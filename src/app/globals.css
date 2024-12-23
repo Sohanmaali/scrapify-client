@@ -1,0 +1,380 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+
+  --heading-font : Helvetica;
+  
+  --related-black: #0a0a0a;
+  --related-white: white;
+
+    --light-color: #e7f8ee; 
+    --dark-color:  #309255; 
+    --muted-color: #212832; 
+
+    --secondary-dark-color: #555555; 
+    --secondary-light-color: #f1f1f1; 
+    --secondary-muted-color: #888888; 
+
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+  
+}
+
+/* Flip Card Container */
+.how-to-work-secion .flip-card {
+  perspective: 1000px;
+  width: 330px;
+  height: 300px;
+  background-color:  #f9f0c8;
+  border-radius: 10px;
+  /* Set a fixed height */
+
+}
+
+.how-to-work-secion .flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transform-style: preserve-3d;
+  transition: transform 0.6s;
+  /* border-radius: 5px;
+  border: 1px solid #2d4f46; */
+}
+
+.how-to-work-secion .flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+  
+  /* box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px; */
+}
+
+.how-to-work-secion .flip-card-front,
+.how-to-work-secion .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 10px;
+  border: 1px solid #2d4f46;
+  /* border-radius: 10px; */
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+}
+
+.how-to-work-secion.flip-card-front {
+  /* background-color: white; */
+
+  background-color: var(--primary-yellow);
+}
+
+.how-to-work-secion .flip-card-back {
+  /* background-color: white; */
+  background-color: #f9f0c8;
+  transform: rotateY(180deg);
+  border-radius: 10px;
+  border: 1px solid #2d4f46;
+
+}
+
+/* Content Styling */
+.how-to-work-secion .card-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+.how-to-work-secion .card-circle {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--main-green);
+  color: var(--secondry-yellow);
+  font-size: 1.5rem;
+  font-weight: bold;
+  border-radius: 50%;
+}
+
+.how-to-work-secion .card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-top: 1rem;
+  color: #1f2937;
+}
+
+.how-to-work-secion .card-text {
+  margin-top: 0.5rem;
+  color: #4b5563;
+}
+
+
+
+
+
+/* ------------------GREADING BUTOTO */
+/* Updated CSS */
+/* Updated CSS */
+.greadiant-button {
+  border-radius: 6px;
+  appearance: none;
+  background-color: var( --dark-color);
+  border: 1px solid var(--muted-color);
+  box-sizing: border-box;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Clarkson, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1em;
+  margin: 0;
+  opacity: 1;
+  outline: 0;
+  padding: 1.5em 2.2em;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition:
+    opacity 300ms cubic-bezier(.694, 0, 0.335, 1),
+    background-color 300ms cubic-bezier(.694, 0, 0.335, 1),
+    color 300ms cubic-bezier(.694, 0, 0.335, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  color: var(--related-white);
+  /* Default text color */
+}
+
+.greadiant-button:before {
+  border-radius: 6px;
+  animation: opacityFallbackOut .5s step-end forwards;
+  backface-visibility: hidden;
+  background-color: var(--muted-color);
+  clip-path: polygon(-1% 0, 0 0, -25% 100%, -1% 100%);
+  content: "";
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  transform: translateZ(0);
+  transition: clip-path .5s cubic-bezier(.165, 0.84, 0.44, 1), -webkit-clip-path .5s cubic-bezier(.165, 0.84, 0.44, 1);
+  width: 100%;
+}
+
+/* Hover effects */
+.greadiant-button:hover:before {
+  border-radius: 6px;
+  animation: opacityFallbackIn 0s step-start forwards;
+  clip-path: polygon(0 0, 101% 0, 101% 101%, 0 101%);
+  background-color: var(--hover-bg, var(--muted-color));
+}
+.greadiant-button:hover {
+  border-radius: 6px;
+  transform: translateZ(5);
+  color: var(--related-white)
+  /* New hover text color (Tomato) */
+}
+
+.greadiant-button span {
+  z-index: 1;
+  font-weight: 500;
+  position: relative;
+}
+
+
+/* Primary button  */
+.primary-button {
+  border-radius: 6px;
+  appearance: none;
+  background-color: var( --light-color);
+  border: 1px solid var( --dark-color);
+  box-sizing: border-box;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Clarkson, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1em;
+  margin: 0;
+  opacity: 1;
+  outline: 0;
+  padding: 1.5em 2.2em;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition:
+    opacity 300ms cubic-bezier(.694, 0, 0.335, 1),
+    background-color 300ms cubic-bezier(.694, 0, 0.335, 1),
+    color 300ms cubic-bezier(.694, 0, 0.335, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  color: var( --dark-color);
+  /* Default text color */
+}
+
+.primary-button:before {
+  border-radius: 6px;
+  animation: opacityFallbackOut .5s step-end forwards;
+  backface-visibility: hidden;
+  background-color: var( --dark-color);
+  clip-path: polygon(-1% 0, 0 0, -25% 100%, -1% 100%);
+  content: "";
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  transform: translateZ(0);
+  transition: clip-path .5s cubic-bezier(.165, 0.84, 0.44, 1), -webkit-clip-path .5s cubic-bezier(.165, 0.84, 0.44, 1);
+  width: 100%;
+}
+
+/* Hover effects */
+.primary-button:hover:before {
+  border-radius: 6px;
+  animation: opacityFallbackIn 0s step-start forwards;
+  clip-path: polygon(0 0, 101% 0, 101% 101%, 0 101%);
+  background-color: var(--hover-bg, var( --dark-color));
+}
+.primary-button:hover {
+  border-radius: 6px;
+  transform: translateZ(5);
+  color: var(--related-white)
+  /* New hover text color (Tomato) */
+}
+
+.primary-button span {
+  z-index: 1;
+  font-weight: 500;
+  position: relative;
+}
+
+/* --------------END */
+
+
+
+
+
+/* HEADING CSSS */
+.heading-parent {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.main-heading {
+  text-transform: uppercase;
+  font-family: var(--heading-font);
+  font-size: 25px;
+  font-weight: 600;
+  /* color: var(--main-green); */
+  text-align: center;
+  /* border-bottom: 3px solid black; */
+  margin-bottom: 10px; /* Default for desktop */
+  
+}
+
+/* For mobile screens */
+@media (max-width: 768px) {
+  .main-heading {
+    margin-bottom: 30px; /* Increase spacing for mobile screens */
+  }
+}
+
+
+
+/* =======================Product Card  */
+
+/* .product-card-comp {
+
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
+  border-radius: 15px;
+  padding: 20px;
+
+  height: 480px;
+  background-color: white;
+  border: 1px solid transparent;
+  transition: all 0.5s ease;
+} */
+
+.product-card-comp {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
+  border-radius: 15px;
+  padding: 20px;
+  height: 480px;
+  background-color: white;
+  border: 1px solid transparent;
+  transition: all 0.5s ease;
+
+  /* Use percentage-based width for responsiveness */
+  width: 100%;
+  max-width: 500px; /* Limit maximum width for larger screens */
+  margin: 0 auto; /* Center the card horizontally */
+}
+
+/* Add responsiveness for different screen sizes */
+
+@media (min-width: 200px) {
+  .product-card-comp {
+    width: 100%;
+    max-width: 400px; /* Adjust for tablets and larger screens */
+  }
+}
+
+@media (min-width: 768px) {
+  .product-card-comp {
+    max-width: 350px; /* Adjust for tablets and larger screens */
+  }
+}
+
+@media (min-width: 1024px) {
+  .product-card-comp {
+    max-width: 350px; /* Adjust for desktops */
+  }
+}
+
+.product-card-comp:hover {
+  
+  border: 1px solid #32b56c
+}
+
+
+.marquee-container{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.marquee-container:hover .marquee-content {
+  animation-play-state: paused;
+}
+
+
+
+/* -----------Testimonial statrt */
