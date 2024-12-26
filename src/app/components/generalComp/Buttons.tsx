@@ -1,20 +1,50 @@
-import { useEffect } from 'react';
-import { IoMdArrowRoundUp } from "react-icons/io";
+"use client"
 
-const GreadiantButton = () => {
+import { useEffect } from 'react';
+import { FaPlus } from 'react-icons/fa6';
+import { IoMdArrowRoundUp } from "react-icons/io";
+import { PiUploadSimpleFill } from "react-icons/pi";
+const GreadiantButton = ({ callBack = () => { } }: any) => {
     return (
-        <button className="greadiant-button" role={'button'}><span className="text">View All Category</span></button>
+        <button onClick={callBack} className="greadiant-button" role={'button'}><span className="text">View All Category</span></button>
     )
 }
 
 
 
-const PrimaryButton = ({heading="View All"}) => {
+const PrimaryButton = ({ heading = "View All" }) => {
     return (
         <button className="primary-button" role={'button'}><span className="text">{heading}</span></button>
     )
 }
 
+
+const AddButton = ({ lable = "Add",callBack=()=>{} }:any) => {
+    return (
+        <button 
+        onClick={callBack}
+            className="flex items-center px-6 py-3 bg-lightColor border border-darkColor text-darkColor font-semibold text-sm rounded-lg hover:bg-darkColor hover:text-relatedWhite transition duration-300 ease-in-out shadow-lg hover:shadow-xl transform hover:scale-105 focus:outline-none"
+            role="button"
+        >
+            <span className="text">{lable}</span>
+            <FaPlus className="text-darkColo hover:text-relatedWhite ml-2 text-lg" /> {/* Icon */}
+        </button>
+    )
+}
+
+
+const SubmitButton = ({ heading = "Submit" }) => {
+    return (
+        <button
+            className="flex items-center px-6 py-3 bg-green-600 text-white font-semibold text-sm rounded-lg hover:bg-green-700 transition duration-300 ease-in-out shadow-lg hover:shadow-xl transform hover:scale-105 focus:outline-none"
+            role="button"
+        >
+            <span className="text">{heading}</span>
+            <PiUploadSimpleFill className="text-white ml-2 text-lg" />
+          
+        </button>
+    )
+}
 
 
 
@@ -54,6 +84,6 @@ function GoOnTopButton() {
 }
 
 
-export { GreadiantButton, PrimaryButton, GoOnTopButton }
+export { GreadiantButton, PrimaryButton, GoOnTopButton, SubmitButton, AddButton }
 
 

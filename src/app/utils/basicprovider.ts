@@ -3,20 +3,24 @@ import axios from "axios";
 import { getToken } from "@/app/utils/auth";
 
 export class BasicProvider {
-    url: string;
-    baseURL = "http://localhost:3001/api";
+    // url: string;
+    baseURL = `${process.env.NEXT_PUBLIC_API_URL}/api/`;
     constructor(url: string) {
-        this.url = url;
+
+
+        console.log("-=-==-==-=url", process.env.NEXT_PUBLIC_API_URL);
+
+        // http://localhost:3004/api/auth/customer/login
+        this.baseURL = `${this.baseURL}${url}`
     }
 
     async getRequest(data: any) {
         const token = getToken();
         try {
-            const response = await axios.get(this.baseURL + this.url, {
+            const response = await axios.get(this.baseURL, {
                 params: data, // Pass query parameters
                 headers: {
                     Authorization: `Bearer ${token}`, // Add the token to the Authorization header
-                   
                 },
             });
             return response;
@@ -29,8 +33,10 @@ export class BasicProvider {
 
     async postRequest(data: any) {
         try {
-            const response = await axios.post(this.baseURL,  data);
+
+            const response = await axios.post(this.baseURL, data);
             return response;
+
         } catch (error) {
             console.error("Error Post data:", error);
             throw error;
@@ -38,6 +44,8 @@ export class BasicProvider {
     }
 
     async putRequest(data: any) {
+
+        console.log('==============>>>', this.baseURL);
 
         const token = getToken();
         try {

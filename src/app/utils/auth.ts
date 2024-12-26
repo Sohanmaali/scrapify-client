@@ -1,9 +1,9 @@
 import Cookies from 'js-cookie';
 
-const TOKEN_KEY = 'scrapify_auth_token';
-
+const TOKEN_KEY = process.env.JWT_SECRET || 'scrapify';
+const expires:any = process.env.TOKEN_EXPIRY || "4h";
 export const setToken = (token: string) => {
-  Cookies.set(TOKEN_KEY, token, { expires: 7 }); // Expire in 7 days
+  Cookies.set(TOKEN_KEY, token, {expires}); 
 };
 
 export const getToken = () => {
@@ -12,7 +12,7 @@ export const getToken = () => {
 
 export const removeToken = () => {
   Cookies.remove(TOKEN_KEY);
-};
+}; 
 
 export const isAuthenticated = () => {
   console.log('get Token :', getToken());

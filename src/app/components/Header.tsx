@@ -3,10 +3,18 @@ import { useState } from "react";
 import SearchBar from "./SearchBar";
 import { LogOut, Login } from "./auth/AuthButton";
 import { isAuthenticated } from "../utils/auth";
+import Link from "next/link";
+import ProfileDropdown from "./auth/ProfileDropDown";
 
+import { RootState } from "../store/store";
+import { useSelector } from "react-redux";
 const Header = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+ 
+  const auth = useSelector((state: RootState) => state.auth);
+  const user = auth?.user;
+  // const isAuthenticated = auth.isAuthenticated
 
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -56,103 +64,54 @@ const Header = () => {
               </svg>
             </button>
 
-            {/* Profile */}
-            <img
-              src="https://via.placeholder.com/40"
-              alt="Profile"
-              className="w-10 h-10 rounded-full border"
-            />
+            {isAuthenticated() ? <ProfileDropdown/> : <Login/>}
+          
           </div>
         </div>
 
-        {/* Desktop Navbar */}
-        {/* <nav className="hidden md:flex justify-start bg-mutedColor border-1 border-b-[#e8b237] sticky top-0 z-10">
-
+        <nav className=" overflow-hidden hidden md:flex justify-start bg-mutedColor border-1 border-b-[#e8b237] sticky top-0 z-10">
           <ul className="flex space-x-8 py-4 px-12">
             <li>
-              <a
-                href="#"
-                className="hover:bg-lightColor hover:text-darkColor py-2 font-semibold border rounded-md text-relatedWhite  border-transparent active:text-darkColor active:border-b-darkColor transition-all duration-300 ease-in-out px-3 "
+              <Link
+                href="/"
+                className="hover:bg-lightColor hover:text-darkColor py-2 font-semibold border rounded-md text-relatedWhite border-transparent active:text-darkColor active:border-b-darkColor transition-all duration-300 ease-in-out px-4"
               >
                 Home
-              </a>
-
-
+              </Link>
             </li>
             <li>
-            <a
-                href="#"
-                className="hover:bg-lightColor hover:text-darkColor p-2 font-semibold border rounded-md text-relatedWhite  border-transparent active:text-darkColor active:border-b-darkColor transition-all duration-300 ease-in-out px-4 "
+              <Link
+                href="/pages/aboutus"
+                className="hover:bg-lightColor hover:text-darkColor p-2 font-semibold border rounded-md text-relatedWhite border-transparent active:text-darkColor active:border-b-darkColor transition-all duration-300 ease-in-out px-4"
               >
                 About us
-              </a>
-
+              </Link>
             </li>
             <li>
-            <a
-                href="#"
-                className="hover:bg-lightColor hover:text-darkColor p-2 font-semibold border rounded-md text-relatedWhite  border-transparent active:text-darkColor active:border-b-darkColor transition-all duration-300 ease-in-out px-4 "
+              <Link
+                href="/pages/products"
+                className="hover:bg-lightColor hover:text-darkColor p-2 font-semibold border rounded-md text-relatedWhite border-transparent active:text-darkColor active:border-b-darkColor transition-all duration-300 ease-in-out px-4"
               >
                 Products
-              </a>
-
+              </Link>
             </li>
             <li>
-            <a
-                href="#"
-                className="hover:bg-lightColor hover:text-darkColor p-2 font-semibold border rounded-md text-relatedWhite  border-transparent active:text-darkColor active:border-b-darkColor transition-all duration-300 ease-in-out px-4 "
-             
-             >
+              <Link
+                href="/pages/contactus"
+                className="hover:bg-lightColor hover:text-darkColor p-2 font-semibold border rounded-md text-relatedWhite border-transparent active:text-darkColor active:border-b-darkColor transition-all duration-300 ease-in-out px-4"
+              >
                 Contact us
-              </a>
+              </Link>
             </li>
           </ul>
-          
-        </nav> */}
-  <nav className=" overflow-hidden hidden md:flex justify-start bg-mutedColor border-1 border-b-[#e8b237] sticky top-0 z-10">
-  <ul className="flex space-x-8 py-4 px-12">
-    <li>
-      <a
-        href="#"
-        className="hover:bg-lightColor hover:text-darkColor py-2 font-semibold border rounded-md text-relatedWhite border-transparent active:text-darkColor active:border-b-darkColor transition-all duration-300 ease-in-out px-4"
-      >
-        Home
-      </a>
-    </li>
-    <li>
-      <a
-        href="#"
-        className="hover:bg-lightColor hover:text-darkColor p-2 font-semibold border rounded-md text-relatedWhite border-transparent active:text-darkColor active:border-b-darkColor transition-all duration-300 ease-in-out px-4"
-      >
-        About us
-      </a>
-    </li>
-    <li>
-      <a
-        href="#"
-        className="hover:bg-lightColor hover:text-darkColor p-2 font-semibold border rounded-md text-relatedWhite border-transparent active:text-darkColor active:border-b-darkColor transition-all duration-300 ease-in-out px-4"
-      >
-        Products
-      </a>
-    </li>
-    <li>
-      <a
-        href="#"
-        className="hover:bg-lightColor hover:text-darkColor p-2 font-semibold border rounded-md text-relatedWhite border-transparent active:text-darkColor active:border-b-darkColor transition-all duration-300 ease-in-out px-4"
-      >
-        Contact us
-      </a>
-    </li>
-  </ul>
 
-  {/* Right side div with green background */}
-  <div className="ml-auto flex items-center justify-center">
-    <div className=" mr-20 bg-darkColor h-full w-80 text-relatedWhite transform md:-rotate-[47deg] transition-transform duration-500 ease-in-out flex items-center justify-center overflow-hidden">
-      <span className="text-xs"></span>
-    </div>
-  </div>
-</nav>
-
+          {/* Right side div with green background */}
+          <div className="ml-auto flex items-center justify-center">
+            <div className=" mr-20 bg-darkColor h-full w-80 text-relatedWhite transform md:-rotate-[47deg] transition-transform duration-500 ease-in-out flex items-center justify-center overflow-hidden">
+              <span className="text-xs"></span>
+            </div>
+          </div>
+        </nav>
       </header>
 
       {/* Overlay */}
@@ -169,33 +128,33 @@ const Header = () => {
           } menu-transition md:hidden`}
       >
         <nav className="flex flex-col space-y-4 p-4">
-          <a
-            href="#"
+          <Link
+            href="/"
             className="text-gray-700 hover:text-relatedWhite border-2 border-transparent hover:bg-darkColor   rounded-lg transition-all duration-300 ease-in-out px-4 py-1"
           >
             Home
-          </a>
-          <a
-            href="#"
+          </Link>
+          <Link
+            href="/pages/aboutus"
             className="text-gray-700 hover:text-relatedWhite border-2 border-transparent hover:bg-darkColor rounded-lg transition-all duration-300 ease-in-out px-4 py-1"
           >
-            About
-          </a>
-          <a
-            href="#"
+            About Us
+          </Link>
+          <Link
+            href="/pages/contactus"
             className="text-gray-700 hover:text-relatedWhite border-2 border-transparent hover:bg-darkColor  rounded-lg transition-all duration-300 ease-in-out px-4 py-1"
           >
-            Contact
-          </a>
-          <a
-            href="#"
+            Contact Us
+          </Link>
+          <Link
+            href="/pages/products"
             className="text-gray-700 hover:text-relatedWhite border-2 border-transparent hover:bg-darkColor  rounded-lg transition-all duration-300 ease-in-out px-4 py-1"
           >
             Product
-          </a>
+          </Link>
 
           <div className="flex items-center ml-3">
-            {isAuthenticated() ? <LogOut /> : <Login />}
+            {!isAuthenticated() && <Login />}
           </div>
         </nav>
       </div>

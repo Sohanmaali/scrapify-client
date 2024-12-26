@@ -37,6 +37,16 @@ body {
   
 }
 
+/* side bar style start */
+.sidebarmainaria{
+ 
+}
+
+
+/* side bar style end */
+
+
+
 /* Flip Card Container */
 .how-to-work-secion .flip-card {
   perspective: 1000px;
@@ -357,7 +367,7 @@ body {
 
 @media (min-width: 1024px) {
   .product-card-comp {
-    max-width: 350px; /* Adjust for desktops */
+    max-width: 400px; /* Adjust for desktops */
   }
 }
 

@@ -1,86 +1,171 @@
-const DetailsCraft = () => {
-  return (
-    <div className="bg-gray-50 py-16">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        {/* Text Content */}
-        <div className="text-center">
-          <h1 className="text-5xl font-bold text-gray-800 leading-tight">
-            It's time to travel with <span className="text-purple-600">DetailsCraft</span>
-          </h1>
-          <p className="mt-4 text-lg text-gray-600">
-            Create the route you want to travel with us and explore the amazing destinations.
-          </p>
-        </div>
+"use client";
 
-        {/* Form Section */}
-        <div className="mt-10 flex flex-col md:flex-row justify-center items-center gap-4">
-          <div className="w-full md:w-1/3">
-            <label className="block text-sm font-medium text-gray-700 mb-2">Location</label>
-            <select className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-600">
-              <option value="new-zealand">New Zealand</option>
-              <option value="usa">USA</option>
-              <option value="india">India</option>
-            </select>
+import Link from "next/link";
+import { useState } from "react";
+import SearchBar from "../SearchBar";
+import { isAuthenticated } from "@/app/utils/auth";
+import { Login, LogOut } from "../auth/AuthButton";
+
+const Header = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  return (
+    <>
+      <header className="bg-lightColor shadow-md relative">
+        {/* Top Header */}
+        <div className="flex items-center justify-between px-4 py-3 md:px-8">
+          {/* Logo */}
+          <div className="flex items-center space-x-2">
+            <img
+              src="https://via.placeholder.com/40"
+              alt="Logo"
+              className="w-10 h-10"
+            />
+            <span className="text-lg font-bold text-mutedColor">Second-Life</span>
           </div>
-          <div className="w-full md:w-1/3">
-            <label className="block text-sm font-medium text-gray-700 mb-2">Date</label>
-            <input
-              type="date"
-              className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-600"
+
+          <SearchBar />
+
+          <div className="hidden md:flex items-center space-x-2">
+            {/* {isAuthenticated() ? <LogOut /> : <Login />} */}
+          </div>
+
+          {/* Profile and Hamburger Menu */}
+          <div className="flex items-center space-x-4">
+            {/* Hamburger Icon */}
+            <button
+              onClick={toggleMenu}
+              className="block md:hidden focus:outline-none"
+              aria-label="Toggle menu"
+            >
+              <svg
+                className="w-8 h-8 text-gray-700"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+            </button>
+
+            {/* Profile */}
+            <img
+              src="https://via.placeholder.com/40"
+              alt="Profile"
+              className="w-10 h-10 rounded-full border"
+            // onClick={}
             />
           </div>
-          <button className="px-6 py-3 bg-purple-600 text-white rounded-md font-medium hover:bg-purple-700 shadow-sm">
-            Explore Now
-          </button>
         </div>
 
-        {/* Image Grid */}
-        <div className="mt-12 relative">
-          {/* Curved Line Decoration */}
-          <div className="absolute inset-0 transform -translate-y-10">
-            <svg
-              viewBox="0 0 1440 320"
-              className="w-full h-40 text-purple-100"
-              fill="currentColor"
-            >
-              <path d="M0,128L40,160C80,192,160,256,240,240C320,224,400,128,480,112C560,96,640,160,720,176C800,192,880,160,960,133.3C1040,107,1120,85,1200,96C1280,107,1360,149,1400,170.7L1440,192L1440,320L1400,320C1360,320,1280,320,1200,320C1120,320,1040,320,960,320C880,320,800,320,720,320C640,320,560,320,480,320C400,320,320,320,240,320C160,320,80,320,40,320L0,320Z"></path>
-            </svg>
-          </div>
+    
+        <nav className=" overflow-hidden hidden md:flex justify-start bg-mutedColor border-1 border-b-[#e8b237] sticky top-0 z-10">
+          <ul className="flex space-x-8 py-4 px-12">
+            <li>
+              <Link
+                href="/"
+                className="hover:bg-lightColor hover:text-darkColor py-2 font-semibold border rounded-md text-relatedWhite border-transparent active:text-darkColor active:border-b-darkColor transition-all duration-300 ease-in-out px-4"
+              >
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/pages/aboutus"
+                className="hover:bg-lightColor hover:text-darkColor p-2 font-semibold border rounded-md text-relatedWhite border-transparent active:text-darkColor active:border-b-darkColor transition-all duration-300 ease-in-out px-4"
+              >
+                About us
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/pages/products"
+                className="hover:bg-lightColor hover:text-darkColor p-2 font-semibold border rounded-md text-relatedWhite border-transparent active:text-darkColor active:border-b-darkColor transition-all duration-300 ease-in-out px-4"
+              >
+                Products
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/pages/contactus"
+                className="hover:bg-lightColor hover:text-darkColor p-2 font-semibold border rounded-md text-relatedWhite border-transparent active:text-darkColor active:border-b-darkColor transition-all duration-300 ease-in-out px-4"
+              >
+                Contact us
+              </Link>
+            </li>
+          </ul>
 
-          <div className="flex justify-center items-center gap-6 flex-wrap">
-            <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-purple-600">
-              <img
-                src="https://via.placeholder.com/150"
-                alt="Placeholder 1"
-                className="object-cover w-full h-full"
-              />
-            </div>
-            <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-purple-600">
-              <img
-                src="https://via.placeholder.com/150"
-                alt="Placeholder 2"
-                className="object-cover w-full h-full"
-              />
-            </div>
-            <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-purple-600">
-              <img
-                src="https://via.placeholder.com/150"
-                alt="Placeholder 3"
-                className="object-cover w-full h-full"
-              />
-            </div>
-            <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-purple-600">
-              <img
-                src="https://via.placeholder.com/150"
-                alt="Placeholder 4"
-                className="object-cover w-full h-full"
-              />
+          {/* Right side div with green background */}
+          <div className="ml-auto flex items-center justify-center">
+            <div className=" mr-20 bg-darkColor h-full w-80 text-relatedWhite transform md:-rotate-[47deg] transition-transform duration-500 ease-in-out flex items-center justify-center overflow-hidden">
+              <span className="text-xs"></span>
             </div>
           </div>
-        </div>
+        </nav>
+      </header>
+
+      {/* Overlay */}
+      <div
+        className={`fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-40 transition-opacity ${isMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"
+          }`}
+        onClick={toggleMenu}
+      ></div>
+
+      {/* Off-Canvas Menu (Mobile) */}
+      <div
+        id="offcanvas-menu"
+        className={`rounded-r-lg fixed top-0 left-0 z-50 w-1/2 h-full bg-white transform ${isMenuOpen ? "translate-x-0" : "-translate-x-full"
+          } menu-transition md:hidden`}
+      >
+        <nav className="flex flex-col space-y-4 p-4">
+          <Link
+            href="/"
+            className="text-gray-700 hover:text-relatedWhite border-2 border-transparent hover:bg-darkColor   rounded-lg transition-all duration-300 ease-in-out px-4 py-1"
+          >
+            Home
+          </Link>
+          <Link
+            href="/pages/aboutus"
+            className="text-gray-700 hover:text-relatedWhite border-2 border-transparent hover:bg-darkColor rounded-lg transition-all duration-300 ease-in-out px-4 py-1"
+          >
+            About Us
+          </Link>
+          <Link
+            href="/pages/contactus"
+            className="text-gray-700 hover:text-relatedWhite border-2 border-transparent hover:bg-darkColor  rounded-lg transition-all duration-300 ease-in-out px-4 py-1"
+          >
+            Contact Us
+          </Link>
+          <Link
+            href="/pages/products"
+            className="text-gray-700 hover:text-relatedWhite border-2 border-transparent hover:bg-darkColor  rounded-lg transition-all duration-300 ease-in-out px-4 py-1"
+          >
+            Product
+          </Link>
+
+          <div className="flex items-center ml-3">
+            {isAuthenticated() ? <LogOut /> : <Login />}
+          </div>
+        </nav>
       </div>
-    </div>
+
+      <style jsx>{`
+        .menu-transition {
+          transition: transform 0.3s ease-in-out;
+        }
+      `}</style>
+    </>
   );
 };
 
-export default DetailsCraft;
+export default Header;

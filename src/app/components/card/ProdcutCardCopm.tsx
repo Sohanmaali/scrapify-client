@@ -1,20 +1,23 @@
+import Link from 'next/link';
 import React from 'react';
 
 const ProductCardComp = ({ image = "https://via.placeholder.com/300" }) => {
     return (
         // <div className='mt-10 mb-10 ml-10'>
-        <div className="product-card-comp">
+        <div className="product-card-comp ">
             <div className="max-w-sm mx-auto bg-white border border-gray-200 rounded-lg overflow-hidden">
-                <img className=" cursor-pointer w-full h-48 object-cover" src={image} alt='asdas' />
+               <Link href="/product-detail"> <img className=" cursor-pointer w-full h-48 object-cover" src={image} alt='asdas' /></Link>
             </div>
             <div className="py-6">
                 <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center">
+                        <Link href='/user-detail'>
                         <img
                             src="https://via.placeholder.com/50"
                             alt="User"
                             className="w-15 h-15 rounded-full mr-5 cursor-pointer"
                         />
+                        </Link>
                         <p className=" cursor-pointer text-sm font-medium text-gray-500">Mohan Maali</p>
                     </div>
                     <button

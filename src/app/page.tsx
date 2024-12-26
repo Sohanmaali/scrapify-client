@@ -14,6 +14,7 @@ import ScrollCounter from './components/generalComp/ScrollCounter';
 import { GoOnTopButton } from './components/generalComp/Buttons';
 import LoginPage from './pages/auth/login/page';
 import DetaulsCraft from './components/generalComp/TestFile';
+import ScrapProductCard from './components/card/ScrapProductCard';
 
 const HomePage = () => {
   const auth = useSelector((state: RootState) => state.auth);
@@ -29,7 +30,8 @@ const HomePage = () => {
           <ScrollCounter/>
           <Testimonials/>
           <GoOnTopButton/>
-          <DetaulsCraft/>
+          {/* <DetaulsCraft/> */}
+           <ScrapProductCard/>
           {/* <LoginPage/> */}
         </div>
     </div>

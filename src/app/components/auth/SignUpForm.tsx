@@ -1,25 +1,36 @@
 "use client";
-
 import { useState } from "react";
-import { BasicProvider } from "@/app/pages/api/basicprovider";
-import { useDispatch } from "react-redux";
+import { BasicProvider } from "@/app/utils/basicprovider";
+import { useDispatch, useSelector } from "react-redux";
 import { login } from "@/app/store/slices/authSlice";
 import { setToken } from "@/app/utils/auth";
 import setNotification from "@/app/utils/nitification";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 import Link from "next/link";
+import { RootState } from "@/app/store/store";
+import { validateObject } from "@/helpers/formvalidation";
 export default function SignUpForm() {
+// hooks
+const dispatch = useDispatch();
+  
+  // state
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [passwordType, setPasswordType] = useState("password");
-
   const [initialValue,setInitialValue] = useState({email : '', password : '',confirmPassword : '', name : '', mobile:''})
 
-  const dispatch = useDispatch();
+  // objects
+  const validationRules:any = {
+    name: { required: true, type: 'string', minLength: 3, maxLength: 30 },
+    mobile: { required: true, type: 'number', min: 18, max: 99 },
+    email: { required: true, type: 'email' },
+  };
+  
+
+  // functions
   const togglePassword = () => {
     setPasswordVisible(!passwordVisible);
     setPasswordType(passwordVisible ? "password" : "text");
   };
-
 
   function handleChange(e :any){
    const {name,value} =  e.target;
@@ -29,16 +40,27 @@ export default function SignUpForm() {
    })
    
   }
-
-
   async function handleSubmit(e : any){
     e.preventDefault()
     try {
-        console.log('Login page ');
-        // const response = await new BasicProvider('/frontend/login').postRequest(creadantial);
-        setNotification('success','Login Successfull') 
-        dispatch(login({ token: '123', user: {name : 'test', email : 'test'} }));
-        setToken('123mmmmmmmmmmmmmmmmmmmmmmm')
+      // const errors = validateObject(initialValue, validationRules);
+      const errors ={}
+      if (Object.keys(errors).length === 0) {
+        
+          const response = await new BasicProvider('auth/customer/register').postRequest(initialValue)
+          console.log("responsel;-=-=-=---===-=--== ", response);
+          
+        // setNotification('success','Login Successfull') 
+        // dispatch(login({ token: '123', user: {name : 'test', email : 'test', image:''} }));
+        // setToken('123mmmmmmmmmmmmmmmmmmmmmmm')
+        return;
+      } else {
+        console.log("Error : ",errors);
+        return
+      }
+        const response = await new BasicProvider('/frontend/login').postRequest(initialValue);
+
+      
         
     } catch (error) {
         
@@ -64,7 +86,6 @@ export default function SignUpForm() {
                 type="text"
                 id="name"
                 name="name"
-
                 className="peer w-full mt-4 px-3 pt-3.5 pb-0.2 border-b border-gray-300 placeholder-transparent focus:outline-none focus:ring-0 focus:border-darkColor text-mutedColor"
                 placeholder="name"
               />
@@ -83,7 +104,6 @@ export default function SignUpForm() {
                 type="text"
                 id="email"
                 name="email"
-
                 className="peer w-full mt-4 px-3 pt-3.5 pb-0.2 border-b border-gray-300 placeholder-transparent focus:outline-none focus:ring-0 focus:border-darkColor text-black"
                 placeholder="email"
               />
@@ -101,9 +121,7 @@ export default function SignUpForm() {
                 type={passwordType}
                 id="password"
                 name="password"
-      
                 className="peer w-full mt-4 px-3 pt-3.5 pb-0.2 border-b border-gray-300 placeholder-transparent focus:outline-none focus:ring-0 focus:border-darkColor text-mutedColor"
-              
                 placeholder="Password"
               />
               <label
@@ -192,7 +210,7 @@ export default function SignUpForm() {
           className="hidden md:block w-1/2 bg-cover bg-center"
           style={{
             // backgroundImage: "url('./assert/images/scrap_holder_img.jpg')",
-            backgroundImage: `url(/assets/images/scrap_holder_img.jpg)`,
+            backgroundImage: `url(https://via.placeholder.com/40)`,
           }}
         ></div>
       </div>
