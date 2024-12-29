@@ -1,7 +1,7 @@
 type ValidationRules = {
     [key: string]: {
       required?: boolean;
-      type?: 'string' | 'number' | 'email';
+      type?: 'string' | 'number' | 'email' | 'password';
       minLength?: number;
       maxLength?: number;
       min?: number;
@@ -38,12 +38,12 @@ type ValidationRules = {
       if (rule.type) {
         if (rule.type === 'string' && typeof value !== 'string') {
           errors[field] = `${field} must be a string.`;
-        } else if (rule.type === 'number' && typeof value !== 'number') {
+        } else if (rule.type === 'number' && !/^\d+$/.test(value)) {
           errors[field] = `${field} must be a number.`;
         } else if (rule.type === 'email') {
           const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
           if (!emailRegex.test(value)) {
-            errors[field] = `${field} must be a valid email address.`;
+            errors[field] = `${field} address is not valid.`;
           }
         }
       }
@@ -66,9 +66,22 @@ type ValidationRules = {
         if (rule.max !== undefined && value > rule.max) {
           errors[field] = `${field} must be no more than ${rule.max}.`;
         }
+        if (rule.minLength !== undefined && value.length < rule.minLength) {
+          errors[field] = `${field} should contain at least ${rule.minLength} digits.`;
+        } else if (rule.maxLength !== undefined && value.length > rule.maxLength) {
+          errors[field] = `${field} should contain maximum ${rule.maxLength} digits .`;
+        }
       }
+
+      // if (rule.type === 'password') {
+      //   if (rule.min !== undefined && value < rule.min) {
+      //     errors[field] = `${field} must be at least ${rule.min}.`;
+      //   }
+      //   if (rule.max !== undefined && value > rule.max) {
+      //     errors[field] = `${field} must be no more than ${rule.max}.`;
+      //   }
+      // }
     }
-  
     return errors;
   }
   

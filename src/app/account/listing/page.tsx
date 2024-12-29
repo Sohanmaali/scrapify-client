@@ -1,6 +1,7 @@
 
 'use client'
 import ProductCardComp from "@/app/components/card/ProdcutCardCopm";
+import ScrapListing from "@/app/components/dashboard/ScrapListing";
 import { AddButton, GreadiantButton, PrimaryButton, SubmitButton } from "@/app/components/generalComp/Buttons";
 import NotAvalilable from "@/app/components/generalComp/NotAvailable";
 import { useState } from "react";
@@ -44,7 +45,7 @@ const ListingnPage = () => {
                                 <AddButton lable="Add Product" />
                             </div>
                             {/* <hr /> */}
-                            <div className="mt-10"><NotAvalilable/></div>
+                            <div className="mt-10"><ScrapListing/></div>
                         </div>
                     )}
                     {activeTab === "handmadeProducts" && (

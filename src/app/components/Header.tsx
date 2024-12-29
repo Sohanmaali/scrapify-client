@@ -1,19 +1,20 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SearchBar from "./SearchBar";
 import { LogOut, Login } from "./auth/AuthButton";
-import { isAuthenticated } from "../utils/auth";
+import { getUser, isAuthenticated } from "../utils/auth";
 import Link from "next/link";
 import ProfileDropdown from "./auth/ProfileDropDown";
-
+import { useDispatch, useSelector } from "react-redux";
+import { setUser } from "../store/slices/authSlice";
 import { RootState } from "../store/store";
-import { useSelector } from "react-redux";
 const Header = () => {
- 
-  const auth = useSelector((state: RootState) => state.auth);
-  const user = auth?.user;
-  // const isAuthenticated = auth.isAuthenticated
-
+  const dispatch = useDispatch()
+  useEffect(() => {
+    const user = getUser();
+    dispatch(setUser(user));
+  }, [])
+  const user = useSelector((state: RootState) => state.auth.user);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -25,14 +26,23 @@ const Header = () => {
         {/* Top Header */}
         <div className="flex items-center justify-between px-4 py-3 md:px-8">
           {/* Logo */}
-          <div className="flex items-center space-x-2">
+          {/* <div className="flex items-center space-x-2">
             <img
-              src="https://via.placeholder.com/40"
+              src="/logo/scrapify-high-resolution-logo-transparent (1).svg"
               alt="Logo"
-              className="w-10 h-10"
+              className="w-50 h-100"
             />
             <span className="text-lg font-bold text-mutedColor">Second-Life</span>
+          </div> */}
+
+          <div className="flex items-center">
+            <img
+              src="/logo/good.svg"
+              alt="Logo"
+              className="w-[150px] h-14 " // Responsive sizing
+            />
           </div>
+
 
           <SearchBar />
 
@@ -64,8 +74,8 @@ const Header = () => {
               </svg>
             </button>
 
-            {isAuthenticated() ? <ProfileDropdown/> : <Login/>}
-          
+            {user ? <ProfileDropdown /> : <Login />}
+
           </div>
         </div>
 
@@ -85,6 +95,14 @@ const Header = () => {
                 className="hover:bg-lightColor hover:text-darkColor p-2 font-semibold border rounded-md text-relatedWhite border-transparent active:text-darkColor active:border-b-darkColor transition-all duration-300 ease-in-out px-4"
               >
                 About us
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/pages/category"
+                className="hover:bg-lightColor hover:text-darkColor p-2 font-semibold border rounded-md text-relatedWhite border-transparent active:text-darkColor active:border-b-darkColor transition-all duration-300 ease-in-out px-4"
+              >
+                Category
               </Link>
             </li>
             <li>
@@ -139,6 +157,12 @@ const Header = () => {
             className="text-gray-700 hover:text-relatedWhite border-2 border-transparent hover:bg-darkColor rounded-lg transition-all duration-300 ease-in-out px-4 py-1"
           >
             About Us
+          </Link>
+          <Link
+            href="/pages/category"
+            className="text-gray-700 hover:text-relatedWhite border-2 border-transparent hover:bg-darkColor rounded-lg transition-all duration-300 ease-in-out px-4 py-1"
+          >
+            Category
           </Link>
           <Link
             href="/pages/contactus"

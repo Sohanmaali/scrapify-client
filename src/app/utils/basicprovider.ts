@@ -1,102 +1,122 @@
-import axios from "axios";
 
-import { getToken } from "@/app/utils/auth";
-
-export class BasicProvider {
-    // url: string;
-    baseURL = `${process.env.NEXT_PUBLIC_API_URL}/api/`;
-    constructor(url: string) {
-
-
-        console.log("-=-==-==-=url", process.env.NEXT_PUBLIC_API_URL);
-
-        // http://localhost:3004/api/auth/customer/login
-        this.baseURL = `${this.baseURL}${url}`
-    }
-
-    async getRequest(data: any) {
-        const token = getToken();
-        try {
-            const response = await axios.get(this.baseURL, {
-                params: data, // Pass query parameters
-                headers: {
-                    Authorization: `Bearer ${token}`, // Add the token to the Authorization header
-                },
-            });
-            return response;
-        } catch (error) {
-            console.error("Error fetching data:", error);
-            throw error;
-        }
-    }
-
-
-    async postRequest(data: any) {
-        try {
-
-            const response = await axios.post(this.baseURL, data);
-            return response;
-
-        } catch (error) {
-            console.error("Error Post data:", error);
-            throw error;
-        }
-    }
-
-    async putRequest(data: any) {
-
-        console.log('==============>>>', this.baseURL);
-
-        const token = getToken();
-        try {
-            const response = await axios.put(this.baseURL, {
-                params: data, // Pass query parameters
-                headers: {
-                    Authorization: `Bearer ${token}`, // Add the token to the Authorization header
-                },
-            });
-            return response;
-        } catch (error) {
-            console.error("Error updating data:", error);
-            throw error;
-        }
-    }
-
-
-    async patchRequest(data: any) {
-        try {
-            const token = getToken();
-            const response = await axios.patch(this.baseURL, {
-                params: data, // Pass query parameters
-                headers: {
-                    Authorization: `Bearer ${token}`, // Add the token to the Authorization header
-                },
-            });
-            return response;
-        } catch (error) {
-            console.error("Error updating data:", error);
-            throw error;
-        }
-    }
-
-
-    async deleteRequest(data: any) {
-        try {
-            const response = await axios.delete(this.baseURL, data);
-            return response;
-        } catch (error) {
-            console.error("Error deleting data:", error);
-            throw error;
-        }
-    }
-
-    async trashRequest(data: any) {
-        try {
-            const response = await axios.patch(this.baseURL, data);
-            return response;
-        } catch (error) {
-            console.error("Error trashing data:", error);
-            throw error;
-        }
-    }
+import { getToken, removeToken } from "@/app/utils/auth";
+import axios, { AxiosResponse, AxiosRequestConfig } from 'axios';
+interface ApiResponse<T = any> {
+  data: T;
+  message?: string;
+  statusCode?: number;
+  error?: string;
 }
+
+
+
+class BasicProvider {
+  private url: string;
+  constructor(url: string){
+    this.url = process.env.NEXT_PUBLIC_API_URL+'/api/' + url;
+  }
+
+  async getRequest<T>(): Promise<ApiResponse<T>> {
+    try {
+      const config = this.getHeaders();
+      if (this.url.includes('files')) {
+        config.responseType = 'blob';
+      }
+      const response = await axios.get<ApiResponse<T>>(this.url, config);
+      return this.processResponse(response);
+    } catch (error) {
+      return this.handleException(error);
+    }
+  }
+
+  async postRequest<T>(data: any): Promise<ApiResponse<T>> {
+    try {
+      const response = await axios.post<ApiResponse<T>>(this.url, data, this.getHeaders(data));
+        return response.data;
+      // return this.processResponse(response);
+    } catch (error) {
+      return this.handleException(error);
+    }
+  }
+
+  async getPdf(): Promise<Blob> {
+    try {
+      const config = this.getHeaders();
+      config.responseType = 'blob';
+      const response = await axios.get<Blob>(this.url, config);
+      return this.processResponse(response);
+    } catch (error) {
+      return this.handleException(error);
+    }
+  }
+
+  private processResponse<T>(response: AxiosResponse<any>): T {
+    if (response.status >= 200 && response.status < 300) {
+      if ((response.data as any)?.data) {
+        return response?.data;
+      }
+      return response as unknown as T;
+    }
+    throw new Error(`Error: ${response.status} - ${(response.data as any)?.message || 'Unknown error'}`);
+  }
+
+  private getHeaders(data?: any): AxiosRequestConfig {
+    const headers: Record<string, string> = {};
+
+    if (data instanceof FormData) {
+      headers['Content-Type'] = 'multipart/form-data';
+    } else {
+      headers['Content-Type'] = 'application/json';
+    }
+    const token = getToken();
+    if (token) {
+      headers.Authorization = `Bearer ${token}`;
+    }
+
+    return { headers };
+  }
+
+
+
+  private handleException(error: any): never {
+    // if (process.env.NEXT_APP_DEBUG) {
+    //   console.error(error.response?.data);
+    // }
+    if (error.response?.data.statusCode === 401) {
+        removeToken();
+    }
+    if (error.response?.data.statusCode === 403) {
+    removeToken()
+    }
+    throw error.response?.data || error.response || error;
+  }
+
+  async putRequest<T>(data: any): Promise<ApiResponse<T>> {
+    try {
+      const response = await axios.put<ApiResponse<T>>(this.url, data, this.getHeaders());
+      return this.processResponse(response);
+    } catch (error) {
+      return this.handleException(error);
+    }
+  }
+
+  async patchRequest<T>(data: any): Promise<ApiResponse<T>> {
+    try {
+      const response = await axios.patch<ApiResponse<T>>(this.url, data, this.getHeaders(data));
+      return this.processResponse(response);
+    } catch (error) {
+      return this.handleException(error);
+    }
+  }
+
+  async deleteRequest<T>(data: any): Promise<ApiResponse<T>> {
+    try {
+      const response = await axios.post<ApiResponse<T>>(this.url, data, this.getHeaders());
+      return this.processResponse(response);
+    } catch (error) {
+      return this.handleException(error);
+    }
+  }
+}
+
+export default BasicProvider;

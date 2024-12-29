@@ -17,7 +17,7 @@ const NotAvalilable = () => {
                         Data Not Available !
                     </h1>
                 </div>
-                <p className="text-gray-500 text-sm mt-4 text-center">
+                <p className="text-gray-500 text-sm mt-4 mb-5 text-center">
                     No records found at the moment. Please try again later.
                 </p>
             </div>

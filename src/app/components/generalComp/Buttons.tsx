@@ -1,5 +1,6 @@
 "use client"
 
+import Link from 'next/link';
 import { useEffect } from 'react';
 import { FaPlus } from 'react-icons/fa6';
 import { IoMdArrowRoundUp } from "react-icons/io";
@@ -19,10 +20,10 @@ const PrimaryButton = ({ heading = "View All" }) => {
 }
 
 
-const AddButton = ({ lable = "Add",callBack=()=>{} }:any) => {
+const AddButton = ({ lable = "Add", callBack = () => { } }: any) => {
     return (
-        <button 
-        onClick={callBack}
+        <button
+            onClick={callBack}
             className="flex items-center px-6 py-3 bg-lightColor border border-darkColor text-darkColor font-semibold text-sm rounded-lg hover:bg-darkColor hover:text-relatedWhite transition duration-300 ease-in-out shadow-lg hover:shadow-xl transform hover:scale-105 focus:outline-none"
             role="button"
         >
@@ -33,19 +34,37 @@ const AddButton = ({ lable = "Add",callBack=()=>{} }:any) => {
 }
 
 
-const SubmitButton = ({ heading = "Submit" }) => {
+const SubmitButton = ({ heading = "Submit", isLoading = false, callBack }:any) => {
     return (
-        <button
-            className="flex items-center px-6 py-3 bg-green-600 text-white font-semibold text-sm rounded-lg hover:bg-green-700 transition duration-300 ease-in-out shadow-lg hover:shadow-xl transform hover:scale-105 focus:outline-none"
+        <button onClick={callBack}
+            className="flex items-center px-6 py-3 bg-darkColor text-relatedWhite font-semibold text-sm rounded-lg hover:bg-green-700 transition duration-300 ease-in-out shadow-lg hover:shadow-xl transform hover:scale-105 focus:outline-none"
             role="button"
         >
-            <span className="text">{heading}</span>
-            <PiUploadSimpleFill className="text-white ml-2 text-lg" />
-          
+
+            {isLoading ?
+                <><span className="text mr-2">Loading...</span>
+                    <span className="flex items-center justify-end pr-2">
+                        <span className="w-4 h-4 border-2 border-t-transparent border-white rounded-full animate-spin"></span>
+                        </span>
+                </> : <>
+                    <span className="text">{heading}</span>
+                    <PiUploadSimpleFill className="text-white ml-2 text-lg" />
+                </>
+            }
+
         </button>
     )
 }
 
+
+
+function GetStartButton() {
+    return (<>
+        <Link href={'/account/addproduct'} className="bg-mutedColor text-relatedWhite hover:bg-lightColor hover:text-darkColor py-4 px-7  rounded-lg transition duration-300">
+            Get Started
+        </Link>
+    </>)
+}
 
 
 function GoOnTopButton() {
@@ -84,6 +103,6 @@ function GoOnTopButton() {
 }
 
 
-export { GreadiantButton, PrimaryButton, GoOnTopButton, SubmitButton, AddButton }
+export { GreadiantButton, PrimaryButton, GoOnTopButton, SubmitButton, AddButton, GetStartButton }
 
 

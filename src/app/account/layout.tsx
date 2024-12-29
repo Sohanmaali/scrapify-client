@@ -14,10 +14,11 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import sideBarData from "@/data/SideBar";
 import { LogOut } from "../components/auth/AuthButton";
+import { useSelector } from "react-redux";
 
 
 export default function AccountLayout({ children }: { children: React.ReactNode }) {
-  const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const user = useSelector((state: any) => state.auth.user);
   const [isOpen, setIsOpen] = useState(false);
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -39,13 +40,14 @@ export default function AccountLayout({ children }: { children: React.ReactNode 
             {/* Image Container */}
             <div className="w-20 h-20 sm:w-20 sm:h-20 md:w-28 md:h-28 lg:w-46 lg:h-46 border-4   rounded-full">
               <img
-                src="https://via.placeholder.com/300"
+                  src={`${process.env.NEXT_PUBLIC_API_URL}/${user?.image}` || '/images/noimage.png'}
                 alt="Circle Image"
                 className="w-full h-full rounded-full object-cover"
               />
             </div>
             {/* User Name */}
-            <p className="mt-2 text-lg  text-relatedWhite  font-bold">Mahendra John Doe</p>
+            <p className="mt-2 text-lg  text-relatedWhite  font-bold">{user?.name}</p>
+            {/* <p className=" text-sm  text-relatedWhite">{user.email}</p> */}
 
           </div>
           {/* <hr /> */}

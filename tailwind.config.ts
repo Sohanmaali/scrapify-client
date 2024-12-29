@@ -46,9 +46,14 @@ export default {
           "0%": { transform: "translateX(100%)" },
           "100%": { transform: "translateX(-100%)" },
         },
+        smoothUpDown: {
+          '0%, 100%': { transform: 'translateY(-10px)' },
+          '50%': { transform: 'translateY(10px)' },
+        },
       },
       animation: {
         marquee: "marquee 30s linear infinite",
+        'smooth-up-down': 'smoothUpDown 3s ease-in-out infinite',
       },
     },
   },

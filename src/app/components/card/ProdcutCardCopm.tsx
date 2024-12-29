@@ -1,10 +1,10 @@
 import Link from 'next/link';
 import React from 'react';
 
-const ProductCardComp = ({ image = "https://via.placeholder.com/300" }) => {
+const ProductCardComp = ({ image = "https://via.placeholder.com/300", index }:any) => {
     return (
         // <div className='mt-10 mb-10 ml-10'>
-        <div className="product-card-comp ">
+        <div className="product-card-comp " key={index}>
             <div className="max-w-sm mx-auto bg-white border border-gray-200 rounded-lg overflow-hidden">
                <Link href="/product-detail"> <img className=" cursor-pointer w-full h-48 object-cover" src={image} alt='asdas' /></Link>
             </div>

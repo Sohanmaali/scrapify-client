@@ -1,30 +1,36 @@
 "use client";
 import { useState } from "react";
-import { BasicProvider } from "@/app/utils/basicprovider";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "@/app/store/slices/authSlice";
+import { login, setUser } from "@/app/store/slices/authSlice";
 import { setToken } from "@/app/utils/auth";
-import setNotification from "@/app/utils/nitification";
+import setNotification from "@/app/utils/notification";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 import Link from "next/link";
 import { RootState } from "@/app/store/store";
 import { validateObject } from "@/helpers/formvalidation";
+import Modal from "../generalComp/CommonModal";
+import { title } from "process";
+import OTPInput from "./OtpInput";
+import BasicProvider from "@/app/utils/basicprovider";
 export default function SignUpForm() {
-// hooks
-const dispatch = useDispatch();
-  
-  // state
+  // hooks
+  const dispatch = useDispatch();
+
+  // statee
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [passwordType, setPasswordType] = useState("password");
-  const [initialValue,setInitialValue] = useState({email : '', password : '',confirmPassword : '', name : '', mobile:''})
-
+  const [initialValue, setInitialValue] = useState({ email: '', password: '', confirmPassword: '', name: '', mobile: '' })
+  const [showModal, setShowModal] = useState(false);
+  const [errors, setErrors] = useState<any>({});
   // objects
-  const validationRules:any = {
+  const validationRules: any = {
     name: { required: true, type: 'string', minLength: 3, maxLength: 30 },
-    mobile: { required: true, type: 'number', min: 18, max: 99 },
+    mobile: { required: true, type: 'number', minLength: 10, maxLength: 10 },
     email: { required: true, type: 'email' },
+    password: { required: true, type: 'string' },
+    // conforempassword: { required: true, type: 'string' },
   };
-  
+
 
   // functions
   const togglePassword = () => {
@@ -32,57 +38,52 @@ const dispatch = useDispatch();
     setPasswordType(passwordVisible ? "password" : "text");
   };
 
-  function handleChange(e :any){
-   const {name,value} =  e.target;
-   setInitialValue({
-    ...initialValue,
-    [name] : value
-   })
-   
+  function handleChange(e: any) {
+    setErrors({});
+    const { name, value } = e.target;
+    setInitialValue({
+      ...initialValue,
+      [name]: value
+    })
+
   }
-  async function handleSubmit(e : any){
+  async function handleSubmit(e: any) {
     e.preventDefault()
     try {
-      // const errors = validateObject(initialValue, validationRules);
-      const errors ={}
+      const errors = validateObject(initialValue, validationRules);
+
       if (Object.keys(errors).length === 0) {
-        
-          const response = await new BasicProvider('auth/customer/register').postRequest(initialValue)
-          console.log("responsel;-=-=-=---===-=--== ", response);
-          
-        // setNotification('success','Login Successfull') 
-        // dispatch(login({ token: '123', user: {name : 'test', email : 'test', image:''} }));
-        // setToken('123mmmmmmmmmmmmmmmmmmmmmmm')
+        const response = await new BasicProvider('auth/customer/register').postRequest(initialValue)
+        setShowModal(true)
+        setNotification({ type: 'success', message: 'Otp Send Successfull' });
         return;
       } else {
-        console.log("Error : ",errors);
+        console.log("Error : ", errors);
+        setErrors(errors)
         return
       }
-        const response = await new BasicProvider('/frontend/login').postRequest(initialValue);
-
-      
-        
-    } catch (error) {
-        
+    } catch (error:any) {
+      setNotification({ type: 'error', message: error.message});
+      console.log("Error in SignUp : ", error);
     }
   }
   return (
-    <div className="flex items-center justify-center min-h-screen bg-relatedWhite py-10">
+    <div className="flex items-center justify-center min-h-screen bg-relatedWhite py-10 px-2">
       <div className="flex flex-col md:flex-row w-full max-w-6xl bg-relatedWhite border border-darkColor rounded-lg shadow-2xl py-2">
         {/* Left Side (Form) */}
         <div className="w-full md:w-1/2 p-8">
-        <h2 className="text-3xl font-bold text-center text-gray-700 mb-6 ">
-            Turn <span className="text-darkColor underline decoration-wavy">Scrap</span> into Savings Sign 
+          <h2 className="text-3xl font-bold text-center text-gray-700 mb-6 ">
+            Turn <span className="text-darkColor underline decoration-wavy">Scrap</span> into Savings Sign
             Up Now!
           </h2>
-          <hr className="w-48 border-1 border-darkColor justify-self-center" />
+          <hr className="sm:w-48 lg:48 border-1 border-darkColor justify-self-center" />
           <form >
 
 
 
-          <div className="relative w-full mt-4">
+            <div className="relative w-full mt-4">
               <input
-               onChange={(e)=>{handleChange(e)}}
+                onChange={(e) => { handleChange(e) }}
                 type="text"
                 id="name"
                 name="name"
@@ -95,12 +96,13 @@ const dispatch = useDispatch();
               >
                 Name
               </label>
+              <span className="text-red-400 text-sm">{errors['name']}</span>
             </div>
 
 
             <div className="relative w-full mt-4">
               <input
-               onChange={(e)=>{handleChange(e)}}
+                onChange={(e) => { handleChange(e) }}
                 type="text"
                 id="email"
                 name="email"
@@ -113,11 +115,12 @@ const dispatch = useDispatch();
               >
                 Email
               </label>
+              <span className="text-red-400 text-sm">{errors['email']}</span>
             </div>
 
             <div className="relative w-full mt-4">
               <input
-              onChange={(e)=>{handleChange(e)}}
+                onChange={(e) => { handleChange(e) }}
                 type={passwordType}
                 id="password"
                 name="password"
@@ -130,22 +133,24 @@ const dispatch = useDispatch();
               >
                 Password
               </label>
+
               <button
                 type="button"
                 id="togglePassword"
                 onClick={togglePassword}
                 className="absolute right-3 top-4 text-gray-500 hover:text-darkColor focus:outline-none"
-             
-             >
-               {passwordVisible ? <FaRegEye/> : <FaRegEyeSlash/>}
+
+              >
+                {passwordVisible ? <FaRegEye /> : <FaRegEyeSlash />}
               </button>
+              <span className="text-red-400 text-sm">{errors['password']}</span>
             </div>
 
 
-            
+
             <div className="relative w-full mt-4">
               <input
-               onChange={(e)=>{handleChange(e)}}
+                onChange={(e) => { handleChange(e) }}
                 type="password"
                 id="confirmPassword"
                 name="confirmPassword"
@@ -159,12 +164,13 @@ const dispatch = useDispatch();
               >
                 Confirm Password
               </label>
+              <span className="text-red-400 text-sm">{errors['conforempassword']}</span>
             </div>
 
 
             <div className="relative w-full mt-4">
               <input
-               onChange={(e)=>{handleChange(e)}}
+                onChange={(e) => { handleChange(e) }}
                 type="text"
                 id="mobile"
                 name="mobile"
@@ -178,17 +184,18 @@ const dispatch = useDispatch();
               >
                 Mobile
               </label>
+              <span className="text-red-400 text-sm">{errors['mobile']}</span>
             </div>
 
 
 
             <div className="text-center mt-8">
               <button
-              onClick={(e) => {handleSubmit(e)}}
+                onClick={(e) => { handleSubmit(e) }}
                 type="submit"
                 className="w-full py-3 bg-darkColor text-relatedWhite rounded-lg hover:bg-mutedColor transition duration-200"
               >
-               SignUp
+                SignUp
               </button>
             </div>
             <div className="text-center mt-2">
@@ -212,8 +219,13 @@ const dispatch = useDispatch();
             // backgroundImage: "url('./assert/images/scrap_holder_img.jpg')",
             backgroundImage: `url(https://via.placeholder.com/40)`,
           }}
-        ></div>
+
+        >
+
+          
+        </div>
       </div>
+      <Modal isOpen={showModal} onClose={() => { setShowModal(false) }} title={"Email Varification"}> <div><OTPInput data={initialValue} /></div> </Modal >
     </div>
   );
 }

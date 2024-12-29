@@ -6,6 +6,7 @@ import 'swiper/css/navigation';
 import { Autoplay, Navigation } from 'swiper/modules';
 import { useRef } from 'react';
 import { GrFormNext, GrFormPrevious } from "react-icons/gr";
+import { GetStartButton } from './generalComp/Buttons';
 export default function ImageSlider() {
   const prevRef = useRef(null);
   const nextRef = useRef(null);
@@ -50,7 +51,7 @@ export default function ImageSlider() {
         <SwiperSlide>
           <div className="relative">
             <img
-              src="./assert/images/scrap_holder_img.jpg"
+              src="./assert/images/sliderImage_1.jpeg"
               alt="Slide 1"
               className="w-full h-80 sm:h-80 md:h-96 lg:h-[500px] object-cover"
             />
@@ -61,9 +62,7 @@ export default function ImageSlider() {
               <div className="text-center text-white">
                 <h2 className="text-3xl font-bold mb-4">Welcome to Our Service</h2>
                 <p className="text-lg mb-6">We provide the best solutions for your needs.</p>
-                <button className="bg-mutedColor text-relatedWhite hover:bg-lightColor hover:text-darkColor py-4 px-7  rounded-lg transition duration-300">
-                  Get Started
-                </button>
+               <GetStartButton/>
               </div>
             </div>
           </div>
@@ -72,7 +71,7 @@ export default function ImageSlider() {
         <SwiperSlide>
           <div className="relative">
             <img
-              src="./assert/images/scrap_holder_img.jpg"
+              src="./assert/images/sliderimage2.jpg"
               alt="Slide 2"
               className="w-full h-80 sm:h-80 md:h-96 lg:h-[500px] object-cover"
             />
@@ -83,9 +82,7 @@ export default function ImageSlider() {
               <div className="text-center text-white">
                 <h2 className="text-3xl font-bold mb-4">Innovative Solutions</h2>
                 <p className="text-lg mb-6">Helping you achieve your business goals.</p>
-                <button className="bg-mutedColor text-relatedWhite hover:bg-lightColor hover:text-darkColor py-4 px-7  rounded-lg transition duration-300">
-                  Get Started
-                </button>
+                <GetStartButton/>
               </div>
             </div>
           </div>
@@ -106,9 +103,7 @@ export default function ImageSlider() {
               <div className="text-center text-white">
                 <h2 className="text-3xl font-bold mb-4">Get Started Today</h2>
                 <p className="text-lg mb-6">Join us and take your business to the next level.</p>
-                <button className="bg-mutedColor text-relatedWhite hover:bg-lightColor hover:text-darkColor py-4 px-7  rounded-lg transition duration-300">
-                  Get Started
-                </button>
+                <GetStartButton/>
               </div>
             </div>
           </div>

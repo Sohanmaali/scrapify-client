@@ -1,9 +1,8 @@
 import ScrapMaterialForm from "@/app/components/AddProductForm"
-import AddProductForm from "@/app/components/AddProductForm"
 
-const AddProduct =()=>{
+const AddProduct =({ params }: { params: { id: string } })=>{
     return (<>
-    <ScrapMaterialForm/>
+    <ScrapMaterialForm category={params.id}/>
     </>)
 }
 

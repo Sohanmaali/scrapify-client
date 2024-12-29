@@ -1,8 +1,12 @@
-import Banner from "@/app/components/generalComp/Banner"
+import PageBanner from "@/app/components/generalComp/PageBanner"
 
 const AboutUs = ()=>{
     return (<>
-    <Banner/>
+    <PageBanner
+        pageName="About"
+        parentPage="Home"
+        backgroundImage="/assert/images/recycle_image.jpg"
+      />
     </>)
 }
 

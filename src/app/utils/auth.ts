@@ -1,9 +1,13 @@
 import Cookies from 'js-cookie';
+import {jwtDecode} from "jwt-decode";
 
-const TOKEN_KEY = process.env.JWT_SECRET || 'scrapify';
-const expires:any = process.env.TOKEN_EXPIRY || "4h";
+import { login, setUser } from '../store/slices/authSlice';
+
+const TOKEN_KEY = process.env.NEXT_APP_COOKIE_PREFIX || 'scrapify';
+const expires = process.env.TOKEN_EXPIRY
+
 export const setToken = (token: string) => {
-  Cookies.set(TOKEN_KEY, token, {expires}); 
+  Cookies.set(TOKEN_KEY, token, { expires: 7 }); // Expire in 7 days
 };
 
 export const getToken = () => {
@@ -15,6 +19,24 @@ export const removeToken = () => {
 }; 
 
 export const isAuthenticated = () => {
-  console.log('get Token :', getToken());
   return !!getToken();
 };
+
+
+
+export function getUser() {
+  const token:any = getToken();
+  try {
+    const data: any = jwtDecode(token); // Decode the JWT
+    const userData = {
+      _id: data._id,
+      name: data.name,
+      mobile: data.mobile,
+      email: data.email,
+      image: data.featured_image?.filepath || null,
+    };
+    return userData;
+  } catch (error) {
+    return null
+  }
+}

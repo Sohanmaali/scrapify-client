@@ -4,7 +4,7 @@ import { MdOutlineCategory } from "react-icons/md";
 import { FaMapMarkerAlt, FaRegCalendarAlt } from "react-icons/fa";
 const ScrapProductCard = ({ image = "https://via.placeholder.com/300" }) => {
     return (
-        <div className="flex flex-col sm:flex-row bg-white border border-gray-200 hover:border-darkColor rounded-lg overflow-hidden max-w-md mx-auto shadow-md p-4 mb-5 transition-all duration-300 ease-in-out hover:shadow-lg ">
+        <div className="flex flex-col sm:flex-row bg-white border hover:bg-lightColor  border-darkColor rounded-lg overflow-hidden max-w-md mx-auto shadow-md p-4 mb-5 transition-all duration-300 ease-in-out hover:shadow-lg ">
             {/* Product Image */}
             <Link href="/product-detail" className="flex-shrink-0 w-full sm:w-1/3">
                 <img
@@ -27,7 +27,7 @@ const ScrapProductCard = ({ image = "https://via.placeholder.com/300" }) => {
                         <span className="text-lg font-bold text-darkColor">$500.00</span>
                         <span className="ml-2 text-xs text-gray-500">10$/kg</span>
                     </div>
-                    <span className="text-xs font-medium text-darkColor bg-lightColor px-2 py-1 rounded">
+                    <span className="text-xs font-medium text-relatedWhite bg-darkColor px-2 py-1 rounded">
                        Metal
                     </span>
                 </div>

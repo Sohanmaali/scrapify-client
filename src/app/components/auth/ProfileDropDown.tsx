@@ -5,7 +5,9 @@ import { CiSettings } from 'react-icons/ci';
 import sideBarData from '@/data/SideBar';
 import Link from 'next/link';
 import { LogOut } from './AuthButton';
+import { useSelector } from 'react-redux';
 const ProfileDropdown = () => {
+  const user = useSelector((state: any) => state.auth.user);
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef<any>(null);
 
@@ -32,9 +34,9 @@ const ProfileDropdown = () => {
             onMouseLeave={handleMouseLeave}>
             <img
                 onClick={toggleDropdown}
-                src="https://via.placeholder.com/40"
+                src={`${process.env.NEXT_PUBLIC_API_URL}/${user?.image}` || '/images/noimage.png'}
                 alt="Profile"
-                className="w-10 h-10 rounded-full border cursor-pointer hover:shadow-lg transition-shadow"
+                className="w-10 h-10 rounded-full border border-darkColor cursor-pointer hover:shadow-lg transition-shadow"
             />
 
             <div className={`absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-lg py-2 
@@ -42,16 +44,16 @@ const ProfileDropdown = () => {
                       ${isOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'}`}>
                 {/* Rest of the dropdown content remains the same */}
                 <div className="px-4 py-3 border-b">
-                    <p className="text-sm font-medium text-gray-900">John Doe</p>
-                    <p className="text-xs text-gray-500">john@example.com</p>
+                    <p className="text-sm font-medium text-gray-900">{user?.name}</p>
+                    <p className="text-xs text-gray-500">{user?.email}</p>
                 </div>
 
                 <div className="py-1">
                     {sideBarData && sideBarData.map((item,index) => (
-                        <Link key={index} href={item.url} className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-lightColor">
+                        <Link key={index} href={item?.url} className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-lightColor">
                             {/* <{I} className="w-4 h-4 mr-3" /> */}
-                            {item.icon}
-                            <span className="ml-2">{item.lable}</span>
+                            {item?.icon}
+                            <span className="ml-2">{item?.lable}</span>
                         </Link>)
 
                     )}

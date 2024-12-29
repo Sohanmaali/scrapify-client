@@ -5,8 +5,8 @@ import { FaBoxes, FaTruck, FaChartBar, FaCalendarCheck } from 'react-icons/fa';
 const DashboardPage = () => {
   return (
     <div className="">
-      <div className="w-full flex justify-between aligh-center"><h1 className="text-2xl text-mutedColor font-bold mb-4 border-b-2 border-b border-darkColor ">Dashboard</h1></div>
-      <div className="p-0  flex flex-col space-y-6">
+      <div className="w-full flex justify-between aligh-center p-2"><h1 className="text-2xl text-mutedColor font-bold mb-4 border-b-2 border-b border-darkColor ">Dashboard</h1></div>
+      <div className=" sm:p-0 lg:p-0 p-2 flex flex-col space-y-6">
         <div className="sm:p-6 ">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {/* Primary Sales Card */}

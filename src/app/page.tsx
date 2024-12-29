@@ -15,6 +15,8 @@ import { GoOnTopButton } from './components/generalComp/Buttons';
 import LoginPage from './pages/auth/login/page';
 import DetaulsCraft from './components/generalComp/TestFile';
 import ScrapProductCard from './components/card/ScrapProductCard';
+import CategoryCard from './components/card/CategoryCard';
+import { ButtonLoader } from './components/generalComp/Loader';
 
 const HomePage = () => {
   const auth = useSelector((state: RootState) => state.auth);
@@ -22,6 +24,7 @@ const HomePage = () => {
     <div>
         <div>
           <ImageSlider/>
+          <ButtonLoader/>
           <CategoryComp/>
           <ProductList/>
           <InfiniteMarquee/>
@@ -30,9 +33,9 @@ const HomePage = () => {
           <ScrollCounter/>
           <Testimonials/>
           <GoOnTopButton/>
-          {/* <DetaulsCraft/> */}
+        
            <ScrapProductCard/>
-          {/* <LoginPage/> */}
+         
         </div>
     </div>
   );

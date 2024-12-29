@@ -1,7 +1,14 @@
-const ContactUs = ()=>{
+import PageBanner from "@/app/components/generalComp/PageBanner"
+
+
+const ContactPage = ()=>{
     return (<>
-        <div><h1>Contact us</h1></div>
+    <PageBanner
+        pageName="Contact"
+        parentPage="Home"
+        backgroundImage="/assert/images/recycle_image.jpg"
+      />
     </>)
 }
 
-export default ContactUs;
+export default ContactPage

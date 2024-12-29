@@ -14,7 +14,7 @@ const ProductList = () => {
   return <>
     <div>
   <div className="bg-relatedWhite grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-4 py-10 sm:px-10">
-    {products.map(() => <ProductCardComp />)}
+    {products.map((item,index) => <ProductCardComp key={index} index={index} />)}
   </div>
   
   {/* Centering the button */}
