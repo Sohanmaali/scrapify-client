@@ -8,9 +8,24 @@
 // export default nextConfig;
 
 
+// const nextConfig = {
+//   experimental: {
+//     appDir: true, // Enable the `app` directory
+//   },
+
+// };
+
+// export default nextConfig;
+
+
+
+/** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
     appDir: true, // Enable the `app` directory
+  },
+  images: {
+    domains: ['via.placeholder.com'], // Add external image domains here
   },
 };
 

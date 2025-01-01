@@ -49,13 +49,13 @@ const ScrapListing =  () => {
   
 useEffect(()=>{
   getScrapProduct();
-})
+},[])
 
   return (<>
     <div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-6">
         {
-          true ? Array.from({ length: 6 }).map((_, index) => <ShimmerCard key={index} />) : [1, 3, 4, 5, 7, 8, 9, 9, 9].map((_, index) => (
+          scrapData.length === 0 ? Array.from({ length: 6 }).map((_, index) => <ShimmerCard key={index} />) : Array.isArray(scrapData) && scrapData.map((_, index) => (
             <ScrapProductCard key={index} />
           ))
         }
