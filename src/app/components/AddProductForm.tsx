@@ -2,7 +2,7 @@
 import React, { use, useState } from "react";
 import { BiUpload } from "react-icons/bi";
 import { SubmitButton } from "./generalComp/Buttons";
-import ImagePreviewer from "./generalComp/helperComp/ImagePreviewer";
+import ImagePreviewer from "./helperComp/ImagePreviewer";
 import { useGetByIdSlugCategories } from "@/hooks/categoryHelper";
 import {
   useCityRegions,
