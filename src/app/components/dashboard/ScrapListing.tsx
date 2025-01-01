@@ -1,7 +1,7 @@
 'use client'
 import BasicProvider from "@/app/utils/basicprovider";
 import ScrapProductCard from "../card/ScrapProductCard"
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const ShimmerCard =  () => {
   return (
@@ -35,13 +35,15 @@ const ShimmerCard =  () => {
   );
 };
 const ScrapListing =  () => {
+  const [scrapData ,setScrapData] = useState([]);
   const getScrapProduct = async () => {
     try {
-      const response = await new BasicProvider('public/scrap').getRequest();
-      console.log('response to fetch data', response);
+      const response:any = await new BasicProvider('public/scrap').getRequest();
+      if(response.status === 'success'){
+          setScrapData(response?.data?.data || [])
+      }
     } catch (error) {
       console.log('Error to fetch Scrap Data  : ', error);
-  
     }
   }
   
