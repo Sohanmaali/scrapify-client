@@ -1,6 +1,6 @@
-import { FaBuromobelexperte } from "react-icons/fa";
+
 import { FaBox, FaShoppingBag, FaChartLine, FaShoppingCart, FaTags, FaUsers, FaDollarSign, FaPercent, FaWarehouse } from 'react-icons/fa';
-import { FaBoxes, FaTruck, FaChartBar, FaCalendarCheck } from 'react-icons/fa';
+import { FaBoxes,  FaChartBar } from 'react-icons/fa';
 
 const DashboardPage = () => {
   return (
