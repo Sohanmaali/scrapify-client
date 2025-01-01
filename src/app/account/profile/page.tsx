@@ -12,7 +12,8 @@ import {
   useStateRegions,
 } from "@/hooks/regionHepler";
 import { SubmitButton } from "@/app/components/generalComp/Buttons";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setUser } from "@/app/store/slices/authSlice";
 
 // import noImage from 'assert/images/noimage.png';
 
@@ -83,65 +84,69 @@ const SelectField: React.FC<SelectFieldProps> = ({
   placeholder,
   handleChange,
 }) => (
-<div className="relative w-full mt-4">
-  <select
-    id={id}
-    name={name}
-    value={value}
-    className="peer w-full mt-4 px-3 pt-3.5 pb-0.2 border-b border-gray-300 placeholder-transparent focus:outline-none focus:ring-0 focus:border-darkColor text-mutedColor transition-all"
-    onChange={handleChange}
-  >
-    <option value="">{placeholder}</option>
-    {options?.length > 0 &&
-      options.map((option: any, index) => (
-        <option key={index} value={option?._id}>
-          {option.name}
-        </option>
-      ))}
-  </select>
-  <label
-    htmlFor={id}
-    className="absolute left-3 top-0 text-gray-500 text-sm transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-focus:top-0 peer-focus:text-darkColor peer-focus:text-sm"
-  >
-    {label}
-  </label>
-</div>
-
+  <div className="relative w-full mt-4">
+    <select
+      id={id}
+      name={name}
+      value={value}
+      className="peer w-full mt-4 px-3 pt-3.5 pb-0.2 border-b border-gray-300 placeholder-transparent focus:outline-none focus:ring-0 focus:border-darkColor text-mutedColor transition-all"
+      onChange={handleChange}
+    >
+      <option value="">{placeholder}</option>
+      {options?.length > 0 &&
+        options.map((option: any, index) => (
+          <option key={index} value={option?._id}>
+            {option.name}
+          </option>
+        ))}
+    </select>
+    <label
+      htmlFor={id}
+      className="absolute left-3 top-0 text-gray-500 text-sm transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-focus:top-0 peer-focus:text-darkColor peer-focus:text-sm"
+    >
+      {label}
+    </label>
+  </div>
 );
 
 const ProfilePage = () => {
+  const user = useSelector((state: any) => state.auth.user);
+  const dispatch = useDispatch();
   const [userProfile, setUserProfile] = useState<any>(null);
-  const { countryData } = useCountryRegions();
-  const { states } = useStateRegions(userProfile?.country);
-  const { city } = useCityRegions(userProfile?.state);
-
-  const userData = useSelector((state: any) => state.auth);
-  
+  const countryData = useCountryRegions();
+  const states = useStateRegions(userProfile?.country);
+  const city = useCityRegions(userProfile?.state);
 
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    const fetchUserProfile = async () => {
-      try {
-        const response: any = await new BasicProvider(
-          "customer/profile"
-        ).getRequest();
+  const fetchUserProfile = async () => {
+    try {
+      const response: any = await new BasicProvider(
+        "customer/profile"
+      ).getRequest();
 
-        if (response?.status === "success") setUserProfile(response?.data);
-      } catch (error) {
-        console.error("Error fetching user profile:", error);
+      console.log("response-=--===-", response);
+
+      if (response?.status === "success") {
+        dispatch(
+          setUser({
+            ...response.data,
+            image: response?.data?.featured_image?.filepath || null,
+          })
+        );
+        setUserProfile(response?.data);
       }
-    };
-
+    } catch (error) {
+      console.error("Error fetching user profile:", error);
+    }
+  };
+  useEffect(() => {
     fetchUserProfile();
   }, []);
 
   const updateProfile = async () => {
     try {
-      const data: any = createFormData({
-        ...userProfile,
-        featured_image: userProfile?.featured_image,
-      });
+      const data: any = createFormData(userProfile);
       if (!data) {
         return;
       }
@@ -150,6 +155,9 @@ const ProfilePage = () => {
       const response: any = await new BasicProvider(
         "customer/update-profile"
       ).postRequest(data);
+      if (response.status === "success") {
+        fetchUserProfile();
+      }
       setNotification({ type: "success", message: response.message });
     } catch (error: any) {
       setNotification({ type: "error", message: error.message });
@@ -161,7 +169,6 @@ const ProfilePage = () => {
 
   const handleChange = (e: any) => {
     const { name, value, files } = e.target;
-    
 
     // Check if the input is a file input (i.e., it contains files)
     if (files) {
@@ -299,8 +306,8 @@ const ProfilePage = () => {
                   userProfile?.featured_image instanceof File
                     ? URL.createObjectURL(userProfile?.featured_image)
                     : userProfile?.featured_image?.filepath
-                    ? `${process.env.NEXT_PUBLIC_API_URL}/${userProfile.featured_image.filepath}`
-                    : "/images/noimage.png"
+                    ? `${process.env.NEXT_PUBLIC_API_URL}/${userProfile?.featured_image?.filepath}`
+                    : "/assert/images/noimage.png"
                 }
                 alt="Profile"
               />
@@ -317,6 +324,7 @@ const ProfilePage = () => {
                     id="profile-edit"
                     name="featured_image"
                     type="file"
+                    accept="image/*"
                     onChange={handleChange}
                     className="absolute inset-0 w-full h-full opacity-0 cursor-pointer border rounded-full border-gray-300"
                   />

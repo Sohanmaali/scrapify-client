@@ -11,7 +11,7 @@ const useCountryRegions = () => {
         const fetchCountry = async () => {
             try {
                 const response: any = await new BasicProvider(`public/region/country`).getRequest();
-            
+           
                 if (response?.status === "success")
                     setCountry(response?.data || []);
             } catch (error: any) {
@@ -24,7 +24,7 @@ const useCountryRegions = () => {
         fetchCountry();
     }, []);
 
-    return { countryData, loading, error };
+    return  countryData;
 };
 
 const useStateRegions = (id: any) => {
@@ -47,7 +47,7 @@ const useStateRegions = (id: any) => {
         fetchState();
     }, [id]);
 
-    return { states, loading, error };
+    return  states;
 };
 const useCityRegions = (id: any) => {
     const [city, setCity] = useState([]);
@@ -73,7 +73,7 @@ const useCityRegions = (id: any) => {
         fetchCity();
     }, [id]);
 
-    return { city, loading, error };
+    return city
 };
 
 export { useCountryRegions, useStateRegions, useCityRegions };

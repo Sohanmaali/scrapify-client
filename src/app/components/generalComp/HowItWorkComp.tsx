@@ -28,7 +28,7 @@ const HowItWorks = () => {
           Over 1,735+ product`s sell
         </p>
         <h2 className="text-3xl md:text-4xl font-bold mb-6">
-          How It <span className="text-darkColor underline decoration-wavy">Work?</span>
+         Why Choose <span className="text-darkColor underline decoration-wavy">us?</span>
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 sm:gap-16 gap-8 mt-12">
           {steps.map((step, index) => (

@@ -1,20 +1,36 @@
 "use client";
 import { useEffect, useState } from "react";
 import SearchBar from "./SearchBar";
-import { LogOut, Login } from "./auth/AuthButton";
-import { getUser, isAuthenticated } from "../utils/auth";
+import {  Login } from "./auth/AuthButton";
+import {  isAuthenticated } from "../utils/auth";
 import Link from "next/link";
 import ProfileDropdown from "./auth/ProfileDropDown";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../store/slices/authSlice";
-import { RootState } from "../store/store";
+import { VscThreeBars } from "react-icons/vsc";
+import BasicProvider from "../utils/basicprovider";
 const Header = () => {
-  const dispatch = useDispatch()
+const dispatch = useDispatch()
+const userData = useSelector((state: any) => state.auth);
+// const user = useSelector((state: any) => state.auth);
   useEffect(() => {
-    const user = getUser();
-    dispatch(setUser(user));
+    const fetchUserProfile = async () => {
+      try {
+        const response: any = await new BasicProvider(
+          "customer/profile"
+        ).getRequest();
+        if (response?.status === "success") {
+          const data = { ...response.data, image: response?.data?.featured_image?.filepath || null }
+          dispatch(setUser(data));
+        }
+      } catch (error) {
+        console.error("Error fetching user Data:", error);
+      }
+    };
+    if (isAuthenticated()) {
+      fetchUserProfile()
+    }
   }, [])
-  const user = useSelector((state: RootState) => state.auth.user);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -23,36 +39,20 @@ const Header = () => {
   return (
     <>
       <header className="bg-lightColor shadow-md relative">
-        {/* Top Header */}
+  
         <div className="flex items-center justify-between px-4 py-3 md:px-8">
-          {/* Logo */}
-          {/* <div className="flex items-center space-x-2">
-            <img
-              src="/logo/scrapify-high-resolution-logo-transparent (1).svg"
-              alt="Logo"
-              className="w-50 h-100"
-            />
-            <span className="text-lg font-bold text-mutedColor">Second-Life</span>
-          </div> */}
 
           <div className="flex items-center">
             <img
               src="/logo/good.svg"
               alt="Logo"
-              className="w-[150px] h-14 " // Responsive sizing
+              className="w-[150px] h-14 " 
             />
           </div>
-
-
           <SearchBar />
-
-          <div className="hidden md:flex items-center space-x-2">
-            {/* {isAuthenticated() ? <LogOut /> : <Login />} */}
-          </div>
-
-          {/* Profile and Hamburger Menu */}
+       
           <div className="flex items-center space-x-4">
-            {/* Hamburger Icon */}
+         
             <button
               onClick={toggleMenu}
               className="block md:hidden focus:outline-none"
@@ -72,14 +72,16 @@ const Header = () => {
                   d="M4 6h16M4 12h16M4 18h16"
                 />
               </svg>
+
+           
             </button>
 
-            {user ? <ProfileDropdown /> : <Login />}
+            {isAuthenticated() ? <ProfileDropdown /> : <Login />}
 
           </div>
         </div>
 
-        <nav className=" overflow-hidden hidden md:flex justify-start bg-mutedColor border-1 border-b-[#e8b237] sticky top-0 z-10">
+        <nav className=" overflow-hidden hidden md:flex justify-start bg-mutedColor border-1 border-b-[#e8b237] sticky   top-0 z-10">
           <ul className="flex space-x-8 py-4 px-12">
             <li>
               <Link
@@ -123,7 +125,7 @@ const Header = () => {
             </li>
           </ul>
 
-          {/* Right side div with green background */}
+       
           <div className="ml-auto flex items-center justify-center">
             <div className=" mr-20 bg-darkColor h-full w-80 text-relatedWhite transform md:-rotate-[47deg] transition-transform duration-500 ease-in-out flex items-center justify-center overflow-hidden">
               <span className="text-xs"></span>

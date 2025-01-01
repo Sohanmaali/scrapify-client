@@ -1,171 +1,145 @@
 "use client";
 
-import Link from "next/link";
-import { useState } from "react";
-import SearchBar from "../SearchBar";
-import { isAuthenticated } from "@/app/utils/auth";
-import { Login, LogOut } from "../auth/AuthButton";
 
-const Header = () => {
+import { useState } from "react";
+
+const TestFile = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
 
   return (
     <>
-      <header className="bg-lightColor shadow-md relative">
-        {/* Top Header */}
-        <div className="flex items-center justify-between px-4 py-3 md:px-8">
-          {/* Logo */}
-          <div className="flex items-center space-x-2">
-            <img
-              src="https://via.placeholder.com/40"
-              alt="Logo"
-              className="w-10 h-10"
-            />
-            <span className="text-lg font-bold text-mutedColor">Second-Life</span>
-          </div>
+      
 
-          <SearchBar />
+      <div>
 
-          <div className="hidden md:flex items-center space-x-2">
-            {/* {isAuthenticated() ? <LogOut /> : <Login />} */}
-          </div>
+        <div className="bg-lightColor py-10 sm:py-10 mt-5">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <div className="mx-auto max-w-2xl lg:text-center">
+              <p className="mt-2 text-pretty text-4xl font-semibold tracking-tight text-mutedColor sm:text-4xl lg:text-balance">
+                How <span className="text-darkColor underline decoration-wavy">scrapify</span> are works
+              </p>
+              <p className="mt-6 text-lg/8 text-gray-600">
+                Quis tellus eget adipiscing convallis sit sit eget aliquet quis.
+                Suspendisse eget egestas a elementum pulvinar et feugiat blandit at. In
+                mi viverra elit nunc.
+              </p>
+            </div>
 
-          {/* Profile and Hamburger Menu */}
-          <div className="flex items-center space-x-4">
-            {/* Hamburger Icon */}
-            <button
-              onClick={toggleMenu}
-              className="block md:hidden focus:outline-none"
-              aria-label="Toggle menu"
-            >
-              <svg
-                className="w-8 h-8 text-gray-700"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              </svg>
-            </button>
-
-            {/* Profile */}
-            <img
-              src="https://via.placeholder.com/40"
-              alt="Profile"
-              className="w-10 h-10 rounded-full border"
-            // onClick={}
-            />
+            <div className="mx-auto mt-10 max-w-2xl sm:mt-12 lg:mt-18 lg:max-w-6xl">
+              <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16">
+                <div className="relative pl-16">
+                  <dt className="text-base/7 font-semibold text-gray-900">
+                    <div className="absolute left-0 top-0 flex size-10 items-center justify-center rounded-lg bg-darkColor">
+                      <svg
+                        className="size-6 text-white"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth="1.5"
+                        stroke="currentColor"
+                        aria-hidden="true"
+                        data-slot="icon"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M12 16.5V9.75m0 0 3 3m-3-3-3 3M6.75 19.5a4.5 4.5 0 0 1-1.41-8.775 5.25 5.25 0 0 1 10.233-2.33 3 3 0 0 1 3.758 3.848A3.752 3.752 0 0 1 18 19.5H6.75Z"
+                        />
+                      </svg>
+                    </div>
+                  <span className="text-darkColor">Step 1</span> | Push to deploy
+                  </dt>
+                  <dd className="mt-2 text-base/7 text-gray-600">
+                    Morbi viverra dui mi arcu sed. Tellus semper adipiscing suspendisse
+                    semper morbi. Odio urna massa nunc massa.
+                  </dd>
+                </div>
+                <div className="relative pl-16">
+                  <dt className="text-base/7 font-semibold text-gray-900">
+                    <div className="absolute left-0 top-0 flex size-10 items-center justify-center rounded-lg bg-darkColor">
+                      <svg
+                        className="size-6 text-white"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth="1.5"
+                        stroke="currentColor"
+                        aria-hidden="true"
+                        data-slot="icon"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"
+                        />
+                      </svg>
+                    </div>
+                    <span className="text-darkColor">Step 1</span> | Push to deploy
+                  </dt>
+                  <dd className="mt-2 text-base/7 text-gray-600">
+                    Sit quis amet rutrum tellus ullamcorper ultricies libero dolor eget.
+                    Sem sodales gravida quam turpis enim lacus amet.
+                  </dd>
+                </div>
+                <div className="relative pl-16">
+                  <dt className="text-base/7 font-semibold text-gray-900">
+                    <div className="absolute left-0 top-0 flex size-10 items-center justify-center rounded-lg bg-darkColor">
+                      <svg
+                        className="size-6 text-white"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth="1.5"
+                        stroke="currentColor"
+                        aria-hidden="true"
+                        data-slot="icon"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99"
+                        />
+                      </svg>
+                    </div>
+                    <span className="text-darkColor">Step 1</span> | Push to deploy
+                  </dt>
+                  <dd className="mt-2 text-base/7 text-gray-600">
+                    Quisque est vel vulputate cursus. Risus proin diam nunc commodo.
+                    Lobortis auctor congue commodo diam neque.
+                  </dd>
+                </div>
+                <div className="relative pl-16">
+                  <dt className="text-base/7 font-semibold text-gray-900">
+                    <div className="absolute left-0 top-0 flex size-10 items-center justify-center rounded-lg bg-darkColor">
+                      <svg
+                        className="size-6 text-white"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth="1.5"
+                        stroke="currentColor"
+                        aria-hidden="true"
+                        data-slot="icon"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M7.864 4.243A7.5 7.5 0 0 1 19.5 10.5c0 2.92-.556 5.709-1.568 8.268M5.742 6.364A7.465 7.465 0 0 0 4.5 10.5a7.464 7.464 0 0 1-1.15 3.993m1.989 3.559A11.209 11.209 0 0 0 8.25 10.5a3.75 3.75 0 1 1 7.5 0c0 .527-.021 1.049-.064 1.565M12 10.5a14.94 14.94 0 0 1-3.6 9.75m6.633-4.596a18.666 18.666 0 0 1-2.485 5.33"
+                        />
+                      </svg>
+                    </div>
+                    <span className="text-darkColor">Step 1</span> | Push to deploy
+                  </dt>
+                  <dd className="mt-2 text-base/7 text-gray-600">
+                    Arcu egestas dolor vel iaculis in ipsum mauris. Tincidunt mattis
+                    aliquet hac quis. Id hac maecenas ac donec pharetra eget.
+                  </dd>
+                </div>
+              </dl>
+            </div>
           </div>
         </div>
 
-    
-        <nav className=" overflow-hidden hidden md:flex justify-start bg-mutedColor border-1 border-b-[#e8b237] sticky top-0 z-10">
-          <ul className="flex space-x-8 py-4 px-12">
-            <li>
-              <Link
-                href="/"
-                className="hover:bg-lightColor hover:text-darkColor py-2 font-semibold border rounded-md text-relatedWhite border-transparent active:text-darkColor active:border-b-darkColor transition-all duration-300 ease-in-out px-4"
-              >
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/pages/aboutus"
-                className="hover:bg-lightColor hover:text-darkColor p-2 font-semibold border rounded-md text-relatedWhite border-transparent active:text-darkColor active:border-b-darkColor transition-all duration-300 ease-in-out px-4"
-              >
-                About us
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/pages/products"
-                className="hover:bg-lightColor hover:text-darkColor p-2 font-semibold border rounded-md text-relatedWhite border-transparent active:text-darkColor active:border-b-darkColor transition-all duration-300 ease-in-out px-4"
-              >
-                Products
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/pages/contactus"
-                className="hover:bg-lightColor hover:text-darkColor p-2 font-semibold border rounded-md text-relatedWhite border-transparent active:text-darkColor active:border-b-darkColor transition-all duration-300 ease-in-out px-4"
-              >
-                Contact us
-              </Link>
-            </li>
-          </ul>
-
-          {/* Right side div with green background */}
-          <div className="ml-auto flex items-center justify-center">
-            <div className=" mr-20 bg-darkColor h-full w-80 text-relatedWhite transform md:-rotate-[47deg] transition-transform duration-500 ease-in-out flex items-center justify-center overflow-hidden">
-              <span className="text-xs"></span>
-            </div>
-          </div>
-        </nav>
-      </header>
-
-      {/* Overlay */}
-      <div
-        className={`fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-40 transition-opacity ${isMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"
-          }`}
-        onClick={toggleMenu}
-      ></div>
-
-      {/* Off-Canvas Menu (Mobile) */}
-      <div
-        id="offcanvas-menu"
-        className={`rounded-r-lg fixed top-0 left-0 z-50 w-1/2 h-full bg-white transform ${isMenuOpen ? "translate-x-0" : "-translate-x-full"
-          } menu-transition md:hidden`}
-      >
-        <nav className="flex flex-col space-y-4 p-4">
-          <Link
-            href="/"
-            className="text-gray-700 hover:text-relatedWhite border-2 border-transparent hover:bg-darkColor   rounded-lg transition-all duration-300 ease-in-out px-4 py-1"
-          >
-            Home
-          </Link>
-          <Link
-            href="/pages/aboutus"
-            className="text-gray-700 hover:text-relatedWhite border-2 border-transparent hover:bg-darkColor rounded-lg transition-all duration-300 ease-in-out px-4 py-1"
-          >
-            About Us
-          </Link>
-          <Link
-            href="/pages/contactus"
-            className="text-gray-700 hover:text-relatedWhite border-2 border-transparent hover:bg-darkColor  rounded-lg transition-all duration-300 ease-in-out px-4 py-1"
-          >
-            Contact Us
-          </Link>
-          <Link
-            href="/pages/products"
-            className="text-gray-700 hover:text-relatedWhite border-2 border-transparent hover:bg-darkColor  rounded-lg transition-all duration-300 ease-in-out px-4 py-1"
-          >
-            Product
-          </Link>
-
-          <div className="flex items-center ml-3">
-            {isAuthenticated() ? <LogOut /> : <Login />}
-          </div>
-        </nav>
       </div>
-
-      <style jsx>{`
-        .menu-transition {
-          transition: transform 0.3s ease-in-out;
-        }
-      `}</style>
     </>
   );
-};
-
-export default Header;
+}
+export default TestFile;
+// https://www.hyperui.dev/components/marketing/popups

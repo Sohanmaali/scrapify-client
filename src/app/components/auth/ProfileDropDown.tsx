@@ -10,7 +10,6 @@ const ProfileDropdown = () => {
   const user = useSelector((state: any) => state.auth.user);
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef<any>(null);
-
     const toggleDropdown = () => setIsOpen(!isOpen);
 
     const handleMouseEnter = (event: any) => {
@@ -34,12 +33,12 @@ const ProfileDropdown = () => {
             onMouseLeave={handleMouseLeave}>
             <img
                 onClick={toggleDropdown}
-                src={`${process.env.NEXT_PUBLIC_API_URL}/${user?.image}` || '/images/noimage.png'}
+                src={user?.image?`${process.env.NEXT_PUBLIC_API_URL}/${user?.image}` : '/assert/images/noimage.png'}
                 alt="Profile"
                 className="w-10 h-10 rounded-full border border-darkColor cursor-pointer hover:shadow-lg transition-shadow"
             />
 
-            <div className={`absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-lg py-2 
+            <div className={`absolute right-0 w-56 bg-white rounded-lg shadow-lg py-2 
                       transform transition-all duration-200 origin-top-right
                       ${isOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'}`}>
                 {/* Rest of the dropdown content remains the same */}

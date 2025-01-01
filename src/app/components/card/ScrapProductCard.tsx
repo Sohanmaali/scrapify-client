@@ -14,7 +14,6 @@ const ScrapProductCard = ({ image = "https://via.placeholder.com/300" }) => {
                 />
             </Link>
 
-            {/* Product Details */}
             <div className="flex flex-col justify-between w-full sm:w-2/3 py-2 px-4 space-y-3">
                 {/* Product Title */}
                 <p className="text-sm font-semibold text-gray-800 hover:text-darkColor transition duration-300 cursor-pointer">

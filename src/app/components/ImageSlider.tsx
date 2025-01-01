@@ -63,6 +63,7 @@ export default function ImageSlider() {
                 <h2 className="text-3xl font-bold mb-4">Welcome to Our Service</h2>
                 <p className="text-lg mb-6">We provide the best solutions for your needs.</p>
                <GetStartButton/>
+               
               </div>
             </div>
           </div>

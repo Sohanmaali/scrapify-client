@@ -7,7 +7,11 @@ import setNotification from "../../utils/notification";
 export  function LogOut() {
   const router = useRouter();
   const dispatch = useDispatch();
-    function handleLogout() {
+    
+  function handleLogout() {
+
+      console.log('========Logout===========>>>>>>:::', );
+      
        removeToken();
        dispatch(logout());
        setNotification({ type: 'info', message: 'Logged out successfully' });

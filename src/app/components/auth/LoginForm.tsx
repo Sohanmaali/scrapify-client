@@ -40,16 +40,12 @@ export default function LoginForm() {
     }
     try {
       const response: any = await new BasicProvider('auth/customer/login').postRequest(creadantial);
-      console.log('===Login====>>>', response);
-
       if(response?.message==="OTP send successfully"){
         setShowModal(true)
         return
       }
-
-
       const user = response?.user
-      dispatch(login({ user: { _id: user._id, mobile: user.mobile, name: user.name, email: user.email, image: user?.featured_image || '' } }));
+      dispatch(login({ user: { _id: user._id, mobile: user.mobile, name: user.name, email: user.email, image: user?.featured_image.filepath || '' } }));
       setToken(response.access_token)
       setNotification({ type: 'success', message: 'Login Successfull' });
       router.push('/')

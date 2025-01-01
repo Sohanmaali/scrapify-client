@@ -1,21 +1,16 @@
 
 'use client'
-import { RxDashboard } from "react-icons/rx";
-import { FaRegCircleUser } from "react-icons/fa6";
-import { FaListUl } from "react-icons/fa";
+
 import { BiLogOut, BiPurchaseTag } from "react-icons/bi";
-import { MdMessage } from "react-icons/md";
-import { FaHistory } from "react-icons/fa";
-import { MdContactSupport } from "react-icons/md";
-import { IoNotificationsOutline } from "react-icons/io5";
-import { MdLogout } from "react-icons/md";
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import sideBarData from "@/data/SideBar";
 import { LogOut } from "../components/auth/AuthButton";
 import { useSelector } from "react-redux";
-
+import { VscThreeBars } from "react-icons/vsc";
+import { VscClose } from "react-icons/vsc";
+// import { IoClose } from "react-icons/io5";
 
 export default function AccountLayout({ children }: { children: React.ReactNode }) {
   const user = useSelector((state: any) => state.auth.user);
@@ -32,15 +27,14 @@ export default function AccountLayout({ children }: { children: React.ReactNode 
 
       <div className="flex flex-col lg:flex-row w-full h-auto    rounded-2xl p-2 desktpsidebar">
 
-        {/* Desktop screen */}
         <div className="lg:w-1/5 w-full py-4 px-4  fixed lg:relative h-[700px] lg:block hidden  rounded-2xl bg-darkColor">
-          {/* <h2 className="text-lg text-center font-bold text-mutedColor">Sidebar Menu</h2> */}
+
 
           <div className="flex flex-col justify-center items-center bg-none mb-10">
             {/* Image Container */}
             <div className="w-20 h-20 sm:w-20 sm:h-20 md:w-28 md:h-28 lg:w-46 lg:h-46 border-4   rounded-full">
               <img
-                  src={`${process.env.NEXT_PUBLIC_API_URL}/${user?.image}` || '/images/noimage.png'}
+                src={user?.image?`${process.env.NEXT_PUBLIC_API_URL}/${user?.image}` : '/assert/images/noimage.png'}
                 alt="Circle Image"
                 className="w-full h-full rounded-full object-cover"
               />
@@ -68,11 +62,11 @@ export default function AccountLayout({ children }: { children: React.ReactNode 
             </li>))}
             <li>
               <div className="border-t  py-1">
-              <Link href="" className="flex items-center px-4 py-2  text-white hover:text-red-500  rounded-lg hover:bg-red-50">
-                <BiLogOut className="w-4 h-4 mr-3" />
-                <LogOut/>
-              </Link>
-            </div></li>
+                <button className="flex items-center px-4 py-2  text-white hover:text-red-500  rounded-lg hover:bg-red-50">
+                  <BiLogOut className="w-4 h-4 mr-3" />
+                  <LogOut />
+                </button>
+              </div></li>
 
           </ul>
         </div>
@@ -80,36 +74,26 @@ export default function AccountLayout({ children }: { children: React.ReactNode 
 
 
         {/*For Mobile screen */}
-        <div className="lg:w-1/5 w-full p-4 bg-gray-200 lg:relative  sm:hidden">
-          <h2 className="text-lg font-bold">Sidebar Menu</h2>
-
+        <div className="lg:w-1/5 w-full px-2 bg-darkColor lg:relative rounded-lg  sm:hidden">
+         <div className="flex justify-between">
+          <h2 className="text-lg font-boldn p-2 pl-5">Menu</h2>
           <button
-            className="block py-2 px-4 bg-gray-300 rounded mb-4"
+            className="block flex text-left p-2   text-lightColor rounded ml-auto"
             onClick={toggleMenu}
           >
-            {isOpen ? 'Close Menu' : 'Open Menu'}
+            {/* {isOpen ? 'Close Menu' : 'Open Menu'} */}
+             {isOpen ? <VscClose className="text-lightColor text-[30px]"/> :<VscThreeBars className="text-lightColor text-[30px]"/> }
           </button>
+         </div>
           <ul className={`${isOpen ? 'block' : 'hidden'} lg:block`}>
-            <li>
-              <Link href="/account/dashboard" className="block py-2 px-4 hover:bg-gray-300">
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link href="/account/profile" className="block py-2 px-4 hover:bg-gray-300">
-                Profile
-              </Link>
-            </li>
-            <li>
-              <Link href="/account/purchases" className="block py-2 px-4 hover:bg-gray-300">
-                Purchases
-              </Link>
-            </li>
-            <li>
-              <Link href="/account/listing" className="block py-2 px-4 hover:bg-gray-300">
-                Listing
-              </Link>
-            </li>
+            {Array.isArray(sideBarData) && sideBarData.map((navigation, index) => (
+              <li>
+                <Link onClick={toggleMenu} href={navigation.url} className="block text-relatedWhite py-2 px-4 hover:bg-lightColor hover:text-darkColor rounded-lg">
+                  <span className="flex items-center space-x-2">{navigation.icon} <span>{navigation.lable}</span></span>
+                </Link>
+
+              </li>
+            ))}
           </ul>
         </div>
 

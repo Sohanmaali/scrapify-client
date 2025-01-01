@@ -18,7 +18,7 @@ const ProductList = () => {
   </div>
   
   {/* Centering the button */}
-  <div className="flex justify-center py-3">
+  <div className="flex justify-center py-3 bg-relatedWhite">
     <PrimaryButton heading={'View All Products '} />
   </div>
 </div>

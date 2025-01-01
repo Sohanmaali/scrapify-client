@@ -3,7 +3,8 @@ import {jwtDecode} from "jwt-decode";
 
 import { login, setUser } from '../store/slices/authSlice';
 
-const TOKEN_KEY = process.env.NEXT_APP_COOKIE_PREFIX || 'scrapify';
+// const TOKEN_KEY = process.env.NEXT_APP_COOKIE_PREFIX || 'scrapify';
+const TOKEN_KEY = process.env.NEXT_PUBLIC_COOKIE_PREFIX || 'scrapify';
 const expires = process.env.TOKEN_EXPIRY
 
 export const setToken = (token: string) => {
@@ -11,6 +12,8 @@ export const setToken = (token: string) => {
 };
 
 export const getToken = () => {
+  console.log('=====================>>>Token :  ', TOKEN_KEY);
+  
   return Cookies.get(TOKEN_KEY);
 };
 

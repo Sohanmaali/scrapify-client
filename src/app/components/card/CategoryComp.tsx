@@ -102,10 +102,9 @@
 
 // export default CategoryComp;
 
+"use client";
 
-
-
-import React from "react";
+import React, { use, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import { GrFormNext, GrFormPrevious } from "react-icons/gr";
@@ -113,10 +112,11 @@ import { Heading } from "../generalComp/Heading";
 import { GreadiantButton } from "../generalComp/Buttons";
 import CategoryCard from "./CategoryCard";
 
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 import { useRouter } from "next/navigation";
+import BasicProvider from "@/app/utils/basicprovider";
 
 interface Category {
   title: string;
@@ -124,43 +124,65 @@ interface Category {
 }
 
 const CategoryComp: React.FC = () => {
-
   const router = useRouter();
 
-  const categories: Category[] = [
-    {
-      title: "Electronics",
-      image: "https://via.placeholder.com/150?text=Electronics",
-    },
-    {
-      title: "Furniture",
-      image: "https://via.placeholder.com/150?text=Furniture",
-    },
-    {
-      title: "Handmade",
-      image: "https://via.placeholder.com/150?text=Handmade",
-    },
-    {
-      title: "Scrap Material",
-      image: "https://via.placeholder.com/150?text=Scrap",
-    },
-    {
-      title: "Books",
-      image: "https://via.placeholder.com/150?text=Books",
-    },
-    {
-      title: "Clothing",
-      image: "https://via.placeholder.com/150?text=Clothing",
-    },
-    {
-      title: "Sports",
-      image: "https://via.placeholder.com/150?text=Sports",
-    },
-    {
-      title: "Kitchen",
-      image: "https://via.placeholder.com/150?text=Kitchen",
-    },
-  ];
+  const [categories, setCategories] = React.useState<Category[]>([]);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response: any = await new BasicProvider(
+          `public/setting/browse-category`
+        ).getRequest();
+        // const data = await response.json();
+
+        setCategories(response?.data?.value);
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
+    };
+
+    fetchCategories();
+  }, []);
+
+  // const categories: Category[] = [
+  //   {
+  //     title: "Electronics",
+  //     image: "https://via.placeholder.com/150?text=Electronics",
+  //   },
+  //   {
+  //     title: "Furniture",
+  //     image: "https://via.placeholder.com/150?text=Furniture",
+  //   },
+  //   {
+  //     title: "Handmade",
+  //     image: "https://via.placeholder.com/150?text=Handmade",
+  //   },
+  //   {
+  //     title: "Scrap Material",
+  //     image: "https://via.placeholder.com/150?text=Scrap",
+  //   },
+  //   {
+  //     title: "Books",
+  //     image: "https://via.placeholder.com/150?text=Books",
+  //   },
+  //   {
+  //     title: "Clothing",
+  //     image: "https://via.placeholder.com/150?text=Clothing",
+  //   },
+  //   {
+  //     title: "Sports",
+  //     image: "https://via.placeholder.com/150?text=Sports",
+  //   },
+  //   {
+  //     title: "Kitchen",
+  //     image: "https://via.placeholder.com/150?text=Kitchen",
+  //   },
+  // ];
+
+  console.log("-=-=-=-=-=-==-response", categories);
+
+
 
   return (
     <div className="min-h-[60vh] bg-[#eefbf3] py-10">
@@ -169,33 +191,29 @@ const CategoryComp: React.FC = () => {
 
         <div className="relative mt-8 px-2 sm:px-8">
           {/* Custom Navigation Buttons */}
-          <button
-            className="custom-swiper-button-prev absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-darkColor text-relatedWhite hover:bg-mutedColor p-3 rounded-full shadow-lg"
-          >
+          <button className="custom-swiper-button-prev absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-darkColor text-relatedWhite hover:bg-mutedColor p-3 rounded-full shadow-lg">
             <GrFormPrevious className="text-2xl font-semibold" />
           </button>
-          <button
-            className="custom-swiper-button-next absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-darkColor text-relatedWhite hover:bg-mutedColor p-3 rounded-full shadow-lg"
-          >
+          <button className="custom-swiper-button-next absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-darkColor text-relatedWhite hover:bg-mutedColor p-3 rounded-full shadow-lg">
             <GrFormNext className="text-2xl font-semibold" />
           </button>
 
           <Swiper
             modules={[Navigation, Pagination]}
             navigation={{
-              prevEl: '.custom-swiper-button-prev',
-              nextEl: '.custom-swiper-button-next',
+              prevEl: ".custom-swiper-button-prev",
+              nextEl: ".custom-swiper-button-next",
             }}
             pagination={{
               clickable: true,
-              el: '.swiper-pagination',
+              el: ".swiper-pagination",
             }}
             breakpoints={{
               // Mobile
               320: {
                 slidesPerView: 2,
-              
-                spaceBetween:10,
+
+                spaceBetween: 10,
                 centeredSlides: false,
                 initialSlide: 0,
               },
@@ -218,17 +236,16 @@ const CategoryComp: React.FC = () => {
               1280: {
                 slidesPerView: 5.2,
                 spaceBetween: 25,
-                
               },
             }}
             loop={true}
             grabCursor={true}
             className="category-swiper !px-1 sm:!px-4"
           >
-            {categories.map((category, index) => (
+            {categories?.length > 0 && categories?.map((category, index) => (
               <SwiperSlide key={index} className="pb-8">
                 <div className="px-2 sm:px-0">
-                  <CategoryCard data={category} index={index} />
+                  <CategoryCard data={category} index={index} price={false} />
                 </div>
               </SwiperSlide>
             ))}
@@ -237,7 +254,7 @@ const CategoryComp: React.FC = () => {
         </div>
 
         <div className="text-center mt-10">
-          <GreadiantButton callBack={()=>router.replace("/pages/category")} />
+          <GreadiantButton callBack={() => router.replace("/pages/category")} />
         </div>
       </div>
     </div>

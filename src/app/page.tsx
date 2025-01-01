@@ -17,6 +17,8 @@ import DetaulsCraft from './components/generalComp/TestFile';
 import ScrapProductCard from './components/card/ScrapProductCard';
 import CategoryCard from './components/card/CategoryCard';
 import { ButtonLoader } from './components/generalComp/Loader';
+import TestFile from './components/generalComp/TestFile';
+import HeroSection from './components/Home/HeroSection';
 
 const HomePage = () => {
   const auth = useSelector((state: RootState) => state.auth);
@@ -27,15 +29,16 @@ const HomePage = () => {
           <ButtonLoader/>
           <CategoryComp/>
           <ProductList/>
-          <InfiniteMarquee/>
+         
+          <TestFile/>
+           <InfiniteMarquee/>
+           <HeroSection/>
           <HowItWorks/>
           <QuickShell/>
           <ScrollCounter/>
           <Testimonials/>
           <GoOnTopButton/>
-        
-           <ScrapProductCard/>
-         
+       
         </div>
     </div>
   );
