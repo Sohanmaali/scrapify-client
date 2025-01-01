@@ -3,16 +3,6 @@ import BasicProvider from "@/app/utils/basicprovider";
 import ScrapProductCard from "../card/ScrapProductCard"
 import { useEffect } from "react";
 
-const getScrapProduct = async () => {
-  try {
-    const response = await new BasicProvider('public/scrap').getRequest();
-    console.log('response to fetch data', response);
-  } catch (error) {
-    console.log('Error to fetch Scrap Data  : ', error);
-
-  }
-}
-
 const ShimmerCard =  () => {
   return (
     <div className="flex w-full flex-col sm:flex-row bg-white border rounded-lg overflow-hidden max-w-md mx-auto shadow-md p-5 mb-5 animate-pulse">
@@ -45,8 +35,6 @@ const ShimmerCard =  () => {
   );
 };
 const ScrapListing =  () => {
-
-
   const getScrapProduct = async () => {
     try {
       const response = await new BasicProvider('public/scrap').getRequest();
