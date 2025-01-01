@@ -47,7 +47,7 @@ const ScrapProductCard = ({ item }:any) => {
                 </div>
                 <div className="text-xs text-gray-700 flex space-x-1">
                     <FaMapMarkerAlt className="text-darkColor  " />
-                    <p>123 MG Road, Bangalore, Karnataka 560001, India</p>
+                    <p>{item?.address || '-'}</p>
                 </div>
             </div>
         </div>

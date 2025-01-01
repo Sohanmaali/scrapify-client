@@ -28,8 +28,8 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'http',
-        hostname: '192.168.189.92',
-        port: '3004',
+        hostname: process.env.NEXT_PUBLIC_HOST, // Dynamically use hostname from env
+        port: process.env.NEXT_PUBLIC_PORT, // Dynamically use port from env
         pathname: '/**', // Match all paths
       },
     ],

@@ -1,17 +1,16 @@
-import ScrapMaterialForm from "@/app/components/AddProductForm"
+"use client"
+import ScrapMaterialForm from "@/app/components/AddProductForm";
+import { useRouter } from 'next/navigation';
 
-interface AddProductProps {
-  params: {
-    id: string;
-  };
-}
+const AddProduct = () => {
+  const { id } :any= useRouter();  // Use router to get dynamic params
 
-const AddProduct = ({ params }: AddProductProps) => {
+ 
   return (
     <>
-      <ScrapMaterialForm category={params.id} />
+      <ScrapMaterialForm category={id} />
     </>
   );
-}
+};
 
 export default AddProduct;
