@@ -42,6 +42,9 @@ const ScrapListing =  () => {
       if(response.status === 'success'){
           setScrapData(response?.data?.data || [])
       }
+
+      console.log('response data : ', response);
+      
     } catch (error) {
       console.log('Error to fetch Scrap Data  : ', error);
     }

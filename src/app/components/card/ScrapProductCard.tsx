@@ -8,15 +8,15 @@ const ScrapProductCard = ({ image = "https://via.placeholder.com/300" }) => {
         <div className="flex flex-col sm:flex-row bg-white border hover:bg-lightColor  border-darkColor rounded-lg overflow-hidden max-w-md mx-auto shadow-md p-4 mb-5 transition-all duration-300 ease-in-out hover:shadow-lg ">
             {/* Product Image */}
             <Link href="/product-detail" className="flex-shrink-0 w-full sm:w-1/3">
-            <div className="w-full h-36 cursor-pointer rounded-lg overflow-hidden">
-      <Image
-        width={100}
-        height={36}
-        className="w-full h-full object-cover"
-        src={image}
-        alt="Product"
-      />
-    </div>
+                <div className="w-full h-36 cursor-pointer rounded-lg overflow-hidden">
+                    <Image
+                        width={100}
+                        height={36}
+                        className="w-full h-full object-cover"
+                        src={image}
+                        alt="Product"
+                    />
+                </div>
             </Link>
 
             <div className="flex flex-col justify-between w-full sm:w-2/3 py-2 px-4 space-y-3">
@@ -32,7 +32,7 @@ const ScrapProductCard = ({ image = "https://via.placeholder.com/300" }) => {
                         <span className="ml-2 text-xs text-gray-500">10$/kg</span>
                     </div>
                     <span className="text-xs font-medium text-relatedWhite bg-darkColor px-2 py-1 rounded">
-                       Metal
+                        Metal
                     </span>
                 </div>
 
