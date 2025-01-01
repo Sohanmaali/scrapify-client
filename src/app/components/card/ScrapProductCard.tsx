@@ -3,7 +3,7 @@ import React from 'react';
 import { MdOutlineCategory } from "react-icons/md";
 import { FaMapMarkerAlt, FaRegCalendarAlt } from "react-icons/fa";
 import Image from 'next/image';
-const ScrapProductCard = ({ image = "https://via.placeholder.com/300" }) => {
+const ScrapProductCard = ({ item }:any) => {
     return (
         <div className="flex flex-col sm:flex-row bg-white border hover:bg-lightColor  border-darkColor rounded-lg overflow-hidden max-w-md mx-auto shadow-md p-4 mb-5 transition-all duration-300 ease-in-out hover:shadow-lg ">
             {/* Product Image */}
@@ -13,7 +13,7 @@ const ScrapProductCard = ({ image = "https://via.placeholder.com/300" }) => {
                         width={100}
                         height={36}
                         className="w-full h-full object-cover"
-                        src={image}
+                        src={`${process.env.NEXT_PUBLIC_API_URL}/${item?.gallery[0]?.filepath}`}
                         alt="Product"
                     />
                 </div>

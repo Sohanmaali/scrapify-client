@@ -25,7 +25,14 @@ const nextConfig = {
     appDir: true, // Enable the `app` directory
   },
   images: {
-    domains: ['via.placeholder.com'], // Add external image domains here
+    remotePatterns: [
+      {
+        protocol: 'http',
+        hostname: '192.168.189.92',
+        port: '3004',
+        pathname: '/**', // Match all paths
+      },
+    ],
   },
 };
 
