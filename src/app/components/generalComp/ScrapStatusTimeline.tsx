@@ -8,13 +8,42 @@ interface TimelineItem {
   status: Status
   title: string
   description: string
-  timestamp: string
+  timestamp: any
 }
 
 interface TimelineProps {
   items: TimelineItem[]
   highlightedIndex: number
 }
+
+
+const items : TimelineItem[] = [
+  {
+      status: "pending",
+      title: "Pending Admin Review",
+      description: "Your scrap upload is awaiting review by the admin team.",
+      timestamp: "2024-01-01 09:00 AM", // Show timestamp for the current step
+  },
+
+  {
+      status: "accepted",
+      title: "Scrap Approval Pending",
+      description: "Once reviewed, your scrap will be approved and purchased by the admin.",
+      timestamp: null, // No timestamp for future steps
+  },
+  {
+      status: "processing",
+      title: "Pickup Will Be Scheduled",
+      description: "After purchase, our team will schedule a pickup for your scrap materials.",
+      timestamp: null,
+  },
+  {
+      status: "completed",
+      title: "Process Will Be Completed",
+      description: "Once picked up, the process will be marked as completed.",
+      timestamp: null,
+  },
+] as const
 
 const statusConfig = {
   pending: {

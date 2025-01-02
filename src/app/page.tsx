@@ -25,7 +25,7 @@ const HomePage = () => {
     <div>
         <div>
           <ImageSlider/>
-          <ButtonLoader/>
+          {/* <ButtonLoader/> */}
           <CategoryComp/>
           <ProductList/>
          

@@ -21,34 +21,43 @@ const page = () => {
         "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_960_720.jpg",
     ];
 
-
-    const items = [
+    interface TimelineItem {
+        status: "pending" | "processing" | "accepted" | "cancelled" | "rejected" | "completed";
+        title: string;
+        description: string;
+        timestamp: any
+      }
+      
+    // const items: TimelineItem[]
+    const items : TimelineItem[] = [
         {
             status: "pending",
             title: "Pending Admin Review",
             description: "Your scrap upload is awaiting review by the admin team.",
             timestamp: "2024-01-01 09:00 AM", // Show timestamp for the current step
-          },
-       
-          {
+        },
+
+        {
             status: "accepted",
             title: "Scrap Approval Pending",
             description: "Once reviewed, your scrap will be approved and purchased by the admin.",
             timestamp: null, // No timestamp for future steps
-          },
-          {
+        },
+        {
             status: "processing",
             title: "Pickup Will Be Scheduled",
             description: "After purchase, our team will schedule a pickup for your scrap materials.",
             timestamp: null,
-          },
-          {
+        },
+        {
             status: "completed",
             title: "Process Will Be Completed",
             description: "Once picked up, the process will be marked as completed.",
             timestamp: null,
-          },
-      ] 
+        },
+    ] as const
+
+  
     return (
 
         <>
@@ -130,31 +139,32 @@ const page = () => {
 
                     {/* Right Card: Price Section */}
                     <div className=" mt-2 w-full lg:w-4/12  flex flex-col self-start lg:mb-0 gap-6">
-                    <div className="w-full lg:w-12/12 bg-white rounded-lg shadow-lg p-6 flex flex-col self-start mb-4 lg:mb-0">
-    <h1 className="text-2xl font-bold mb-4">Scrap Name</h1>
-    <ul className="text-gray-700 mb-4">
-        <li className="mb-2">
-            <span className="font-bold">Category:</span> Metal
-        </li>
-        <li className="mb-2">
-            <span className="font-bold">Weight:</span> 15 kg
-        </li>
-        <li className="mb-2">
-            <span className="font-bold">Condition:</span> Good
-        </li>
-        <li className="mb-2">
-            <span className="font-bold">Location:</span> New Delhi, India
-        </li>
-        <li className="mb-2">
-            <span className="font-bold">Posted On:</span> January 1, 2024
-        </li>
-    </ul>
-    <span className="text-3xl font-bold text-green-500">$299.99</span>
-</div>
+                        <div className="w-full lg:w-12/12 bg-white rounded-lg shadow-lg p-6 flex flex-col self-start mb-4 lg:mb-0">
+                            <h1 className="text-2xl font-bold mb-4">Scrap Name</h1>
+                            <ul className="text-gray-700 mb-4">
+                                <li className="mb-2">
+                                    <span className="font-bold">Category:</span> Metal
+                                </li>
+                                <li className="mb-2">
+                                    <span className="font-bold">Weight:</span> 15 kg
+                                </li>
+                                <li className="mb-2">
+                                    <span className="font-bold">Condition:</span> Good
+                                </li>
+                                <li className="mb-2">
+                                    <span className="font-bold">Location:</span> New Delhi, India
+                                </li>
+                                <li className="mb-2">
+                                    <span className="font-bold">Posted On:</span> January 1, 2024
+                                </li>
+                            </ul>
+                            <span className="text-3xl font-bold text-green-500">$299.99</span>
+                        </div>
 
 
                         <div className=" w-full lg:w-12/12 bg-white rounded-lg shadow-lg p-6 flex flex-col self-start mb-4 lg:mb-0">
-                           <ScrapStatusTimeline  items={items} highlightedIndex={0}/>
+                                <h1>Timeline of you scrap</h1>
+                            <ScrapStatusTimeline items={items} highlightedIndex={0} />
                         </div>
                     </div>
                 </div>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
-import { setToken } from '../utils/auth';
-import api from '../utils/api';
+import { setToken } from '@/app/utils/auth';
+import api from '@/app/utils/api';
 
 interface AuthFormProps {
   type: 'login' | 'signup';
