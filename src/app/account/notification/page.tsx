@@ -1,4 +1,4 @@
-import NotificationListing from "@/app/components/scrapProducts/NotificationListing"
+import NotificationListing from "@/app/pages/scrapProducts/NotificationListing"
 
 const NotificationPage =()=>{
     return (<>
