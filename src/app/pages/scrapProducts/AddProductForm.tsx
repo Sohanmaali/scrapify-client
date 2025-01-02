@@ -1,8 +1,8 @@
 "use client";
 import React, { use, useState } from "react";
 import { BiUpload } from "react-icons/bi";
-import { SubmitButton } from "./generalComp/Buttons";
-import ImagePreviewer from "./helperComp/ImagePreviewer";
+import { SubmitButton } from "@/app/components/generalComp/Buttons";
+import ImagePreviewer from "@/app/components/helperComp/ImagePreviewer";
 import { useGetByIdSlugCategories } from "@/hooks/categoryHelper";
 import {
   useCityRegions,
@@ -10,8 +10,8 @@ import {
   useStateRegions,
 } from "@/hooks/regionHepler";
 import createFormData from "@/helpers/createFormData";
-import BasicProvider from "../utils/basicprovider";
-import setNotification from "../utils/notification";
+import BasicProvider from "../../utils/basicprovider";
+import setNotification from "../../utils/notification";
 
 const ScrapMaterialForm = ({ category }: any) => {
   const categoryData: any = useGetByIdSlugCategories(category);
@@ -65,32 +65,28 @@ const ScrapMaterialForm = ({ category }: any) => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     try {
-      console.log("-=-==-=-=--", scrapData);
-
       const data = createFormData({
         ...scrapData,
         name: categoryData?.name,
         sell_price: categoryData?.price,
+        catagory: categoryData?._id,
       });
       setIsLoading(true);
       if (!data) {
         return;
       }
-      const formObject = Object.fromEntries(data.entries());
 
-      console.log("Form Data:", formObject);
-      const response:any = await new BasicProvider("public/scrap").postRequest(
+      const response: any = await new BasicProvider("public/scrap").postRequest(
         data
       );
 
-      if(response.status === 'success'){
-       setNotification({type:'success', message:response.message})
-      }else{
-        setNotification({type:'error', message:response.message})
+      if (response.status === "success") {
+        setNotification({ type: "success", message: response.message });
+      } else {
+        setNotification({ type: "error", message: response.message });
       }
-
-    } catch (error:any) {
-      setNotification({type:'error', message:error.message})
+    } catch (error: any) {
+      setNotification({ type: "error", message: error.message });
       console.log("ERROR TO SUBMIT SCRAP -=-=-=-==", error);
     } finally {
       setIsLoading(false);
@@ -129,25 +125,25 @@ const ScrapMaterialForm = ({ category }: any) => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
           <div className="relative w-full">
             <input
-              value={scrapData?.quantity || ""}
+              value={scrapData?.quentity || ""}
               onChange={handleChange}
-              name="quantity"
-              id="quantity"
+              name="quentity"
+              id="quentity"
               type="text"
               maxLength={8}
               className="peer w-full px-3 pt-6 pb-2 border-b border-gray-300 bg-transparent 
                    placeholder-transparent focus:outline-none focus:border-darkColor
                    transition-colors duration-200"
-              placeholder={`Enter quantity in ${categoryData?.unit_type}`}
+              placeholder={`Enter quentity in ${categoryData?.unit_type}`}
             />
             <label
-              htmlFor="quantity"
+              htmlFor="quentity"
               className="absolute left-3 -top-1 text-sm text-gray-500 
                    peer-placeholder-shown:text-base peer-placeholder-shown:top-4 
                    peer-focus:-top-1 peer-focus:text-sm peer-focus:text-darkColor
                    transition-all duration-200"
             >
-              {`Enter quantity in ${categoryData?.unit_type}`}
+              {`Enter quentity in ${categoryData?.unit_type}`}
             </label>
           </div>
 

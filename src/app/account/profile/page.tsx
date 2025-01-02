@@ -114,8 +114,8 @@ const ProfilePage = () => {
   const dispatch = useDispatch();
   const [userProfile, setUserProfile] = useState<any>(null);
   const countryData = useCountryRegions();
-  const states = useStateRegions(userProfile?.country);
-  const city = useCityRegions(userProfile?.state);
+  const states:any = useStateRegions(userProfile?.country);
+  const city :any= useCityRegions(userProfile?.state);
 
   const [isLoading, setIsLoading] = useState(false);
 

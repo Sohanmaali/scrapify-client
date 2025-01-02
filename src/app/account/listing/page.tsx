@@ -1,9 +1,9 @@
 
 'use client'
 import ProductCardComp from "@/app/components/card/ProdcutCardCopm";
-import ScrapListing from "@/app/components/dashboard/ScrapListing";
 import { AddButton, GreadiantButton, PrimaryButton, SubmitButton } from "@/app/components/generalComp/Buttons";
 import NotAvalilable from "@/app/components/generalComp/NotAvailable";
+import ScrapListing from "@/app/pages/scrapProducts/ScrapListing";
 import { useState } from "react";
 const ListingnPage = () => {
     const [activeTab, setActiveTab] = useState("scrapMaterial");

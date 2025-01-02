@@ -44,7 +44,10 @@ const useStateRegions = (id: any) => {
             }
         };
 
+       if (id) {
         fetchState();
+        
+       }
     }, [id]);
 
     return  states;
@@ -70,7 +73,9 @@ const useCityRegions = (id: any) => {
             }
         };
 
+       if (id) {
         fetchCity();
+       }
     }, [id]);
 
     return city

@@ -8,7 +8,7 @@ import "swiper/css/thumbs";
 import { Autoplay, Navigation, Thumbs } from "swiper/modules";
 
 const page = () => {
-  const [thumbsSwiper, setThumbsSwiper] = React.useState(null);
+  const [thumbsSwiper, setThumbsSwiper] = React.useState<any>(null);
 
   const [activeTab, setActiveTab] = React.useState("about");
 

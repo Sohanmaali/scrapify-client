@@ -1,9 +1,9 @@
-'use client'
+"use client";
 import BasicProvider from "@/app/utils/basicprovider";
-import ScrapProductCard from "../card/ScrapProductCard"
+import ScrapProductCard from "@/app/components/card/ScrapProductCard";
 import { useEffect, useState } from "react";
 
-const ShimmerCard =  () => {
+const ShimmerCard = () => {
   return (
     <div className="flex w-full flex-col sm:flex-row bg-white border rounded-lg overflow-hidden max-w-md mx-auto shadow-md p-5 mb-5 animate-pulse">
       <div className="flex-shrink-0 w-full sm:w-1/3">
@@ -16,7 +16,6 @@ const ShimmerCard =  () => {
           <div className="space-y-1">
             <div className="h-4 bg-gray-200 rounded w-1/2"></div>
             <div className="h-3 bg-gray-200 rounded w-1/4"></div>
-
           </div>
           <div className="h-6 bg-gray-200 rounded w-12"></div>
         </div>
@@ -30,47 +29,48 @@ const ShimmerCard =  () => {
         </div>
       </div>
     </div>
-
-
   );
 };
-const ScrapListing =  () => {
-  const [scrapData ,setScrapData] = useState([]);
+const ScrapListing = () => {
+  const [scrapData, setScrapData] = useState([]);
   const getScrapProduct = async () => {
     try {
-      const response:any = await new BasicProvider('public/scrap').getRequest();
-      if(response.status === 'success'){
-          setScrapData(response?.data?.data || [])
+      const response: any = await new BasicProvider(
+        "public/scrap"
+      ).getRequest();
+
+      console.log("-=-=--===-response : ", response);
+
+      if (response.status === "success") {
+        setScrapData(response?.data?.data || []);
       }
 
-      console.log('response data : ', response);
-      
+      console.log("response data : ", response);
     } catch (error) {
-      console.log('Error to fetch Scrap Data  : ', error);
+      console.log("Error to fetch Scrap Data  : ", error);
     }
-  }
-  
-useEffect(()=>{
-  getScrapProduct();
-},[])
+  };
 
-  return (<>
-    <div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-6">
-        {
-          scrapData.length === 0 ? Array.from({ length: 6 }).map((_, index) => <ShimmerCard key={index} />) : Array.isArray(scrapData) && scrapData.map((_, index) => (
-            <ScrapProductCard key={index} />
-          ))
-        }
-        <ScrapProductCard key={''} />
+  useEffect(() => {
+    getScrapProduct();
+  }, []);
+
+  return (
+    <>
+      <div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-6">
+          {scrapData.length === 0
+            ? Array.from({ length: 6 }).map((_, index) => (
+                <ShimmerCard key={index} />
+              ))
+            : Array.isArray(scrapData) &&
+              scrapData.map((item, index) => (
+                <ScrapProductCard item={item} key={index} />
+              ))}
+        </div>
       </div>
+    </>
+  );
+};
 
-
-    </div>
-
-  </>)
-}
-
-export default ScrapListing
-
-
+export default ScrapListing;

@@ -94,10 +94,9 @@ const CategoryPage = () => {
               <span>{category?.name}</span>
               <span>{category?.icon}</span>
             </h1>
-
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-10 lg:grid-cols-6 sm:gap-6  w-full justify-items-center">
               {category?.children?.length > 0 && category?.children.map((item: any, subIndex: any) => (
-               <Link href={`/account/addscrap/${item?._id}`}> <CategoryCard data={item} key={subIndex} /></Link>
+               <Link href={`/pages/addscrap/${item?._id}`}> <CategoryCard data={item} key={subIndex} /></Link>
               ))}
             </div>
             <hr />

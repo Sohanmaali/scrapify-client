@@ -19,7 +19,6 @@ import CategoryCard from './components/card/CategoryCard';
 import { ButtonLoader } from './components/generalComp/Loader';
 import TestFile from './components/generalComp/TestFile';
 import HeroSection from './components/Home/HeroSection';
-
 const HomePage = () => {
   const auth = useSelector((state: RootState) => state.auth);
   return (
@@ -38,7 +37,6 @@ const HomePage = () => {
           <ScrollCounter/>
           <Testimonials/>
           <GoOnTopButton/>
-       
         </div>
     </div>
   );

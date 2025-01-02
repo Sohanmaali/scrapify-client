@@ -1,8 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
 import SearchBar from "./SearchBar";
-import {  Login } from "./auth/AuthButton";
-import {  isAuthenticated } from "../utils/auth";
+import { Login } from "./auth/AuthButton";
+import { isAuthenticated } from "../utils/auth";
 import Link from "next/link";
 import ProfileDropdown from "./auth/ProfileDropDown";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,9 +10,9 @@ import { setUser } from "../store/slices/authSlice";
 import { VscThreeBars } from "react-icons/vsc";
 import BasicProvider from "../utils/basicprovider";
 const Header = () => {
-const dispatch = useDispatch()
-const userData = useSelector((state: any) => state.auth);
-// const user = useSelector((state: any) => state.auth);
+  const dispatch = useDispatch();
+  const userData = useSelector((state: any) => state.auth);
+  // const user = useSelector((state: any) => state.auth);
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
@@ -20,7 +20,10 @@ const userData = useSelector((state: any) => state.auth);
           "customer/profile"
         ).getRequest();
         if (response?.status === "success") {
-          const data = { ...response.data, image: response?.data?.featured_image?.filepath || null }
+          const data = {
+            ...response.data,
+            image: response?.data?.featured_image?.filepath || null,
+          };
           dispatch(setUser(data));
         }
       } catch (error) {
@@ -28,9 +31,9 @@ const userData = useSelector((state: any) => state.auth);
       }
     };
     if (isAuthenticated()) {
-      fetchUserProfile()
+      fetchUserProfile();
     }
-  }, [])
+  }, []);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -39,20 +42,19 @@ const userData = useSelector((state: any) => state.auth);
   return (
     <>
       <header className="bg-lightColor shadow-md relative">
-  
         <div className="flex items-center justify-between px-4 py-3 md:px-8">
-
           <div className="flex items-center">
-            <img
-              src="/logo/good.svg"
-              alt="Logo"
-              className="w-[150px] h-14 " 
-            />
+            <Link href="/">
+              <img
+                src="/logo/good.svg"
+                alt="Logo"
+                className="w-[150px] h-14 "
+              />
+            </Link>
           </div>
           <SearchBar />
-       
+
           <div className="flex items-center space-x-4">
-         
             <button
               onClick={toggleMenu}
               className="block md:hidden focus:outline-none"
@@ -72,12 +74,9 @@ const userData = useSelector((state: any) => state.auth);
                   d="M4 6h16M4 12h16M4 18h16"
                 />
               </svg>
-
-           
             </button>
 
             {isAuthenticated() ? <ProfileDropdown /> : <Login />}
-
           </div>
         </div>
 
@@ -125,7 +124,6 @@ const userData = useSelector((state: any) => state.auth);
             </li>
           </ul>
 
-       
           <div className="ml-auto flex items-center justify-center">
             <div className=" mr-20 bg-darkColor h-full w-80 text-relatedWhite transform md:-rotate-[47deg] transition-transform duration-500 ease-in-out flex items-center justify-center overflow-hidden">
               <span className="text-xs"></span>
@@ -136,16 +134,18 @@ const userData = useSelector((state: any) => state.auth);
 
       {/* Overlay */}
       <div
-        className={`fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-40 transition-opacity ${isMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"
-          }`}
+        className={`fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-40 transition-opacity ${
+          isMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"
+        }`}
         onClick={toggleMenu}
       ></div>
 
       {/* Off-Canvas Menu (Mobile) */}
       <div
         id="offcanvas-menu"
-        className={`rounded-r-lg fixed top-0 left-0 z-50 w-1/2 h-full bg-white transform ${isMenuOpen ? "translate-x-0" : "-translate-x-full"
-          } menu-transition md:hidden`}
+        className={`rounded-r-lg fixed top-0 left-0 z-50 w-1/2 h-full bg-white transform ${
+          isMenuOpen ? "translate-x-0" : "-translate-x-full"
+        } menu-transition md:hidden`}
       >
         <nav className="flex flex-col space-y-4 p-4">
           <Link
