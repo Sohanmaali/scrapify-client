@@ -1,4 +1,4 @@
-import NotificationCard from "../card/NotificationCard"
+import NotificationCard from "@/app/components/card/NotificationCard"
 
 const NotificationListing = () => {
 

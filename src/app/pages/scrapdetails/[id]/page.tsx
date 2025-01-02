@@ -130,14 +130,28 @@ const page = () => {
 
                     {/* Right Card: Price Section */}
                     <div className=" mt-2 w-full lg:w-4/12  flex flex-col self-start lg:mb-0 gap-6">
-                        <div className="w-full lg:w-12/12 bg-white rounded-lg shadow-lg p-6 flex flex-col self-start mb-4 lg:mb-0">
-                            <h1 className="text-2xl font-bold mb-4">Product Name</h1>
-                            <p className="text-gray-700 mb-4">This is a brief description of the product.</p>
-                            <span className="text-3xl font-bold text-green-500 mb-4">$299.99</span>
-                            <button className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600">
-                                Add to Cart
-                            </button>
-                        </div>
+                    <div className="w-full lg:w-12/12 bg-white rounded-lg shadow-lg p-6 flex flex-col self-start mb-4 lg:mb-0">
+    <h1 className="text-2xl font-bold mb-4">Scrap Name</h1>
+    <ul className="text-gray-700 mb-4">
+        <li className="mb-2">
+            <span className="font-bold">Category:</span> Metal
+        </li>
+        <li className="mb-2">
+            <span className="font-bold">Weight:</span> 15 kg
+        </li>
+        <li className="mb-2">
+            <span className="font-bold">Condition:</span> Good
+        </li>
+        <li className="mb-2">
+            <span className="font-bold">Location:</span> New Delhi, India
+        </li>
+        <li className="mb-2">
+            <span className="font-bold">Posted On:</span> January 1, 2024
+        </li>
+    </ul>
+    <span className="text-3xl font-bold text-green-500">$299.99</span>
+</div>
+
 
                         <div className=" w-full lg:w-12/12 bg-white rounded-lg shadow-lg p-6 flex flex-col self-start mb-4 lg:mb-0">
                            <ScrapStatusTimeline  items={items} highlightedIndex={0}/>
