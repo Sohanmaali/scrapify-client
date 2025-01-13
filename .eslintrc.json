@@ -7,6 +7,7 @@
     "@next/next/no-img-element": "off",
     "react/jsx-key": "off",
     "react-hooks/exhaustive-deps": "off",
-    "react-hooks/rules-of-hooks": "off"
+    "react-hooks/rules-of-hooks": "off",
+     "prefer-const": "off"
   }
 }
