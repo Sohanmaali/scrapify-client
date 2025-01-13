@@ -5,8 +5,8 @@ import React,{useState} from "react";
 export default function TestComp() {
 
     let menuArray = [true, false, false];
-    const [menu, setMenu] = useState(menuArray);
-    const [show, setShow] = useState(true);
+    const [menu, setMenu] = useState<any>(menuArray);
+    const [show, setShow] = useState<any>(true);
 
     const setMenuValue = (props:any) => {
         let newArr = [...menu];
