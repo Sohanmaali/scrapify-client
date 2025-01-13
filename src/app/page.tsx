@@ -5,7 +5,6 @@ import { RootState } from './store/store';
 import { isAuthenticated, removeToken } from './utils/auth';
 import ImageSlider from './components/ImageSlider';
 import CategoryComp from './components/card/CategoryComp';
-import HowItWorks from './components/generalComp/HowItWorkComp';
 import ProductList from './components/card/ProductList';
 import InfiniteMarquee from './components/generalComp/Marquee';
 import QuickShell from './components/generalComp/QuickShell';
@@ -13,26 +12,26 @@ import Testimonials from './components/generalComp/Testimonial';
 import ScrollCounter from './components/generalComp/ScrollCounter';
 import { GoOnTopButton } from './components/generalComp/Buttons';
 import LoginPage from './pages/auth/login/page';
-import DetaulsCraft from './components/generalComp/TestFile';
+import DetaulsCraft from './components/generalComp/HowItIsWorkComp';
 import ScrapProductCard from './components/card/ScrapProductCard';
 import CategoryCard from './components/card/CategoryCard';
 import { ButtonLoader } from './components/generalComp/Loader';
-import TestFile from './components/generalComp/TestFile';
 import HeroSection from './components/Home/HeroSection';
+import HowItIsWorkComp from './components/generalComp/HowItIsWorkComp';
+import WhyChooseUs from './components/generalComp/WhyChooseUs';
 const HomePage = () => {
   const auth = useSelector((state: RootState) => state.auth);
   return (
     <div>
         <div>
           <ImageSlider/>
-          {/* <ButtonLoader/> */}
           <CategoryComp/>
           <ProductList/>
          
-          <TestFile/>
+           <HowItIsWorkComp/>
            <InfiniteMarquee/>
            <HeroSection/>
-          <HowItWorks/>
+          <WhyChooseUs/>
           <QuickShell/>
           <ScrollCounter/>
           <Testimonials/>

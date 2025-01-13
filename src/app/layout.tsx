@@ -4,6 +4,10 @@ import { Provider } from 'react-redux';
 
 import localFont from 'next/font/local';
 import './globals.css';
+import 'react-datepicker/dist/react-datepicker.css';
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/thumbs";
 import { store } from './store/store';
 import { Toaster } from 'react-hot-toast';
   // Import the toast styles

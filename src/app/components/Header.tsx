@@ -7,7 +7,6 @@ import Link from "next/link";
 import ProfileDropdown from "./auth/ProfileDropDown";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../store/slices/authSlice";
-import { VscThreeBars } from "react-icons/vsc";
 import BasicProvider from "../utils/basicprovider";
 const Header = () => {
   const dispatch = useDispatch();

@@ -6,6 +6,7 @@ const useAllCategories = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
+    
     useEffect(() => {
         const fetchAllCategories = async () => {
             try {

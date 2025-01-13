@@ -2,21 +2,21 @@ import React from "react";
 import { SiAuthy } from "react-icons/si";
 import { AiFillProduct } from "react-icons/ai";
 import { MdOutlinePayment } from "react-icons/md";
-const HowItWorks = () => {
+const WhyChooseUs = () => {
   const steps = [
     {
-      title: "Sign up account.",
-      description: "It has survived not only centuries but also leaped into electronic.",
+      title: "Simple, Hassle-Free Experience",
+      description: "Start selling with just a few clicks. Our intuitive platform makes listing scrap and handmade products easy and quick.",
       icon: <SiAuthy />, // You can replace this with an SVG or image
     },
     {
-      title: "Upload scrap or handmade products",
-      description: "It has survived not only centuries but also leaped into electronic.",
+      title: "A Platform You Can Trust",
+      description: "Scrapify has become a go-to marketplace for thousands of users, offering reliable service and consistent buyer engagement.",
       icon: <AiFillProduct/>, // Replace with SVG or image
     },
     {
-      title: "Buyers confirm purchases",
-      description: "It has survived not only centuries but also leaped into electronic.",
+      title: "Fast and Secure Payments",
+      description: "We ensure that your transactions are secure, and payments are processed promptly, giving you peace of mind every step of the way..",
       icon: <MdOutlinePayment/>, // Replace with SVG or image
     },
   ];
@@ -28,7 +28,7 @@ const HowItWorks = () => {
           Over 1,735+ product`s sell
         </p>
         <h2 className="text-3xl md:text-4xl font-bold mb-6">
-         Why Choose <span className="text-darkColor underline decoration-wavy">us?</span>
+        Why Choose <span className="text-darkColor underline decoration-wavy">Scrapify?</span>
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 sm:gap-16 gap-8 mt-12">
           {steps.map((step, index) => (
@@ -54,4 +54,4 @@ const HowItWorks = () => {
   );
 };
 
-export default HowItWorks;
+export default WhyChooseUs;

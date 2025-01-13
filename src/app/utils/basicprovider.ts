@@ -12,8 +12,8 @@ interface ApiResponse<T = any> {
 
 class BasicProvider {
   private url: string;
-  constructor(url: string){
-    this.url = process.env.NEXT_PUBLIC_API_URL+'/api/' + url;
+  constructor(url: string) {
+    this.url = process.env.NEXT_PUBLIC_API_URL + '/api/' + url;
   }
 
   async getRequest<T>(): Promise<ApiResponse<T>> {
@@ -32,7 +32,7 @@ class BasicProvider {
   async postRequest<T>(data: any): Promise<ApiResponse<T>> {
     try {
       const response = await axios.post<ApiResponse<T>>(this.url, data, this.getHeaders(data));
-        return response.data;
+      return response.data;
       // return this.processResponse(response);
     } catch (error) {
       return this.handleException(error);
@@ -83,10 +83,11 @@ class BasicProvider {
     //   console.error(error.response?.data);
     // }
     if (error.response?.data.statusCode === 401) {
-        removeToken();
+      removeToken();
     }
     if (error.response?.data.statusCode === 403) {
-    removeToken()
+      removeToken()
+      window.location.href = '/pages/auth/login';
     }
     throw error.response?.data || error.response || error;
   }

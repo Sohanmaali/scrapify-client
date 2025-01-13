@@ -1,39 +1,24 @@
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
-  /* config options here */
-  
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  experimental: {
+    appDir: true, // Enable the `app` directory
+  },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'http', // Allow http protocol
+        hostname: '**', // Allow any hostname
+        port: '', // Leave empty for no specific port
+        pathname: '/**', // Match all paths
+      },
+      {
+        protocol: 'https', // Allow https protocol
+        hostname: '**', // Allow any hostname
+        port: '', // Leave empty for no specific port
+        pathname: '/**', // Match all paths
+      },
+    ],
+  },
 };
 
 export default nextConfig;
-
-
-// const nextConfig = {
-//   experimental: {
-//     appDir: true, // Enable the `app` directory
-//   },
-
-// };
-
-// export default nextConfig;
-
-
-
-// /** @type {import('next').NextConfig} */
-// const nextConfig = {
-//   experimental: {
-//     appDir: true, // Enable the `app` directory
-//   },
-//   images: {
-//     remotePatterns: [
-//       {
-//         protocol: 'http',
-//         hostname: process.env.NEXT_PUBLIC_HOST, // Dynamically use hostname from env
-//         port: process.env.NEXT_PUBLIC_PORT, // Dynamically use port from env
-//         pathname: '/**', // Match all paths
-//       },
-//     ],
-//   },
-// };
-
-// export default nextConfig;

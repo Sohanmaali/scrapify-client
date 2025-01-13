@@ -2,12 +2,16 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 export function middleware(req: NextRequest) {
   const url = req.nextUrl;
-  const isProtectedRoute = url.pathname.startsWith('/account'); 
+  // const isProtectedRoute = url.pathname.startsWith('/account'); 
 
+  const protectedRoutes = ['/account', '/pages/addscrap',];
+
+  const isProtectedRoute = protectedRoutes.some((route) =>
+    url.pathname.startsWith(route)
+  );
   if (isProtectedRoute) {
     const token = req.cookies.get(process.env.NEXT_PUBLIC_COOKIE_PREFIX as string);
 
-// console.log('====================================;;;;;;;');
 
     if (!token) {
       return NextResponse.redirect(new URL('/pages/auth/login', url));
@@ -30,5 +34,5 @@ export function middleware(req: NextRequest) {
 
 // This config specifies which routes the middleware will run on
 export const config = {
-  matcher: ['/account/:path*'], // Matches "/account" and all sub-paths
+  matcher: ['/account/:path*','/pages/addscrap/:path*'], // Matches "/account" and all sub-paths
 };

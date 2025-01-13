@@ -45,7 +45,7 @@ export default function LoginForm() {
         return
       }
       const user = response?.user
-      dispatch(login({ user: { _id: user._id, mobile: user.mobile, name: user.name, email: user.email, image: user?.featured_image.filepath || '' } }));
+      dispatch(login({ user: { _id: user._id, mobile: user.mobile, name: user.name, email: user.email, role : user?.role || null, image: user?.featured_image.filepath || '' } }));
       setToken(response.access_token)
       setNotification({ type: 'success', message: 'Login Successfull' });
       router.push('/')

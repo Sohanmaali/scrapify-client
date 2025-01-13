@@ -34,7 +34,7 @@ const CategoryCard = ({ data, index, price = true }: any) => {
 
 
         <Link
-          href={""}
+          href={`/pages/addscrap/${data?._id}`}
           className="mt-2 bg-lightColor text-darkColor px-3 py-1 bg-gray-100 border border-gray-400  text-xs rounded-full hover:bg-darkColor hover:text-relatedWhite focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-opacity-50"
         >
           Shell Now

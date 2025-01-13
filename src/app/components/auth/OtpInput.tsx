@@ -100,7 +100,7 @@ const OTPInput: React.FC<OTPInputProps> = ({data,length = 4}) => {
                 console.log('response : ', response);
                 
                 const user = response?.data?.user
-                dispatch(login({user: {_id : user._id,mobile : user.mobile, name : user.name, email : user.email, image: user?.featured_image || ''} }));
+                dispatch(login({user: {_id : user._id,mobile : user.mobile, name : user.name, email : user.email, role: user?.role, image: user?.featured_image || ''} }));
                 setToken(response?.access_token)
                 setNotification({ type: 'success', message: 'Varification Successfull' });
                 router.push('/')
@@ -116,7 +116,6 @@ const OTPInput: React.FC<OTPInputProps> = ({data,length = 4}) => {
             }
         }
     };
-
     useEffect(() => {
         if (otp.length === 0) {
             handleSubmit();

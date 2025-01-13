@@ -34,7 +34,7 @@ const AddButton = ({ lable = "Add", callBack = () => { } }: any) => {
 }
 
 
-const SubmitButton = ({ heading = "Submit", isLoading = false, callBack }:any) => {
+const SubmitButton = ({ heading = "Submit", isLoading = false, callBack }: any) => {
     return (
         <button onClick={callBack}
             className="flex items-center px-6 py-3 bg-darkColor text-relatedWhite font-semibold text-sm rounded-lg hover:bg-green-700 transition duration-300 ease-in-out shadow-lg hover:shadow-xl transform hover:scale-105 focus:outline-none"
@@ -45,7 +45,7 @@ const SubmitButton = ({ heading = "Submit", isLoading = false, callBack }:any) =
                 <><span className="text mr-2">Loading...</span>
                     <span className="flex items-center justify-end pr-2">
                         <span className="w-4 h-4 border-2 border-t-transparent border-white rounded-full animate-spin"></span>
-                        </span>
+                    </span>
                 </> : <>
                     <span className="text">{heading}</span>
                     <PiUploadSimpleFill className="text-white ml-2 text-lg" />
@@ -103,6 +103,20 @@ function GoOnTopButton() {
 }
 
 
-export { GreadiantButton, PrimaryButton, GoOnTopButton, SubmitButton, AddButton, GetStartButton }
+const statusBadge = ({ status }: any) => {
+    return (<>
+        <span
+            className={`px-2 py-1 rounded-lg text-xs font-medium ${status === "completed"
+                ? "bg-green-100 text-green-600"
+                : status === "pending"
+                    ? "bg-yellow-100 text-yellow-600"
+                    : "bg-gray-100 text-gray-600"
+                }`}
+        >
+            {status || 'N/A'}
+        </span> 
+    </>)
+}
+export { GreadiantButton, PrimaryButton, GoOnTopButton, SubmitButton, AddButton, GetStartButton, statusBadge }
 
 

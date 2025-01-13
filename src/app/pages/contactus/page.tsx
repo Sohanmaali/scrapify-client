@@ -5,10 +5,62 @@ import { IoCallOutline } from "react-icons/io5";
 import { MdOutlineChat } from "react-icons/md";
 import { FaWhatsapp } from "react-icons/fa6";
 import PageBanner from "@/app/components/generalComp/PageBanner";
-
-
+import { useState } from "react";
+import { IoIosSend } from "react-icons/io";
+import { validateObject } from "@/helpers/formvalidation";
+import setNotification from "@/app/utils/notification";
 
 const ContactPage = () => {
+
+   const [loding,setLoading] = useState(false);
+    const [contactData,setContactData] = useState<any>({
+    email : '',
+    name : '',
+    mobile : '',
+    message : '',
+    });
+
+  const [errors,setErrors] =  useState<any>({});
+  const handleInputChange =(e:any)=>{
+    setErrors({})
+    const {name,value} =  e.target;
+
+    if(name==='mobile' && !/^\d+$/.test(value) && value !== ""){
+     return
+    }
+    setContactData((prev:any) => ({
+      ...prev,
+      [name]: value
+    }));
+  }
+
+  const validationRules :any = {
+    name : {required :true},
+    email : {required :true,type :'email'},
+    mobile :  {required :true, type:'mobile'},
+    message : {required :true}
+  }
+const handleSubmit = async(e:any)=>{
+e.preventDefault();
+try {
+  const errors =  validateObject(contactData,validationRules)
+  if (Object.keys(errors).length > 0) {
+    console.log("Error : ", errors);
+    setErrors(errors);
+    return;
+  }
+  setLoading(true)
+ 
+  setNotification({type:'success', message:''})
+} catch (error:any) {
+  setNotification({type:'error', message: error.message})
+  console.error('===Error in Contact ======>>',error);
+}finally{
+  setLoading(false)
+}
+} 
+
+
   return (<>
     <PageBanner
       pageName="Contact"
@@ -48,48 +100,52 @@ const ContactPage = () => {
             <h2 className="text-2xl sm:text-3xl text-darkColor text-center font-bold mb-6">
               Get In Touch
             </h2>
-            <form>
+            <form onSubmit={handleSubmit}>
               <div className="max-w-md mx-auto space-y-6">
                 <input
                   type="text"
                   placeholder="Name"
                   className=" border w-full bg-white rounded-md py-3 px-4 text-sm outline-none"
+                  name="name"
+                  value={contactData?.name || '' }
+                  onChange={handleInputChange}
                 />
+                <span className=" ml-2 text-red-500 text-sm">{errors['name']}</span>
                 <input
-                  type="email"
+                  type="text"
                   placeholder="Email"
                   className="w-full bg-white rounded-md py-3 px-4 text-sm outline-none"
+                  name="email"
+                  value={contactData?.email || '' }
+                  onChange={handleInputChange}
                 />
+                 <span className=" ml-2 text-red-500 text-sm">{errors['email']}</span>
                 <input
-                  type="email"
-                  placeholder="Phone No."
+                  type="text"
+                  placeholder="Mobile No."
+                  maxLength={10}
                   className="w-full bg-white rounded-md py-3 px-4 text-sm outline-none"
+                  name="mobile"
+                  value={contactData?.mobile || '' }
+                  onChange={handleInputChange}
                 />
+                 <span className=" ml-2 text-red-500 text-sm">{errors['mobile']}</span>
                 <textarea
                   placeholder="Message"
                   rows={6}
                   className="w-full bg-white rounded-md px-4 text-sm pt-3 outline-none"
                   defaultValue={""}
+                  name="message"
+                  value={contactData?.message || '' }
+                  onChange={handleInputChange}
                 />
+                 <span className=" ml-2 text-red-500 text-sm">{errors['message']}</span>
                 <button
-                  type="button"
+                
+                  type="submit"
                   className="text-white w-full relative bg-darkColor hover:bg-mutedColor rounded-md text-sm px-6 py-3 !mt-4 transition duration-200"
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16px"
-                    height="16px"
-                    fill="currentColor"
-                    className="mr-2 inline"
-                    viewBox="0 0 548.244 548.244"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M392.19 156.054 211.268 281.667 22.032 218.58C8.823 214.168-.076 201.775 0 187.852c.077-13.923 9.078-26.24 22.338-30.498L506.15 1.549c11.5-3.697 24.123-.663 32.666 7.88 8.542 8.543 11.577 21.165 7.879 32.666L390.89 525.906c-4.258 13.26-16.575 22.261-30.498 22.338-13.923.076-26.316-8.823-30.728-22.032l-63.393-190.153z"
-                      clipRule="evenodd"
-                      data-original="#000000"
-                    />
-                  </svg>
+                  <IoIosSend className="h-6 w-6 mr-2 inline" />
                   Send Message
                 </button>
               </div>

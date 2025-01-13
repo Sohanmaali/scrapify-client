@@ -2,6 +2,12 @@
 import BasicProvider from "@/app/utils/basicprovider";
 import ScrapProductCard from "@/app/components/card/ScrapProductCard";
 import { useEffect, useState } from "react";
+// import Pagination from "@/app/components/generalComp/PaginationButton";
+import { useLocation } from "react-router-dom";
+
+import { useRouter, useSearchParams } from "next/navigation";
+import { Pagination } from "@/app/components/generalComp/PaginationButton";
+import NotAvalilable from "@/app/components/generalComp/NotAvailable";
 
 const ShimmerCard = () => {
   return (
@@ -33,41 +39,76 @@ const ShimmerCard = () => {
 };
 const ScrapListing = () => {
   const [scrapData, setScrapData] = useState([]);
+  const router = useRouter();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPage, setTotalPage] = useState(1);
+  const [loading, setLoading] = useState(true);
+
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const pageValue = parseInt(searchParams?.get("page") || "1", 10); // Parse as number
+    setCurrentPage(pageValue);
+  }, [searchParams]);
+
   const getScrapProduct = async () => {
     try {
+      setLoading(true);
       const response: any = await new BasicProvider(
-        "public/scrap"
+        `public/scrap?page=${currentPage}&count=10`
       ).getRequest();
 
-      console.log("-=-=--===-response : ", response);
+      console.log("=-==-=--==-response", response);
+      
 
       if (response.status === "success") {
+        setTotalPage(response?.data?.last_page);
         setScrapData(response?.data?.data || []);
       }
-
-      console.log("response data : ", response);
     } catch (error) {
-      console.log("Error to fetch Scrap Data  : ", error);
+      console.error("Error to fetch Scrap Data  : ", error);
+    } finally {
+      setLoading(false);
     }
   };
 
   useEffect(() => {
     getScrapProduct();
-  }, []);
+  }, [currentPage]);
 
   return (
     <>
       <div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-6">
-          {scrapData.length === 0
+          {loading
             ? Array.from({ length: 6 }).map((_, index) => (
                 <ShimmerCard key={index} />
               ))
             : Array.isArray(scrapData) &&
-              scrapData.map((item, index) => (
-                <ScrapProductCard item={item} key={index} />
-              ))}
+              scrapData.map((item: any, index: number) => (
+                // <ScrapProductCard
+                //   item={item}
+                //   key={index}
+                //   navigate={() => {
+                //     router.replace(`/pages/scrapdetails/${item?._id}`);
+                //   }}
+                // />
+                ""
+              )) 
+              
+              }
         </div>
+        { scrapData.length===0 && !loading && <div className="flex justify-center">  <NotAvalilable/></div>}
+        {totalPage > 1 && scrapData.length>0 && (
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPage || 1}
+            onPageChange={(num: number) => {
+              setCurrentPage(num);
+              router.push(`?page=${num}`);
+            }}
+          />
+        )}
       </div>
     </>
   );
