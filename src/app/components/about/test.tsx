@@ -8,11 +8,11 @@ export default function TestComp() {
     const [menu, setMenu] = useState<any>(menuArray);
     const [show, setShow] = useState<any>(true);
 
-    const setMenuValue = (props:any) => {
-        let newArr = [...menu];
+    const setMenuValue = (props: any) => {
+        const newArr = [...menu]; // Use const instead of let
         newArr[props] = !newArr[props];
         setMenu(newArr);
-    }
+    };
 
 
     return (
