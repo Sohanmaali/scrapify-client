@@ -13,6 +13,7 @@ import { Toaster } from 'react-hot-toast';
   // Import the toast styles
 import Header from './components/Header';
 import Footer from './components/Footer';
+import { Suspense } from 'react';
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
   variable: '--font-geist-sans',
@@ -37,7 +38,9 @@ export default function RootLayout({
         <Provider store={store}>
         <Toaster />
           <Header/>
-          {children}
+          <Suspense fallback={<div>Loading...</div>}>
+            {children}
+          </Suspense>
           <Footer/>
         </Provider>
       </body>
