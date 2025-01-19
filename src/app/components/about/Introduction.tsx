@@ -1,7 +1,7 @@
 const Introduction = () => {
 
     return (<>
-        <section className="bg-relatedWhite dark:bg-gray-900">
+        <section className="bg-relatedWhite sm:mt-0 lg:mt-0 mt-5">
             <div className="gap-16 items-center px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:py-16 lg:px-6">
                 <div className="font-light text-gray-500 sm:text-lg dark:text-gray-400">
                     <h2 className="mb-8 text-4xl tracking-tight font-extrabold text-mutedColor  ">

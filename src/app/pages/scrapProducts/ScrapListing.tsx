@@ -57,9 +57,7 @@ const ScrapListing = () => {
       const response: any = await new BasicProvider(
         `public/scrap?page=${currentPage}&count=10`
       ).getRequest();
-
-      console.log("=-==-=--==-response", response);
-      
+    
 
       if (response.status === "success") {
         setTotalPage(response?.data?.last_page);

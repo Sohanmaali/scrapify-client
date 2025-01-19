@@ -32,13 +32,16 @@ const ScrapMaterialForm = ({ category }: any) => {
   const categoryData: any = useGetByIdSlugCategories(category);
   const countryData = useCountryRegions();
 
+  console.log("-=====categoryData", categoryData);
+  
+
   const router = useRouter();
 
   const [scrapData, setScrapData] = useState<any>({
     
     quantity : '',
     name: "",
-    category: categoryData,
+    category: category,
     unit_type : categoryData?.unit_type,
     gallery: [],
     mobile :'',

@@ -4,6 +4,7 @@ import TestComp from "@/app/components/about/test"
 import PageLoader from "@/app/components/generalComp/PageLoader"
 import Introduction from "../../components/about/Introduction"
 import OurVisionSection from "@/app/components/about/OurVision"
+import OurValues from "@/app/components/about/OurValues"
 
 const AboutUs = ()=>{
     return (<>
@@ -14,9 +15,10 @@ const AboutUs = ()=>{
         backgroundImage="/assert/images/recycle_image.jpg"
       />
       <Introduction/>
-      <OurVisionSection/>
+      <OurValues/>
+      {/* <OurVisionSection/> */}
+    
       <TeamMember/>
-      <PageLoader/>
    </div>
     </>)
 }

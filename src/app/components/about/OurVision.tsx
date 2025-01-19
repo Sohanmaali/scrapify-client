@@ -1,23 +1,7 @@
 import React from 'react';
 import { RiLightbulbLine, RiRocketLine, RiLineChartLine, RiEyeLine } from 'react-icons/ri';
 
-const visionData = [
-  {
-    icon: RiLightbulbLine,
-    title: "Innovative Thinking",
-    description: "We foster a culture of innovation, constantly seeking new ideas and approaches."
-  },
-  {
-    icon: RiRocketLine,
-    title: "Accelerated Progress",
-    description: "Our vision is to propel our clients and our company forward, achieving rapid growth."
-  },
-  {
-    icon: RiLineChartLine,
-    title: "Continuous Improvement",
-    description: "We are committed to ongoing enhancement of our skills and processes."
-  }
-];
+
 
 const VisionItem: React.FC<{
   icon: React.ElementType;
@@ -35,22 +19,38 @@ const VisionItem: React.FC<{
 
 const OurVisionSection: React.FC = () => {
   return (
-    <section className="py-20 bg-[#e7f8ee]">
-      <div className="container mx-auto px-4">
-        <div className="flex flex-col items-center mb-12">
-          <RiEyeLine className="w-16 h-16 text-[#309255] mb-4" />
-          <h2 className="text-4xl font-bold text-center mb-4 text-[#309255]">Our Vision</h2>
-          <p className="text-center text-[#212832] text-xl max-w-2xl">
-            Guiding principles that shape our approach and drive our success
-          </p>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {visionData.map((item, index) => (
-            <VisionItem key={index} {...item} />
-          ))}
+    <div className='p-6'>
+    <div className="bg-gray-50 font-[sans-serif] relative  shadow-lg shadow-[#e9d9f3] mx-auto rounded overflow-hidden ">
+    <div className="grid sm:grid-cols-2 max-sm:gap-6">
+      <div className="text-center p-6 flex flex-col justify-center items-center">
+        <h3 className="font-extrabold text-5xl text-darkColor leading-tight">
+          <span className="text-gray-800">Special</span> Offer
+        </h3>
+        <h6 className="text-lg text-gray-800 mt-4">
+          Discover amazing discounts, for limited time
+        </h6>
+        <button
+          type="button"
+          className="bg-darkColor hover:bg-mutedColor text-white tracking-wide font-semibold text-sm py-3 px-6 rounded-xl mt-8"
+        >
+          Get Started
+        </button>
+       
+      </div>
+      <div className="flex justify-end items-center p-2 bg-darkColor  rounded-bl-[230px] w-full h-full">
+        <div className="h-72 w-72 rounded-full bg-lightColor p-5">
+          <img
+            src="https://readymadeui.com/team-image.webp"
+            className="w-full h-full rounded-full object-cover border-8 border-white"
+            alt="img"
+          />
         </div>
       </div>
-    </section>
+    </div>
+    <div className="absolute -top-[50px] -left-[50px] w-28 h-28 rounded-full bg-lightColor shadow-lg" />
+    <div className="absolute -top-10 -left-10 w-28 h-28 rounded-full bg-darkColor  shadow-lg" />
+  </div>
+  </div>
   );
 };
 

@@ -1,3 +1,5 @@
+
+
 const TeamMember = () => {
 
     return (<>
@@ -6,18 +8,19 @@ const TeamMember = () => {
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between items-center flex-col lg:flex-row md:mt-20">
                         <div className="w-full lg:w-1/2">
-                            <h2 className="font-manrope text-5xl text-gray-900 font-bold leading-[4rem] mb-7 text-center lg:text-left">
-                                Our leading, strong &amp; creative team
+                            <h2 className="text-xl font-bold text-gray-600 mb-4">Meet Our Team</h2>
+                            <h2 className="font-manrope text-5xl text-gray-900 font-bold leading-[4rem] mb-7  lg:text-left">
+                                The Driving Force Behind <span className="text-darkColor">Scrapify</span>
                             </h2>
                             <p className="text-lg text-gray-500 mb-16 text-center lg:text-left">
-                                These people work on making our product best.
+                                At <span >Scrapify</span>, we are proud to have a dedicated team of passionate individuals committed to transforming the way recycling works. Our team brings together expertise in technology, sustainability, and customer service to create a platform that empowers communities and promotes a greener future.
                             </p>
-                            <button className="cursor-pointer py-3 px-8 w-60 bg-darkColor text-white text-base font-semibold transition-all duration-500 block text-center rounded-full hover:bg-indigo-700 mx-auto lg:mx-0">
+                            <button className="cursor-pointer py-3 px-8 w-60 bg-darkColor text-white text-base font-semibold transition-all duration-500 block text-center rounded-full hover:bg-mutedColor mx-auto lg:mx-0">
                                 Join our team
                             </button>
                         </div>
-                        <div className="w-full lg:w-1/2 lg:mt-0 md:mt-40 mt-16 max-lg:max-w-2xl">
-                            <div className="grid grid-cols-1 min-[450px]:grid-cols-2 md:grid-cols-3 gap-8">
+                        <div className="w-full lg:w-1/2 lg:mt-0 md:mt-40 mt-16 max-lg:max-w-2xl ">
+                            <div className="grid grid-cols-1 min-[350px]:grid-cols-2 md:grid-cols-3 gap-6">
                                 <img
                                     src="https://pagedone.io/asset/uploads/1696238644.png"
                                     alt="Team tailwind section"
