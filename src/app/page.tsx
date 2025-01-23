@@ -26,7 +26,7 @@ const HomePage = () => {
         <div>
           <ImageSlider/>
           <CategoryComp/>
-          <ProductList/>
+          {/* <ProductList/> */}
          
            <HowItIsWorkComp/>
            <InfiniteMarquee/>

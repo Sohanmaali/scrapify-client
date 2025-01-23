@@ -36,6 +36,9 @@ const CategoryComp: React.FC = () => {
         ).getRequest();
         // const data = await response.json();
 
+        console.log("-=-=-=-=-response=-===", response);
+        
+
         setCategories(response?.data?.value);
       } catch (error) {
         console.error("Error fetching categories:", error);
