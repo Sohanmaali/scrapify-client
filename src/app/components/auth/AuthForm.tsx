@@ -27,7 +27,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
       setToken(response.data.token); // Save the token in cookies
       router.push('/'); // Redirect to the homepage after login/signup
     } catch (err: any) {
-        console.log(err);
+        console.error(err);
         
       setError('Authentication failed. Please try again.');
     }

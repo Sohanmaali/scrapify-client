@@ -32,8 +32,6 @@ const ScrapMaterialForm = ({ category }: any) => {
   const categoryData: any = useGetByIdSlugCategories(category);
   const countryData = useCountryRegions();
 
-  console.log("-=====categoryData", categoryData);
-  
 
   const router = useRouter();
 
@@ -114,7 +112,7 @@ const ScrapMaterialForm = ({ category }: any) => {
       const errors = validateObject(scrapData, validationRules);
 
       if (Object.keys(errors).length > 0) {
-        console.log("Error : ", errors);
+        console.error("Error : ", errors);
         setErrors(errors);
         return;
       }

@@ -16,7 +16,8 @@ export default function SignUpForm() {
   // hooks
   const dispatch = useDispatch();
 
-  // statee
+  // state
+  const [isLoading, setIsLoading] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [passwordType, setPasswordType] = useState("password");
   const [initialValue, setInitialValue] = useState({ email: '', password: '', confirmPassword: '', name: '', mobile: '' })
@@ -53,18 +54,21 @@ export default function SignUpForm() {
       const errors = validateObject(initialValue, validationRules);
 
       if (Object.keys(errors).length === 0) {
+        setIsLoading(true);
         const response = await new BasicProvider('auth/customer/register').postRequest(initialValue)
         setShowModal(true)
         setNotification({ type: 'success', message: 'Otp Send Successfull' });
         return;
       } else {
-        console.log("Error : ", errors);
+        console.error("Error : ", errors);
         setErrors(errors)
         return
       }
     } catch (error:any) {
       setNotification({ type: 'error', message: error.message});
-      console.log("Error in SignUp : ", error);
+      console.error("Error in SignUp : ", error);
+    }finally{
+      setIsLoading(false);
     }
   }
   return (
@@ -190,13 +194,23 @@ export default function SignUpForm() {
 
 
             <div className="text-center mt-8">
-              <button
+            {isLoading ? (
+                <button
+                  disabled
+                  className="w-full py-3 text-relatedWhite rounded-lg bg-mutedColor transition duration-200 flex items-center justify-center gap-2"
+                >
+                  Loading...
+                  <span className="w-4 h-4 border-2 border-t-transparent border-white rounded-full animate-spin"></span>
+                </button>
+              ) : (
+                <button
                 onClick={(e) => { handleSubmit(e) }}
-                type="submit"
-                className="w-full py-3 bg-darkColor text-relatedWhite rounded-lg hover:bg-mutedColor transition duration-200"
-              >
-                SignUp
-              </button>
+                  type="submit"
+                  className="w-full py-3 bg-darkColor text-relatedWhite rounded-lg hover:bg-mutedColor transition duration-200"
+                >
+                 SignUp
+                </button>
+              )}
             </div>
             <div className="text-center mt-2">
               <p className="text-gray-700">

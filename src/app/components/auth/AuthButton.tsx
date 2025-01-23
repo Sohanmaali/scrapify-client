@@ -9,8 +9,6 @@ export  function LogOut() {
   const dispatch = useDispatch();
     
   function handleLogout() {
-
-      console.log('========Logout===========>>>>>>:::', );
       
        removeToken();
        dispatch(logout());

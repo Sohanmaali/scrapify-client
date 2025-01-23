@@ -95,8 +95,8 @@ const SelectField: React.FC<SelectFieldProps> = ({
       <option value="">{placeholder}</option>
       {options?.length > 0 &&
         options.map((option: any, index) => (
-          <option key={index} value={option?._id}>
-            {option.name}
+          <option key={index} value={option?._id || option?.value}>
+            {option?.name || option?.label}
           </option>
         ))}
     </select>
@@ -114,8 +114,8 @@ const ProfilePage = () => {
   const dispatch = useDispatch();
   const [userProfile, setUserProfile] = useState<any>(null);
   const countryData = useCountryRegions();
-  const states:any = useStateRegions(userProfile?.country);
-  const city :any= useCityRegions(userProfile?.state);
+  const states: any = useStateRegions(userProfile?.country);
+  const city: any = useCityRegions(userProfile?.state);
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -125,8 +125,6 @@ const ProfilePage = () => {
         "customer/profile"
       ).getRequest();
 
-      console.log("response-=--===-", response);
-
       if (response?.status === "success") {
         dispatch(
           setUser({
@@ -134,7 +132,21 @@ const ProfilePage = () => {
             image: response?.data?.featured_image?.filepath || null,
           })
         );
-        setUserProfile(response?.data);
+
+        console.log("-=--=-==response=-=", response);
+
+        setUserProfile({
+          name: response?.data?.name,
+          mobile: response?.data?.mobile,
+          email: response?.data?.email,
+          gender: response?.data?.gender,
+          about_us: response?.data?.about_us,
+          country: response?.data?.country?._id,
+          state: response?.data?.state?._id,
+          city: response?.data?.city?._id,
+          address: response?.data?.about_us,
+          featured_image: response?.data?.featured_image,
+        });
       }
     } catch (error) {
       console.error("Error fetching user profile:", error);
@@ -306,7 +318,7 @@ const ProfilePage = () => {
                   userProfile?.featured_image instanceof File
                     ? URL.createObjectURL(userProfile?.featured_image)
                     : userProfile?.featured_image?.filepath
-                    ? `${process.env.NEXT_PUBLIC_API_URL}/${userProfile?.featured_image?.filepath}`
+                    ? `${userProfile?.featured_image?.filepath}`
                     : "/assert/images/noimage.png"
                 }
                 alt="Profile"

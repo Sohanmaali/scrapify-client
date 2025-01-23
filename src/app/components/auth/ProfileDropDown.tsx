@@ -13,8 +13,6 @@ import { useSelector } from 'react-redux';
 import { FaUserShield } from 'react-icons/fa';
 const ProfileDropdown = () => {
     const user = useSelector((state: any) => state.auth.user);
-    console.log('=========>>user : ',user);
-    
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef<any>(null);
     const toggleDropdown = () => setIsOpen(!isOpen);
@@ -40,7 +38,7 @@ const ProfileDropdown = () => {
             onMouseLeave={handleMouseLeave}>
             <img
                 onClick={toggleDropdown}
-                src={user?.image ? `${process.env.NEXT_PUBLIC_API_URL}/${user?.image}` : '/assert/images/noimage.png'}
+                src={user?.image ? `${user?.image}` : '/assert/images/noimage.png'}
                 alt="Profile"
                 className="w-10 h-10 rounded-full border border-darkColor cursor-pointer hover:shadow-lg transition-shadow"
             />

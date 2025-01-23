@@ -24,8 +24,7 @@ export default function AccountLayout({
   };
 
   const pathname = usePathname();
-  console.log(pathname);
-
+  
   return (
     <div className="flex  sm:p-10 bg-relatedWhite ">
       <div className="flex flex-col lg:flex-row w-full   h-auto  rounded-2xl p-2 desktpsidebar">
@@ -36,7 +35,7 @@ export default function AccountLayout({
               <img
                 src={
                   user?.image
-                    ? `${process.env.NEXT_PUBLIC_API_URL}/${user?.image}`
+                    ? `${user?.image}`
                     : "/assert/images/noimage.png"
                 }
                 alt="Circle Image"

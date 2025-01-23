@@ -70,8 +70,7 @@ const OTPInput: React.FC<OTPInputProps> = ({data,length = 4}) => {
     };
 
     const handleResend = async ():Promise<any> => {
-        console.log("canResend", );
-        
+       
        try {
         setTimer(60);
         setCanResend(false);
@@ -82,7 +81,6 @@ const OTPInput: React.FC<OTPInputProps> = ({data,length = 4}) => {
         }
         const response:any = await new BasicProvider('auth/customer/resend-otp').postRequest({ email:data.email });
 
-        console.log("response : ", response);
         
         setNotification({ type: 'success', message: response.message});
        } catch (error:any) {
@@ -97,8 +95,6 @@ const OTPInput: React.FC<OTPInputProps> = ({data,length = 4}) => {
             setIsSubmitting(true);
             try {
                 const response:any = await new BasicProvider('auth/customer/verify').postRequest({ otp: otp.join(''), email:data.email });
-                console.log('response : ', response);
-                
                 const user = response?.data?.user
                 dispatch(login({user: {_id : user._id,mobile : user.mobile, name : user.name, email : user.email, role: user?.role, image: user?.featured_image || ''} }));
                 setToken(response?.access_token)

@@ -3,23 +3,26 @@
 
 import { useState } from "react";
 import dynamic from "next/dynamic";
+import { useSelector } from "react-redux";
 
 const AssignedPickups = dynamic(() => import("@/app/components/employee/AssignedPickups"), {
     loading: () => <p>Loading...</p>,
-    ssr: false, 
+    ssr: false,
 });
 
 
 const CompletedPickups = dynamic(() => import("@/app/components/employee/CompletedPickups"), {
-    loading: () => <p>Loading...</p>, 
-    ssr: false, 
+    loading: () => <p>Loading...</p>,
+    ssr: false,
 });
 
 
 
 const EmployeePage = () => {
+
+    const user = useSelector((state: any) => state.auth.user);
     const [activeTab, setActiveTab] = useState("assigned"); // Default to 'assigned'
-    
+
 
 
 

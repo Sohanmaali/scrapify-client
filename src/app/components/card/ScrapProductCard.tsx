@@ -33,7 +33,7 @@ const ScrapProductCard = ({ item, navigate = () => { } }: any) => {
             className="w-full h-full object-cover cursor-pointer"
             src={
               item?.gallery[0]?.filepath
-                ? `${process.env.NEXT_PUBLIC_API_URL}/${item?.gallery[0]?.filepath}`
+                ? `${item?.gallery[0]?.filepath}`
                 : "/assert/images/noimage.png"
             }
             onClick={navigate}

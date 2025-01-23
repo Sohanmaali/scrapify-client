@@ -27,7 +27,7 @@ const SwiperGalleyComp = ({ gallery }: any) => {
                 <SwiperSlide key={index}>
                   <div className="w-full h-[200px] sm:h-[200px] lg:h-[450px] object-cover rounded-lg">
                     <img
-                      src={`${process.env.NEXT_PUBLIC_API_URL}/${image?.filepath}`}
+                      src={`${image?.filepath}`}
                       alt={`Product ${index + 1}`}
                       className="object-cover h-[400px] h-full w-full rounded-lg"
                     />
@@ -48,7 +48,7 @@ const SwiperGalleyComp = ({ gallery }: any) => {
                 <SwiperSlide key={index}>
                   <div className="w-full h-[50px] sm:h-[113px] rounded-lg overflow-hidden">
                     <img
-                      src={`${process.env.NEXT_PUBLIC_API_URL}/${image?.filepath}`}
+                      src={`${image?.filepath}`}
                       alt={`Thumbnail ${index + 1}`}
                       className="w-full h-[50px] sm:h-[113px] object-cover rounded-lg cursor-pointer border border-[#32b56c]"
                     />

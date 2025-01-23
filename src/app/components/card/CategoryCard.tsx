@@ -14,7 +14,7 @@ const CategoryCard = ({ data, index, price = true }: any) => {
               className="w-[80px] h-[80px] object-cover rounded-3 rounded-lg  "
               src={
                 data?.featured_image
-                  ? `${process.env.NEXT_PUBLIC_API_URL}/${data.featured_image.filepath}`
+                  ? `${data.featured_image.filepath}`
                   : "/assert/images/noimage.png"
               }
               alt="Image Description"

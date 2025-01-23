@@ -99,7 +99,7 @@ export default function ImageSlider() {
             <SwiperSlide key={index}>
               <div className="relative">
                 <img
-                  src={`${process.env.NEXT_PUBLIC_API_URL}/${slider?.image?.filepath}`}
+                  src={`${slider?.image?.filepath}`}
                   alt={`slider ${index + 1}`}
                   className="w-full h-80 sm:h-80 md:h-96 lg:h-[500px] object-cover"
                 />

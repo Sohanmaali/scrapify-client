@@ -71,7 +71,7 @@ const CategoryPage = () => {
                 className="w-[80px] h-[80px] object-cover rounded-3 rounded-lg  "
                 src={
                   category?.featured_image
-                    ? `${process.env.NEXT_PUBLIC_API_URL}/${category.featured_image.filepath}`
+                    ? `${category.featured_image.filepath}`
                     : '/assert/images/noimage.png'
                 }
                 alt="Profile"

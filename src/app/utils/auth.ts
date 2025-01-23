@@ -12,7 +12,6 @@ export const setToken = (token: string) => {
 };
 
 export const getToken = () => {
-  console.log('=====================>>>Token :  ', TOKEN_KEY);
   
   return Cookies.get(TOKEN_KEY);
 };
