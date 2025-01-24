@@ -133,8 +133,6 @@ const ProfilePage = () => {
           })
         );
 
-        console.log("-=--=-==response=-=", response);
-
         setUserProfile({
           name: response?.data?.name,
           mobile: response?.data?.mobile,
@@ -144,7 +142,7 @@ const ProfilePage = () => {
           country: response?.data?.country?._id,
           state: response?.data?.state?._id,
           city: response?.data?.city?._id,
-          address: response?.data?.about_us,
+          address: response?.data?.address,
           featured_image: response?.data?.featured_image,
         });
       }
