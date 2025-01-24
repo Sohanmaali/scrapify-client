@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Scrall Selling Project
 
-## Getting Started
+A comprehensive platform for buying and selling products online. This project aims to provide a seamless experience for users to list, browse, and purchase products.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Table of Contents
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. [Features](#features)
+2. [Technologies Used](#technologies-used)
+3. [Installation](#installation)
+4. [Usage](#usage)
+5. [API Documentation](#api-documentation)
+6. [Folder Structure](#folder-structure)
+7. [Contributing](#contributing)
+8. [License](#license)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Features
 
-## Learn More
+- User authentication and authorization (Sign Up, Login, Logout)
+- Product listing and categorization
+- Search and filtering options
+- Cart and checkout system
+- Admin panel for managing users and products
+- Responsive design for mobile and desktop
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Technologies Used
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**Frontend**:
+- React.js
+- Tailwind CSS (or Bootstrap/Core UI if applicable)
+- Vite (Build tool)
 
-## Deploy on Vercel
+**Backend**:
+- Node.js
+- Express.js
+- NestJS (if used)
+- MongoDB/MySQL (as the database)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**Other Tools**:
+- Redux for state management
+- Axios for API communication
+- JSON Web Tokens (JWT) for authentication
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## Installation
+
+### Prerequisites
+
+- Node.js (v14 or above)
+- npm or yarn
+- MongoDB/MySQL database setup
+
+### Steps
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/scrall-selling-project.git
+   cd scrall-selling-project
