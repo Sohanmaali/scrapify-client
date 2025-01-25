@@ -42,7 +42,7 @@ export default function LoginForm() {
 
       setIsLoading(true);
       const response: any = await new BasicProvider('auth/customer/login').postRequest(creadantial);
-      if (response?.message === "OTP send successfully") {
+      if (response?.message === "OTP successfully sent to your email") {
         setShowModal(true)
         return
       }

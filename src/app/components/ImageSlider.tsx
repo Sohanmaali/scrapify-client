@@ -9,6 +9,7 @@ import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 import { GetStartButton } from "./generalComp/Buttons";
 import BasicProvider from "../utils/basicprovider";
 import { ButtonLoader } from "./generalComp/Loader";
+import SliderSkeleton from "./Skeleton/SliderSkeleton";
 
 export default function ImageSlider() {
   const [sliderData, setSliderData] = useState([]);
@@ -53,7 +54,7 @@ export default function ImageSlider() {
   if (isLoading) {
     return (
       <div>
-        <ButtonLoader />
+       <SliderSkeleton/>
       </div>
     );
   }
