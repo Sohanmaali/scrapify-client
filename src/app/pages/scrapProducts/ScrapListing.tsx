@@ -9,7 +9,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { Pagination } from "@/app/components/generalComp/PaginationButton";
 import NotAvalilable from "@/app/components/generalComp/NotAvailable";
 
-const ShimmerCard = () => {
+const ShimmerCard = () => { 
   return (
     <div className="flex w-full flex-col sm:flex-row bg-white border rounded-lg overflow-hidden max-w-md mx-auto shadow-md p-5 mb-5 animate-pulse">
       <div className="flex-shrink-0 w-full sm:w-1/3">
@@ -53,12 +53,15 @@ const ScrapListing = () => {
 
   const getScrapProduct = async () => {
     try {
+
+      
       setLoading(true);
       const response: any = await new BasicProvider(
         `public/scrap?page=${currentPage}&count=10`
       ).getRequest();
     
-
+      console.log('==================......',response);
+      
       if (response.status === "success") {
         setTotalPage(response?.data?.last_page);
         setScrapData(response?.data?.data || []);
@@ -73,7 +76,8 @@ const ScrapListing = () => {
   useEffect(() => {
     getScrapProduct();
   }, [currentPage]);
-
+    console.log('=====scrapData=====>>>>',scrapData);
+    
   return (
     <>
       <div>
@@ -84,14 +88,13 @@ const ScrapListing = () => {
               ))
             : Array.isArray(scrapData) &&
               scrapData.map((item: any, index: number) => (
-                // <ScrapProductCard
-                //   item={item}
-                //   key={index}
-                //   navigate={() => {
-                //     router.replace(`/pages/scrapdetails/${item?._id}`);
-                //   }}
-                // />
-                ""
+                <ScrapProductCard
+                  item={item}
+                  key={index}
+                  navigate={() => {
+                    router.replace(`/pages/scrapdetails/${item?._id}`);
+                  }}
+                />
               )) 
               
               }

@@ -134,8 +134,8 @@
 import React, { useState } from 'react';
 import { FiClock, FiCheckCircle, FiAlertCircle, FiXCircle, FiLoader } from 'react-icons/fi';
 import { IoCheckmarkCircle } from 'react-icons/io5';
-
-type Status = "pending" | "processing" | "accepted" | "cancelled" | "rejected" | "completed";
+import { HiOutlineCurrencyRupee } from "react-icons/hi";
+type Status = "pending" | "processing" | "accepted" | "cancelled" | "rejected" | "completed" |"paymentapprove";
 
 interface TimelineItem {
   status: Status;
@@ -186,6 +186,12 @@ const statusConfig = {
     bgColor: "bg-emerald-500",
     borderColor: "border-emerald-500",
   },
+  paymentapprove: {
+    icon: HiOutlineCurrencyRupee,
+    color: "text-emerald-500",
+    bgColor: "bg-emerald-500",
+    borderColor: "border-emerald-500",
+  },
 };
 
 const items: TimelineItem[] = [
@@ -214,6 +220,12 @@ const items: TimelineItem[] = [
     status: "completed",
     title: "Process Will Be Completed",
     description: "Once picked up, the process will be marked as completed.",
+    timestamp: null,
+  },
+  {
+    status: "paymentapprove",
+    title: "Payment  Completed",
+    description: "Your Pyamnet has been completed",
     timestamp: null,
   },
 ] as const;

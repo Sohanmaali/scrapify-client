@@ -7,13 +7,14 @@ import "swiper/css/navigation";
 import "swiper/css/thumbs";
 import SwiperGalleyComp from "@/app/components/generalComp/SwiperGalleyComp";
 import ScrapStatusTimeline from "@/app/components/generalComp/ScrapStatusTimeline";
-import { BiCalendar, BiMapPin, BiPackage, BiTag } from "react-icons/bi";
+import { BiCalendar, BiMapPin, BiMobile, BiPackage, BiTag } from "react-icons/bi";
 import { useParams } from "next/navigation";
 import BasicProvider from "@/app/utils/basicprovider";
 import DateTimeHelper from "@/helpers/DateTimeHelper";
 import { FaEdit } from "react-icons/fa";
 
 import { IoIosCloseCircle } from "react-icons/io";
+import { getStatus } from "@/helpers/genralfunction";
 const page = () => {
   const [thumbsSwiper, setThumbsSwiper] = React.useState<any>(null);
   const [scrapDetails, setScrapDetails] = React.useState<any>(null);
@@ -143,13 +144,24 @@ const page = () => {
                         "2023-02-02"}
                     </span>
                   </div>
+                   {/* Posted On */}
+                   <div className="pt-4 grid grid-cols-2 gap-4">
+                    <div className="flex items-center text-gray-700">
+                      <BiMobile className="h-5 w-5 mr-3 text-darkColor" />
+                      <span className="font-medium">Contact Number</span>
+                    </div>
+                    <span className="text-right font-semibold text-gray-800">
+                     {scrapDetails?.mobile}
+                    </span>
+                    {/* <small>please Active your number</small> */}
+                  </div>
                 </div>
               </div>
             </div>
 
             <div className="border border-darkColor w-full lg:w-12/12 bg-white rounded-lg shadow-lg p-6 flex flex-col self-start mb-4 lg:mb-0">
               <h1>Timeline of your scrap</h1>
-              <ScrapStatusTimeline status={'accepted'} />
+              <ScrapStatusTimeline status={getStatus(scrapDetails?.status || "accepted")} />
             </div>
           </div>
         </div>

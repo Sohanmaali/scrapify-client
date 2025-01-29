@@ -146,6 +146,7 @@ export default function RootLayout({
     const timer = setTimeout(() => setLoading(false), 3000); // Adjust delay as needed
     return () => clearTimeout(timer);
   }, []);
+  
 
   return (
     <html lang="en">

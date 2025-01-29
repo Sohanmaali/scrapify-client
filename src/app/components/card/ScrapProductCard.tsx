@@ -7,6 +7,7 @@ import { FaMapMarkerAlt, FaRegCalendarAlt } from "react-icons/fa";
 import Image from "next/image";
 import DateTimeHelper from "@/helpers/DateTimeHelper";
 import { statusBadge } from "../generalComp/Buttons";
+import { getStatus } from "@/helpers/genralfunction";
 const ScrapProductCard = ({ item, navigate = () => { } }: any) => {
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -54,21 +55,21 @@ const ScrapProductCard = ({ item, navigate = () => { } }: any) => {
           <div className="flex justify-between items-center">
             <div>
               <span className="text-lg font-bold text-darkColor">
-                {process.env.NEXT_PUBLIC_CURRENCY_SYMBOL}{item?.total || "10"}
+                {process.env.NEXT_PUBLIC_CURRENCY_SYMBOL}{item?.total || "N/A"}
               </span>
               <span className="ml-2 text-xs text-gray-500">
-                {process.env.NEXT_PUBLIC_CURRENCY_SYMBOL}{item?.sell_price}/kg
+                {process.env.NEXT_PUBLIC_CURRENCY_SYMBOL}{item?.sell_price}/{item?.unit_type}
               </span>
             </div>
             <span className="text-xs font-medium text-relatedWhite bg-darkColor px-2 py-1 rounded">
-              10 kg
+              {item?.quantity} {item?.unit_type}
             </span>
           </div>
 
           <div className="text-xs text-gray-700 flex justify-between space-x-4">
             <p className="flex items-center">
               <MdOutlineCategory className=" text-gray-600 mr-1" />
-              Scrap Material
+              {item?.category?.type}
             </p>
             <p className="flex items-center">
               <FaRegCalendarAlt className="text-gray-600 mr-1" />
@@ -85,16 +86,21 @@ const ScrapProductCard = ({ item, navigate = () => { } }: any) => {
 
             {/* Status Section */}
             <div className="flex items-center ">
-            <span
-            className={`px-2 py-1 rounded-lg text-xs font-medium ${item.status === "completed"
-                ? "bg-green-100 text-green-600"
-                : item.status === "pending"
+              <span
+                className={`px-2 py-1 rounded-lg text-xs font-medium ${getStatus(item.status) === "completed"
+                  ? "bg-green-100 text-green-600"
+                  : getStatus(item.status) === "pending"
                     ? "bg-yellow-100 text-yellow-600"
-                    : "bg-gray-100 text-gray-600"
-                }`}
-        >
-            {item.status || 'N/A'}
-        </span> 
+                    : getStatus(item.status) === "accepted"
+                      ? "bg-blue-100 text-blue-600"
+                      : getStatus(item.status) === "rejected"
+                        ? "bg-red-100 text-red-600"
+                        : "bg-gray-100 text-gray-600"
+                  }`}
+              >
+                {getStatus(item.status) || "N/A"}
+              </span>
+
             </div>
           </div>
         </div>

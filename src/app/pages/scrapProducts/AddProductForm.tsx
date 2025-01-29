@@ -50,7 +50,7 @@ const ScrapMaterialForm = ({ category }: any) => {
     state : '',
     country : '',
     available_date : new Date(),
-
+ 
   });
   const statesData = useStateRegions(scrapData?.country);
   const cityData = useCityRegions(scrapData?.state);
