@@ -164,7 +164,7 @@ export default function LoginForm() {
             </div>
             <div className="text-center mt-2">
               <p className="text-gray-700">
-                Or don't have an account?{" "}
+                don't have an account?{" "}
                 <Link
                   href="/pages/auth/signup"
                   className="text-darkColor hover:underline transition duration-200"
