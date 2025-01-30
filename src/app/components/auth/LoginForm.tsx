@@ -19,8 +19,8 @@ export default function LoginForm() {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [passwordType, setPasswordType] = useState("password");
   const [isLoading, setIsLoading] = useState(false);
-  const [creadantial, setCreadantial] = useState({ email: '', password: '' })
-  const router = useRouter()
+  const [creadantial, setCreadantial] = useState({ email: "", password: "" });
+  const router = useRouter();
   const dispatch = useDispatch();
   const togglePassword = () => {
     setPasswordVisible(!passwordVisible);
@@ -30,53 +30,71 @@ export default function LoginForm() {
     const { name, value } = e.target;
     setCreadantial({
       ...creadantial,
-      [name]: value
-    })
+      [name]: value,
+    });
   }
   async function handleLoginSubmit(e: any) {
-    e.preventDefault()
-    if (creadantial.email === '' || creadantial.password === '') {
-      return
+    e.preventDefault();
+    if (creadantial.email === "" || creadantial.password === "") {
+      return;
     }
     try {
-
       setIsLoading(true);
-      const response: any = await new BasicProvider('auth/customer/login').postRequest(creadantial);
+      const response: any = await new BasicProvider(
+        "auth/customer/login"
+      ).postRequest(creadantial);
       if (response?.message === "OTP successfully sent to your email") {
-        setShowModal(true)
-        return
+        setShowModal(true);
+        return;
       }
-      const user = response?.user
-      dispatch(login({ user: { _id: user._id, mobile: user.mobile, name: user.name, email: user.email, role: user?.role || null, image: user?.featured_image?.filepath || '' } }));
-      setToken(response.access_token)
-      setNotification({ type: 'success', message: 'Login Successfull' });
-      router.push('/')
+      const user = response?.user;
+      dispatch(
+        login({
+          user: {
+            _id: user._id,
+            mobile: user.mobile,
+            name: user.name,
+            email: user.email,
+            role: user?.role || null,
+            image: user?.featured_image?.filepath || "",
+          },
+        })
+      );
+      setToken(response.access_token);
+      setNotification({ type: "success", message: "Login Successfull" });
+      router.push("/");
     } catch (error: any) {
-      console.error('error', error);
-      setNotification({ type: 'error', message: error.message });
+      console.error("error", error);
+      setNotification({ type: "error", message: error.message });
     } finally {
       setIsLoading(false);
     }
   }
   return (
-    <div className="flex items-center justify-center min-h-screen bg-relatedWhite   px-2 sm:mt-0 lg:mt-0 mt-[-115px]
- ">
+    <div
+      className="flex items-center justify-center min-h-screen bg-relatedWhite   px-2 sm:mt-0 lg:mt-0 mt-[-115px]
+ "
+    >
       <div className="flex flex-col md:flex-row  w-full max-w-6xl bg-relatedWhite border border-darkColor rounded-lg shadow-2xl sm:py-8 lg:py-8 ">
         {/* Left Side (Form) */}
         <div className="w-full md:w-1/2 p-8">
           <h2 className="text-3xl font-bold text-center text-gray-700 mb-6 ">
-            Turn <span className="text-darkColor underline decoration-wavy">Scrap</span> into Savings Log
-            In Now!
+            Turn{" "}
+            <span className="text-darkColor underline decoration-wavy">
+              Scrap
+            </span>{" "}
+            into Savings Log In Now!
           </h2>
           <hr className="sm:w-48 lg:48 border-1 border-darkColor  justify-self-center" />
-          <form >
+          <form>
             <div className="relative w-full mt-4">
               <input
-                onChange={(e) => { handleChange(e) }}
+                onChange={(e) => {
+                  handleChange(e);
+                }}
                 type="text"
                 id="email"
                 name="email"
-
                 className="peer w-full mt-4 px-3 pt-3.5 pb-0.2 border-b border-gray-300 placeholder-transparent focus:outline-none focus:ring-0 focus:border-darkColor text-mutedColor"
                 placeholder="email"
               />
@@ -90,12 +108,13 @@ export default function LoginForm() {
 
             <div className="relative w-full mt-4">
               <input
-                onChange={(e) => { handleChange(e) }}
+                onChange={(e) => {
+                  handleChange(e);
+                }}
                 type={passwordType}
                 id="password"
                 name="password"
                 className="peer w-full mt-4 px-3 pt-3.5 pb-0.2 border-b border-gray-300 placeholder-transparent focus:outline-none focus:ring-0 focus:border-darkColor text-mutedColor"
-
                 placeholder="Password"
               />
               <label
@@ -134,10 +153,14 @@ export default function LoginForm() {
                   Login
                 </button>
               )}
-
             </div>
             <div className="d-flex text-right mr-3 mt-2 text-darkColor hover:underline cursor-pointer">
-              Forgot your password?
+              <Link
+                href="/forgot-password"
+                className="text-darkColor hover:underline transition duration-200"
+              >
+                Forgot your password?
+              </Link>
             </div>
             <div className="text-center mt-2">
               <p className="text-gray-700">
@@ -162,7 +185,17 @@ export default function LoginForm() {
           }}
         ></div>
       </div>
-      <Modal isOpen={showModal} onClose={() => { setShowModal(false) }} title={"Email Varification"}><div><OTPInput data={creadantial} /></div> </Modal>
+      <Modal
+        isOpen={showModal}
+        onClose={() => {
+          setShowModal(false);
+        }}
+        title={"Email Varification"}
+      >
+        <div>
+          <OTPInput data={creadantial} />
+        </div>{" "}
+      </Modal>
     </div>
   );
 }
