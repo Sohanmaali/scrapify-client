@@ -61,11 +61,11 @@ const useCityRegions = (id: any) => {
         const fetchCity = async () => {
             try {
                 const response: any = await new BasicProvider(`public/region/children/${id}`).getRequest();
-                if (response?.status === "success") {
-
+                // if (response?.status === "success") {
                     setCity(response?.data || []);
-                }
-
+                // }
+                    console.log('============city : i',id, response);
+                    
             } catch (error: any) {
                 setError(error.message);
             } finally {

@@ -9,7 +9,6 @@ const CategoryCard = ({ data, index, price = true }: any) => {
       >
         <div className=" flex justify-center">
           <span className="text-2xl">
-            {" "}
             <img
               className="w-[80px] h-[80px] object-cover rounded-3 rounded-lg  "
               src={
@@ -30,8 +29,6 @@ const CategoryCard = ({ data, index, price = true }: any) => {
             ₹{data?.price} / kg
           </p>
         )}
-
-
 
         <Link
           href={`/pages/addscrap/${data?._id}`}

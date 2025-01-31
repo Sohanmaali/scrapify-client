@@ -3,20 +3,18 @@
 @tailwind utilities;
 
 :root {
+  --heading-font: Helvetica;
 
-  --heading-font : Helvetica;
-  
   --related-black: #0a0a0a;
   --related-white: white;
 
-    --light-color: #e7f8ee; 
-    --dark-color:  #309255; 
-    --muted-color: #212832; 
+  --light-color: #e7f8ee;
+  --dark-color: #309255;
+  --muted-color: #212832;
 
-    --secondary-dark-color: #555555; 
-    --secondary-light-color: #f1f1f1; 
-    --secondary-muted-color: #888888; 
-
+  --secondary-dark-color: #555555;
+  --secondary-light-color: #f1f1f1;
+  --secondary-muted-color: #888888;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -25,7 +23,7 @@
     --foreground: #ededed;
   }
 }
-*{
+* {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -34,28 +32,27 @@ body {
   color: var(--muted-color);
   background: var(---related-white);
   font-family: Arial, Helvetica, sans-serif;
-  
 }
 
-/* side bar style start */
-.sidebarmainaria{
- 
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }
 
+.no-scrollbar {
+  -ms-overflow-style: none; /* Hide scrollbar for IE & Edge */
+  scrollbar-width: none; /* Hide scrollbar for Firefox */
+}
 
 /* side bar style end */
-
-
 
 /* Flip Card Container */
 .how-to-work-secion .flip-card {
   perspective: 1000px;
   width: 330px;
   height: 300px;
-  background-color:  #f9f0c8;
+  background-color: #f9f0c8;
   border-radius: 10px;
   /* Set a fixed height */
-
 }
 
 .how-to-work-secion .flip-card-inner {
@@ -71,7 +68,7 @@ body {
 
 .how-to-work-secion .flip-card:hover .flip-card-inner {
   transform: rotateY(180deg);
-  
+
   /* box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px; */
 }
 
@@ -84,7 +81,8 @@ body {
   border-radius: 10px;
   border: 1px solid #2d4f46;
   /* border-radius: 10px; */
-  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
+    rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
 }
 
 .how-to-work-secion.flip-card-front {
@@ -99,7 +97,6 @@ body {
   transform: rotateY(180deg);
   border-radius: 10px;
   border: 1px solid #2d4f46;
-
 }
 
 /* Content Styling */
@@ -138,17 +135,13 @@ body {
   color: #4b5563;
 }
 
-
-
-
-
 /* ------------------GREADING BUTOTO */
 /* Updated CSS */
 /* Updated CSS */
 .greadiant-button {
   border-radius: 6px;
   appearance: none;
-  background-color: var( --dark-color);
+  background-color: var(--dark-color);
   border: 1px solid var(--muted-color);
   box-sizing: border-box;
   cursor: pointer;
@@ -165,10 +158,9 @@ body {
   text-align: center;
   text-decoration: none;
   text-transform: uppercase;
-  transition:
-    opacity 300ms cubic-bezier(.694, 0, 0.335, 1),
-    background-color 300ms cubic-bezier(.694, 0, 0.335, 1),
-    color 300ms cubic-bezier(.694, 0, 0.335, 1);
+  transition: opacity 300ms cubic-bezier(0.694, 0, 0.335, 1),
+    background-color 300ms cubic-bezier(0.694, 0, 0.335, 1),
+    color 300ms cubic-bezier(0.694, 0, 0.335, 1);
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
@@ -179,7 +171,7 @@ body {
 
 .greadiant-button:before {
   border-radius: 6px;
-  animation: opacityFallbackOut .5s step-end forwards;
+  animation: opacityFallbackOut 0.5s step-end forwards;
   backface-visibility: hidden;
   background-color: var(--muted-color);
   clip-path: polygon(-1% 0, 0 0, -25% 100%, -1% 100%);
@@ -189,7 +181,8 @@ body {
   position: absolute;
   top: 0;
   transform: translateZ(0);
-  transition: clip-path .5s cubic-bezier(.165, 0.84, 0.44, 1), -webkit-clip-path .5s cubic-bezier(.165, 0.84, 0.44, 1);
+  transition: clip-path 0.5s cubic-bezier(0.165, 0.84, 0.44, 1),
+    -webkit-clip-path 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
   width: 100%;
 }
 
@@ -203,7 +196,7 @@ body {
 .greadiant-button:hover {
   border-radius: 6px;
   transform: translateZ(5);
-  color: var(--related-white)
+  color: var(--related-white);
   /* New hover text color (Tomato) */
 }
 
@@ -213,13 +206,12 @@ body {
   position: relative;
 }
 
-
 /* Primary button  */
 .primary-button {
   border-radius: 6px;
   appearance: none;
-  background-color: var( --light-color);
-  border: 1px solid var( --dark-color);
+  background-color: var(--light-color);
+  border: 1px solid var(--dark-color);
   box-sizing: border-box;
   cursor: pointer;
   display: inline-block;
@@ -235,23 +227,22 @@ body {
   text-align: center;
   text-decoration: none;
   text-transform: uppercase;
-  transition:
-    opacity 300ms cubic-bezier(.694, 0, 0.335, 1),
-    background-color 300ms cubic-bezier(.694, 0, 0.335, 1),
-    color 300ms cubic-bezier(.694, 0, 0.335, 1);
+  transition: opacity 300ms cubic-bezier(0.694, 0, 0.335, 1),
+    background-color 300ms cubic-bezier(0.694, 0, 0.335, 1),
+    color 300ms cubic-bezier(0.694, 0, 0.335, 1);
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
   white-space: nowrap;
-  color: var( --dark-color);
+  color: var(--dark-color);
   /* Default text color */
 }
 
 .primary-button:before {
   border-radius: 6px;
-  animation: opacityFallbackOut .5s step-end forwards;
+  animation: opacityFallbackOut 0.5s step-end forwards;
   backface-visibility: hidden;
-  background-color: var( --dark-color);
+  background-color: var(--dark-color);
   clip-path: polygon(-1% 0, 0 0, -25% 100%, -1% 100%);
   content: "";
   height: 100%;
@@ -259,7 +250,8 @@ body {
   position: absolute;
   top: 0;
   transform: translateZ(0);
-  transition: clip-path .5s cubic-bezier(.165, 0.84, 0.44, 1), -webkit-clip-path .5s cubic-bezier(.165, 0.84, 0.44, 1);
+  transition: clip-path 0.5s cubic-bezier(0.165, 0.84, 0.44, 1),
+    -webkit-clip-path 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
   width: 100%;
 }
 
@@ -268,12 +260,12 @@ body {
   border-radius: 6px;
   animation: opacityFallbackIn 0s step-start forwards;
   clip-path: polygon(0 0, 101% 0, 101% 101%, 0 101%);
-  background-color: var(--hover-bg, var( --dark-color));
+  background-color: var(--hover-bg, var(--dark-color));
 }
 .primary-button:hover {
   border-radius: 6px;
   transform: translateZ(5);
-  color: var(--related-white)
+  color: var(--related-white);
   /* New hover text color (Tomato) */
 }
 
@@ -285,17 +277,12 @@ body {
 
 /* --------------END */
 
-
-
-
-
 /* HEADING CSSS */
 .heading-parent {
   text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
-
 }
 
 .main-heading {
@@ -307,7 +294,6 @@ body {
   text-align: center;
   /* border-bottom: 3px solid black; */
   margin-bottom: 10px; /* Default for desktop */
-  
 }
 
 /* For mobile screens */
@@ -317,13 +303,12 @@ body {
   }
 }
 
-
-
 /* =======================Product Card  */
 
 .product-card-comp {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px,
+    rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
   border-radius: 15px;
   padding: 20px;
   height: 480px;
@@ -359,20 +344,16 @@ body {
 }
 
 .product-card-comp:hover {
-  
-  border: 1px solid #32b56c
+  border: 1px solid #32b56c;
 }
 
-
-.marquee-container{
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+.marquee-container {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .marquee-container:hover .marquee-content {
   animation-play-state: paused;
 }
-
-
 
 /* -----------Banner Page  */
 
@@ -398,12 +379,9 @@ body {
 
 .animate-fadeInUp-delay-2 {
   animation-delay: 0.4s;
-  
 }
 
 /* ...........End Banner Page  */
-
-
 
 /* --------SHIMMER ANMATION  */
 @keyframes shimmer {
@@ -418,11 +396,3 @@ body {
 .animate-shimmer {
   animation: shimmer 2s infinite linear;
 }
-/* ------------------------ */
-
-
-
-/* ------------Satrt time line css */
-
-
-/* ---------end Time line css=========== */

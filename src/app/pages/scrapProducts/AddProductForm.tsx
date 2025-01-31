@@ -59,7 +59,7 @@ const ScrapMaterialForm = ({ category }: any) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const [gallery, setGallery] = useState<any>([]);
-
+    console.log('=================',cityData)
   const handleChange = (e: any) => {
     const { name, value } = e.target;
     if (
@@ -80,6 +80,8 @@ const ScrapMaterialForm = ({ category }: any) => {
       }));
     }
 
+   
+    
     setScrapData(() => ({
       ...scrapData,
       [name]: value,
@@ -349,7 +351,7 @@ const ScrapMaterialForm = ({ category }: any) => {
             >
               <option value="">Select State</option>
               {statesData.length > 0 &&
-                statesData.map((state: any, index: any) => (
+                statesData?.map((state: any, index: any) => (
                   <option key={index} value={state?._id}>
                     {state?.name}
                   </option>

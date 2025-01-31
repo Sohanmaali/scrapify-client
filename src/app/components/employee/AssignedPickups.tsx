@@ -9,19 +9,22 @@ const AssignedPickups = () => {
   const fetchPickupsData = async () => {
     try {
       const response: any = await new BasicProvider(
-        "public/scrap/assign-pickup"
+        "public/task-manager/all"
       ).getRequest();
       if (response?.status === "success") {
         setPickupsData(response?.data?.data || []);
       }
+
+      console.log('===========response======...>>>',response);
+      
     } catch (error) {
       console.error("Error while fatching pickups, ", error);
     }
   };
 
-  // useEffect(()=>{
-  //     fetchPickupsData();
-  // },[])
+  useEffect(()=>{
+      fetchPickupsData();
+  },[])
   const pickups = [
     {
       id: 1,

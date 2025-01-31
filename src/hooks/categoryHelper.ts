@@ -2,11 +2,11 @@ import BasicProvider from '@/app/utils/basicprovider';
 import { useState, useEffect } from 'react';
 
 const useAllCategories = () => {
-    const [categotyData, setCategoty] = useState([]);
+    const [categoryData, setCategoty] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    
+
     useEffect(() => {
         const fetchAllCategories = async () => {
             try {
@@ -24,11 +24,11 @@ const useAllCategories = () => {
         fetchAllCategories();
     }, []);
 
-    return categotyData;
+    return { categoryData, loading, error };
 };
 
 const useGetByIdSlugCategories = (id: any) => {
-    const [categotyData, setCategoty] = useState([]);
+    const [categoryData, setCategoty] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -49,7 +49,7 @@ const useGetByIdSlugCategories = (id: any) => {
         fetchByIdOrSlug();
     }, [id]);
 
-    return categotyData;
+    return categoryData;
 };
 
 export { useAllCategories, useGetByIdSlugCategories };
