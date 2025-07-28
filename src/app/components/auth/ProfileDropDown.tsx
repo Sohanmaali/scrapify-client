@@ -1,6 +1,4 @@
-
 'use clint'
-
 
 import React, { useState, useRef } from 'react';
 import { BiBell, BiLogOut, BiUser } from 'react-icons/bi';
@@ -43,7 +41,7 @@ const ProfileDropdown = () => {
                 className="w-10 h-10 rounded-full border border-darkColor cursor-pointer hover:shadow-lg transition-shadow"
             />
 
-            <div className={`absolute right-0 w-56 bg-white rounded-lg shadow-lg py-2 
+            <div className={`absolute right-0 w-56 bg-white rounded-lg shadow-lg py-2
                       transform transition-all duration-200 origin-top-right
                       ${isOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'}`}>
                 {/* Rest of the dropdown content remains the same */}
@@ -79,5 +77,3 @@ const ProfileDropdown = () => {
 };
 
 export default ProfileDropdown;
-
-

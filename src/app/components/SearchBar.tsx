@@ -62,44 +62,35 @@ export default function SearchBar() {
           </button>
         )}
 
-        {
-          results.length > 0
-            ? results.map((result: any, index) => (
-                <div key={index} className="relative">
-                  <div className="absolute w-full mt-1 bg-white border rounded-lg shadow-lg z-50  max-h-80 overflow-y-auto no-scrollbar">
-                    {result?.data?.length ? (
-                      <div>
-                        <div className="px-3 py-2 font-semibold border-b">
-                          {result?.type} ({result?.data?.length})
-                        </div>
-
-                        <ul className="w-full bg-white">
-                          {result?.data &&
-                            result?.data.length > 0 &&
-                            result.data.map((item: any, innerIndex: number) => (
-                              <li
-                                key={innerIndex}
-                                className="px-3 py-2 hover:bg-gray-100 cursor-pointer"
-                                onClick={() => handleItemClick(result)}
-                              >
-                                {item.name}
-                              </li>
-                            ))}
-                        </ul>
+        {results.length > 0
+          ? results.map((result: any, index) => (
+              <div key={index} className="relative">
+                <div className="absolute w-full mt-1 bg-white border rounded-lg shadow-lg z-50  max-h-80 overflow-y-auto no-scrollbar">
+                  {result?.data?.length ? (
+                    <div>
+                      <div className="px-3 py-2 font-semibold border-b">
+                        {result?.type} ({result?.data?.length})
                       </div>
-                    ) : null}
-                  </div>
+
+                      <ul className="w-full bg-white">
+                        {result?.data &&
+                          result?.data.length > 0 &&
+                          result.data.map((item: any, innerIndex: number) => (
+                            <li
+                              key={innerIndex}
+                              className="px-3 py-2 hover:bg-gray-100 cursor-pointer"
+                              onClick={() => handleItemClick(result)}
+                            >
+                              {item.name}
+                            </li>
+                          ))}
+                      </ul>
+                    </div>
+                  ) : null}
                 </div>
-              ))
-            : null
-          // query && (
-          //     <div className="absolute w-full mt-1 bg-white border rounded-lg shadow-lg z-50  max-h-80 overflow-y-auto no-scrollbar">
-          //       <ul className="w-full bg-white">
-          //         <li className="px-3 py-2 text-gray-500">No results found</li>
-          //       </ul>
-          //     </div>
-          //   )
-        }
+              </div>
+            ))
+          : null}
       </div>
     </div>
   );

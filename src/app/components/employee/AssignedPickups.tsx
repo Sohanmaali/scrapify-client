@@ -2,6 +2,8 @@
 import BasicProvider from "@/app/utils/basicprovider";
 import NotAvalilable from "../generalComp/NotAvailable";
 import { useState, useEffect } from "react";
+import DateTimeHelper from "@/helpers/DateTimeHelper";
+import { getStatus } from "@/helpers/genralfunction";
 
 const AssignedPickups = () => {
   const [pickupsData, setPickupsData] = useState([]);
@@ -12,7 +14,7 @@ const AssignedPickups = () => {
         "public/task-manager/all"
       ).getRequest();
       if (response?.status === "success") {
-        setPickupsData(response?.data?.data || []);
+        setPickupsData(response?.data || []);
       }
 
       console.log('===========response======...>>>',response);
@@ -58,52 +60,56 @@ const AssignedPickups = () => {
         Assigned Pickups
       </h2>
       {pickupsData.length > 0 ? (
-        <div className="space-y-4">
-          {pickupsData.map((pickup: any) => (
-            <div
-              key={pickup._id}
-              className="flex flex-wrap justify-between items-center bg-gray-50 border border-darkColor p-4 rounded-lg shadow-md space-y-4 sm:space-y-0 sm:space-x-4"
-            >
-              {/* Pickup Details */}
-              <div className="flex items-start space-x-4 w-full sm:w-auto">
-                {/* Profile Image */}
-                <img
-                  src={"/placeholder-time-image.png"}
-                  alt={`customer profile`}
-                  className="w-12 h-12 rounded-full object-cover"
-                />
-                {/* Pickup Details */}
-                <div>
-                  <h3 className="text-lg font-bold text-gray-800">
-                    {pickup.customer?.name || "-"}
-                  </h3>
-                  <p className="text-gray-600">
-                    Address: {pickup?.address || "-"}
-                  </p>
-                  <p className="text-gray-600">
-                    Date: {pickup?.available_date}
-                  </p>
-                  <p className="text-gray-600">
-                    Status:{" "}
-                    <span className="font-semibold">{pickup?.status}</span>
-                  </p>
-                </div>
-              </div>
-
-              {/* Action Buttons */}
-              <div className="flex flex-wrap justify-start sm:justify-end space-y-2 sm:space-y-0 space-x-0 sm:space-x-2 w-full sm:w-auto">
-                {pickup.status !== "Completed" && (
-                  <button className="px-4 py-2 bg-lightColor text-darkColor border border-darkColor rounded-lg hover:bg-darkColor hover:text-relatedWhite transition w-full sm:w-auto">
-                    Mark as In Progress
-                  </button>
-                )}
-                <button className="px-4 py-2 bg-darkColor text-relatedWhite rounded-lg hover:bg-mutedColor transition w-full sm:w-auto">
-                  Mark as Completed
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
+       <div className="space-y-4">
+       {pickupsData.map((pickup: any) => (
+         <div
+           key={pickup._id}
+           className="flex flex-wrap justify-between items-center bg-gray-50 border border-darkColor p-4 rounded-lg shadow-md"
+         >
+           {/* Pickup Details Section */}
+           <div className="flex items-center gap-4 w-full sm:w-auto">
+             {/* Profile Image */}
+             <img
+               src={pickup?.scrap?.customer?.featured_image?.filepath}
+               alt="customer profile"
+               className="w-14 h-14 rounded-full object-cover border border-gray-300"
+             />
+     
+             {/* Customer Information - Display in a row format */}
+             <div className="grid grid-cols-2 gap-x-6 gap-y-1 text-sm sm:flex sm:flex-wrap sm:items-center sm:gap-x-6">
+               <h3 className="font-bold text-gray-800 col-span-2 sm:col-auto">
+                 {pickup?.scrap?.customer?.name || "-"}
+                 
+               </h3>
+               {/* <h3 className="font-bold text-gray-800 col-span-2 sm:col-auto">
+               {pickup?.scrap?.customer?.mobile || "-"}
+                 
+               </h3> */}
+               <p className="text-gray-600"><strong>City :</strong> {pickup?.scrap.city.name || "-"}</p>
+               <p className="text-gray-600">🏠<strong>location :</strong> {pickup?.scrap.address || "-"}</p>
+               <p className="text-gray-600">📌<strong>Pincode :</strong> {pickup?.scrap.pincode || "-"}</p>
+               <p className="text-gray-600">🗓️<strong>Date :</strong> {DateTimeHelper.DisplayDate(pickup?.scrap?.available_date) || "-"}</p>
+               <p className="text-gray-600 ">
+               <strong>Status :</strong><span className="">{getStatus(pickup?.scrap?.status)}</span>
+               </p>
+             </div>
+           </div>
+     
+           {/* Action Buttons - Stay aligned in one row */}
+           <div className="flex flex-wrap justify-end gap-2 w-full sm:w-auto mt-2 sm:mt-2">
+             {pickup.status !== "Completed" && (
+               <button className="px-4 py-2 bg-lightColor text-darkColor border border-darkColor rounded-lg hover:bg-darkColor hover:text-white transition">
+                 Mark as In Progress
+               </button>
+             )}
+             <button className="px-4 py-2 bg-darkColor text-white rounded-lg hover:bg-mutedColor transition">
+               Mark as Completed
+             </button>
+           </div>
+         </div>
+       ))}
+     </div>
+     
       ) : (
         <NotAvalilable />
       )}
